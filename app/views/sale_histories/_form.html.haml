@@ -1,0 +1,28 @@
+= form_for @sale_history do |f|
+  - if @sale_history.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sale_history.errors.count, "error")} prohibited this sale_history from being saved:"
+      %ul
+        - @sale_history.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :equipment
+    = f.text_field :equipment
+  .field
+    = f.label :serial_no
+    = f.number_field :serial_no
+  .field
+    = f.label :brand
+    = f.text_field :brand
+  .field
+    = f.label :model
+    = f.text_field :model
+  .field
+    = f.label :customer_id
+    = f.number_field :customer_id
+  .field
+    = f.label :selling_date
+    = f.datetime_select :selling_date
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  equipment_id: 
+  serial_no: 1
+  brand_id: 
+  model_id: 
+  customer_id: 1
+  selling_date: 2014-06-19 18:36:38
+
+two:
+  equipment_id: 
+  serial_no: 1
+  brand_id: 
+  model_id: 
+  customer_id: 1
+  selling_date: 2014-06-19 18:36:38

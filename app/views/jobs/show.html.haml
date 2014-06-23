@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Date of job:
+  = @job.date_of_job
+%p
+  %b Service notes:
+  = @job.service_notes
+%p
+  %b Time spent:
+  = @job.time_spent
+%p
+  %b Claimed:
+  = @job.claimed
+%p
+  %b Warrenty job:
+  = @job.warrenty_job
+%p
+  %b Servicetech:
+  = @job.servicetech
+
+= link_to 'Edit', edit_job_path(@job)
+\|
+= link_to 'Back', jobs_path

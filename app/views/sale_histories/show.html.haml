@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Equipment:
+  = @sale_history.equipment
+%p
+  %b Serial no:
+  = @sale_history.serial_no
+%p
+  %b Brand:
+  = @sale_history.brand
+%p
+  %b Model:
+  = @sale_history.model
+%p
+  %b Customer:
+  = @sale_history.customer_id
+%p
+  %b Selling date:
+  = @sale_history.selling_date
+
+= link_to 'Edit', edit_sale_history_path(@sale_history)
+\|
+= link_to 'Back', sale_histories_path

@@ -1,0 +1,55 @@
+%h1 Listing equipment
+
+%table
+  %tr
+    %th Name
+    %th Url
+    %th Price
+    %th User
+    %th Brand
+    %th Model
+    %th Accessory
+    %th First name
+    %th Last name
+    %th Address
+    %th Town
+    %th City
+    %th Post code
+    %th Telephone
+    %th Mobile
+    %th Email
+    %th Dob
+    %th Customer note
+    %th Purchase date
+    %th
+    %th
+    %th
+
+  - @equipment.each do |equipment|
+    %tr
+      %td= equipment.name
+      %td= equipment.url
+      %td= equipment.price
+      %td= equipment.user
+      %td= equipment.brand
+      %td= equipment.model
+      %td= equipment.accessory
+      %td= equipment.first_name
+      %td= equipment.last_name
+      %td= equipment.address
+      %td= equipment.town
+      %td= equipment.city
+      %td= equipment.post_code
+      %td= equipment.telephone
+      %td= equipment.mobile
+      %td= equipment.email
+      %td= equipment.dob
+      %td= equipment.customer_note
+      %td= equipment.purchase_date
+      %td= link_to 'Show', equipment
+      %td= link_to 'Edit', edit_equipment_path(equipment)
+      %td= link_to 'Destroy', equipment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Equipment', new_equipment_path

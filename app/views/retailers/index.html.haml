@@ -1,0 +1,25 @@
+- user_class = User
+.page-header
+  %h1=t '.title', :default => user_class.user_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= user_class.human_attribute_name(:first_name)
+      %th= user_class.human_attribute_name(:last_name)
+      %th= user_class.human_attribute_name(:retailer_name)
+      %th= user_class.human_attribute_name(:phone_number)
+      %th= user_class.human_attribute_name(:website)     
+      %th= user_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.brand.first_name
+        %td= user.last_name
+        %td= user.retailer_name
+        %td= user.phone_number
+        %td= user.website
+        %td= image_tag(user.image.thumb)        
+        %td=user.created_at.strftime("%A, %d %b %Y %l:%M %p")
+        %td   
+  

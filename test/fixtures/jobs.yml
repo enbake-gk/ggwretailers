@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_of_job: 2014-06-19 18:34:42
+  service_notes: MyText
+  time_spent: MyString
+  claimed: MyString
+  warrenty_job: MyString
+  servicetech: MyString
+
+two:
+  date_of_job: 2014-06-19 18:34:42
+  service_notes: MyText
+  time_spent: MyString
+  claimed: MyString
+  warrenty_job: MyString
+  servicetech: MyString

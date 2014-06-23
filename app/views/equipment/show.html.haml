@@ -1,0 +1,63 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @equipment.name
+%p
+  %b Url:
+  = @equipment.url
+%p
+  %b Price:
+  = @equipment.price
+%p
+  %b User:
+  = @equipment.user
+%p
+  %b Brand:
+  = @equipment.brand
+%p
+  %b Model:
+  = @equipment.model
+%p
+  %b Accessory:
+  = @equipment.accessory
+%p
+  %b First name:
+  = @equipment.first_name
+%p
+  %b Last name:
+  = @equipment.last_name
+%p
+  %b Address:
+  = @equipment.address
+%p
+  %b Town:
+  = @equipment.town
+%p
+  %b City:
+  = @equipment.city
+%p
+  %b Post code:
+  = @equipment.post_code
+%p
+  %b Telephone:
+  = @equipment.telephone
+%p
+  %b Mobile:
+  = @equipment.mobile
+%p
+  %b Email:
+  = @equipment.email
+%p
+  %b Dob:
+  = @equipment.dob
+%p
+  %b Customer note:
+  = @equipment.customer_note
+%p
+  %b Purchase date:
+  = @equipment.purchase_date
+
+= link_to 'Edit', edit_equipment_path(@equipment)
+\|
+= link_to 'Back', equipment_index_path

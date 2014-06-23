@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand_id: 
+  name: MyString
+  color: MyString
+  manufacturer: MyString
+  warranty: MyString
+  image: MyString
+  user_id: 
+
+two:
+  brand_id: 
+  name: MyString
+  color: MyString
+  manufacturer: MyString
+  warranty: MyString
+  image: MyString
+  user_id: 

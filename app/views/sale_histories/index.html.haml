@@ -1,0 +1,29 @@
+%h1 Listing sale_histories
+
+%table
+  %tr
+    %th Equipment
+    %th Serial no
+    %th Brand
+    %th Model
+    %th Customer
+    %th Selling date
+    %th
+    %th
+    %th
+
+  - @sale_histories.each do |sale_history|
+    %tr
+      %td= sale_history.equipment
+      %td= sale_history.serial_no
+      %td= sale_history.brand
+      %td= sale_history.model
+      %td= sale_history.customer_id
+      %td= sale_history.selling_date
+      %td= link_to 'Show', sale_history
+      %td= link_to 'Edit', edit_sale_history_path(sale_history)
+      %td= link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sale history', new_sale_history_path
