@@ -13,7 +13,7 @@
     - @accessories.each do |accessory|
       %tr
         %td= accessory.name
-        %td= link_to accessory.url
+        %td= link_to accessory.url,accessory.url
         %td= accessory.price
         %td=accessory.created_at.strftime("%A, %d %b %Y %l:%M %p")
         %td

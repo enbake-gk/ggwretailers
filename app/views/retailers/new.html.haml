@@ -16,6 +16,11 @@
     = f.text_field :website
   %div
   %div
+    = f.label :Group
+    %br/
+    = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},:include_blank => true, :class => 'form-control'
+  %div
+  %div
     = f.label :retailer_name
     %br/
     = f.text_field :retailer_name

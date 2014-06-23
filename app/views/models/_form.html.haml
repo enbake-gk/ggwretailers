@@ -3,7 +3,6 @@
     = f.label :brand_id, :class => 'control-label'
     .controls
       = f.select :brand_id,Brand.all.map{|b| [b.name,b.id]}, :class => 'form-control'
-      
   .form-group
     = f.label :name, :class => 'control-label'
     .controls
@@ -16,6 +15,10 @@
     = f.label :manufacturer, :class => 'control-label'
     .controls
       = f.text_field :manufacturer, :class => 'form-control'
+  .form-group
+    = f.label :where_serial_number_is_found, :class => 'control-label'
+    .controls
+      = f.text_field :serial_no_location, :class => 'form-control'
   .form-group
     = f.label "warranty (in month)", :class => 'control-label'
     .controls

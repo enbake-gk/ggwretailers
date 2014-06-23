@@ -8,6 +8,7 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:color)
       %th= model_class.human_attribute_name(:manufacturer)
+      %th= model_class.human_attribute_name(:serial_no_location)
       %th= model_class.human_attribute_name("warranty(in months)")
       %th= model_class.human_attribute_name(:image)
       %th= model_class.human_attribute_name(:created_at)
@@ -15,10 +16,11 @@
   %tbody
     - @models.includes(:brand).each do |model|
       %tr
-        %td= model.brand.name
+        %td= link_to model.brand.name,brand_path(model.brand.id)
         %td= model.name
         %td= model.color
         %td= model.manufacturer
+        %td= model.serial_no_location
         %td= model.warranty
         %td= image_tag(model.image.thumb)        
         %td=model.created_at.strftime("%A, %d %b %Y %l:%M %p")

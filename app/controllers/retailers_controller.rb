@@ -9,9 +9,6 @@ class RetailersController  < ApplicationController
   end
 
   def registration
-  
-  # abort user_params.email.to_json
-
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
@@ -28,6 +25,6 @@ class RetailersController  < ApplicationController
 
 private
  def user_params
-      params.require(:user).permit(:first_name,:last_name,:email,:password_confirmation,:password,:contact_person,:website,:role_id).merge(:role_id=>"2")
+      params.require(:user).permit(:email,:password_confirmation,:password,:contact_person,:website,:role_id,:retailer_group_id,:retailer_name,:phone_number).merge(:role_id=>"2")
  end
 end

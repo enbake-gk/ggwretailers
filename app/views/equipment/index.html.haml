@@ -1,55 +1,24 @@
-%h1 Listing equipment
-
-%table
-  %tr
-    %th Name
-    %th Url
-    %th Price
-    %th User
-    %th Brand
-    %th Model
-    %th Accessory
-    %th First name
-    %th Last name
-    %th Address
-    %th Town
-    %th City
-    %th Post code
-    %th Telephone
-    %th Mobile
-    %th Email
-    %th Dob
-    %th Customer note
-    %th Purchase date
-    %th
-    %th
-    %th
-
-  - @equipment.each do |equipment|
+- model_class = Equipment
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
     %tr
-      %td= equipment.name
-      %td= equipment.url
-      %td= equipment.price
-      %td= equipment.user
-      %td= equipment.brand
-      %td= equipment.model
-      %td= equipment.accessory
-      %td= equipment.first_name
-      %td= equipment.last_name
-      %td= equipment.address
-      %td= equipment.town
-      %td= equipment.city
-      %td= equipment.post_code
-      %td= equipment.telephone
-      %td= equipment.mobile
-      %td= equipment.email
-      %td= equipment.dob
-      %td= equipment.customer_note
-      %td= equipment.purchase_date
-      %td= link_to 'Show', equipment
-      %td= link_to 'Edit', edit_equipment_path(equipment)
-      %td= link_to 'Destroy', equipment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th= model_class.human_attribute_name(:serial_number)
+      %th= model_class.human_attribute_name(:model_id)
+      %th= model_class.human_attribute_name(:brand_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @equipment.includes(:model,:brand).each do |equipment| 
+      %tr
+        %td= equipment.serial_number
+        %td= link_to equipment.brand.name,brand_path(equipment.brand.id)    
+        %td= link_to equipment.model.name,model_path(equipment.model.id)        
+        %td=equipment.created_at.strftime("%A, %d %b %Y %l:%M %p")
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(equipment), :class => 'btn btn-default btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), equipment_path(equipment), :class => 'btn btn-primary btn-sm'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), equipment_path(equipment), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
-%br
-
-= link_to 'New Equipment', new_equipment_path
+= link_to t('.new', :default => t("helpers.links.new")), new_equipment_path, :class => 'btn btn-primary'
