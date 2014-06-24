@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620145357) do
+ActiveRecord::Schema.define(version: 20140623124545) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140620145357) do
     t.integer  "retailer_group_id"
     t.integer  "role_id"
     t.string   "retailer_name"
-    t.integer  "phone_number"
+    t.string   "phone_number"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

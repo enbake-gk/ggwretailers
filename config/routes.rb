@@ -13,13 +13,15 @@ Rails.application.routes.draw do
   resources :models
 
   resources :brands
+  
+  resources :users
 
   devise_for :users
 
-  resources :retailers,:only=>[:new,:index] do
-   collection do
+  resources :retailers do
+    collection do
         post :registration
-      end
+    end
   end
   # retailers
   # devise_for :retailers, :skip => [:registrations],  :controllers => { :users => "users" }

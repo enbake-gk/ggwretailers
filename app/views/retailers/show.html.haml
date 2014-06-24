@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Contact person:
+  = @retailer.contact_person
+%p
+  %b Website:
+  = @retailer.website
+%p
+  %b Retailer name:
+  = @retailer.retailer_name
+%p
+  %b Phone number:
+  = @retailer.phone_number
+%p
+  %b Email:
+  = @retailer.email
+%p
+  %b Password:
+  = @retailer.password
+%p
+  %b Password confirmation:
+  = @retailer.password_confirmation
+
+= link_to 'Edit', edit_retailer_path(@retailer)
+\|
+= link_to 'Back', retailers_path

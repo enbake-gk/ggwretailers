@@ -1,25 +1,31 @@
-- user_class = User
 .page-header
-  %h1=t '.title', :default => user_class.user_name.human.pluralize.titleize
-%table.table.table-striped
+  %h1.title Retailers listing
+%table.table.table-bordered 
   %thead
     %tr
-      %th= user_class.human_attribute_name(:first_name)
-      %th= user_class.human_attribute_name(:last_name)
-      %th= user_class.human_attribute_name(:retailer_name)
-      %th= user_class.human_attribute_name(:phone_number)
-      %th= user_class.human_attribute_name(:website)     
-      %th= user_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
+      %th Contact person
+      %th Retailer name
+      %th Phone number
+      %th Email
+      %th Created On
+      %th Actions
   %tbody
-    - @users.each do |user|
+    - if @retailers.present?
+      - @retailers.each do |retailer|
+        %tr
+          %td= retailer.contact_person
+          %td= retailer.retailer_name
+          %td= retailer.phone_number
+          %td= retailer.email
+          %td= retailer.email
+          %td
+            = link_to 'Show', "/retailers/#{retailer.id}", :class => 'btn btn-primary btn-sm'
+            = link_to 'Edit', edit_retailer_path(retailer),:class => 'btn btn-info btn-sm'
+            = link_to 'Destroy', "/retailers/#{retailer.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-sm  btn-danger'
+    - else
       %tr
-        %td= user.brand.first_name
-        %td= user.last_name
-        %td= user.retailer_name
-        %td= user.phone_number
-        %td= user.website
-        %td= image_tag(user.image.thumb)        
-        %td=user.created_at.strftime("%A, %d %b %Y %l:%M %p")
-        %td   
-  
+        %td{colspan: "9"} No data available.
+%br
+= will_paginate @retailers, renderer: BootstrapPagination::Rails 
+
+= link_to t('.new', :default => t("helpers.links.new")), new_retailer_path, :class => 'btn btn-primary'

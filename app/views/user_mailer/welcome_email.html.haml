@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome to our serial number tracking system, #{@user.user_name}
+    %p
+      Your account is successfully created.
+      %br
+      your username is: #{@user.email}
+      %br
+      your password is: #{@user.password}
+    %p
+      To login to the site, just follow this link: #{@url}.
