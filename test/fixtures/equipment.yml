@@ -3,41 +3,41 @@
 one:
   name: MyString
   url: MyString
-  price: 1
-  user_id: 
-  brand_id: 
-  model_id: 
-  accessory_id: 
+  price: MyString
+  user_id: MyString
+  brand_id: MyString
+  model_id: MyString
+  accessory_id: MyString
   first_name: MyString
   last_name: MyString
   address: MyString
   town: MyString
   city: MyString
-  post_code: 1
-  telephone: 1
-  mobile: 1
+  post_code: MyString
+  telephone: MyString
+  mobile: MyString
   email: MyString
-  dob: 2014-06-19 18:32:03
-  customer_note: MyText
-  purchase_date: 2014-06-19 18:32:03
+  dob: MyString
+  customer_note: MyString
+  purchase_date: MyString
 
 two:
   name: MyString
   url: MyString
-  price: 1
-  user_id: 
-  brand_id: 
-  model_id: 
-  accessory_id: 
+  price: MyString
+  user_id: MyString
+  brand_id: MyString
+  model_id: MyString
+  accessory_id: MyString
   first_name: MyString
   last_name: MyString
   address: MyString
   town: MyString
   city: MyString
-  post_code: 1
-  telephone: 1
-  mobile: 1
+  post_code: MyString
+  telephone: MyString
+  mobile: MyString
   email: MyString
-  dob: 2014-06-19 18:32:03
-  customer_note: MyText
-  purchase_date: 2014-06-19 18:32:03
+  dob: MyString
+  customer_note: MyString
+  purchase_date: MyString

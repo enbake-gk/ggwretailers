@@ -62,7 +62,29 @@ class EquipmentController < ApplicationController
     end
   end
 
+
+  def import 
+
+    # abort import_file.to_yaml
+    # abort params[:filele].original_filename.to_yaml
+
+    @equipment=Equipment.import(params[:file])
+    respond_to do |format|
+      if @equipment.save
+        format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
+        format.json { render :show, status: :created, location: @equipment }
+      else
+        format.html { render :new }
+        format.json { render json: @equipment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
+
+    def import_file
+      params.require(:file).permit(:model_id,:brand_id,:serial_number)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_equipment
       @equipment = Equipment.find(params[:id])
@@ -70,6 +92,7 @@ class EquipmentController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
-      params.require(:equipment).permit(:name, :url, :price, :user_id, :brand_id, :model_id, :accessory_id, :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, :customer_note, :purchase_date)
+      # ,:brand=>Brand.find(params[:equipment][:model_id])
+      params.require(:equipment).permit(:model_id,:brand_id,:serial_number).merge(user_id: current_user.id)
     end
 end

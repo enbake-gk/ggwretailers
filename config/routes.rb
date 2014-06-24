@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   
  
 
+  resources :equipment do
+    post :import,on: :collection
+  end
+
+  resources :retailer_groups
+
   resources :sale_histories
 
   resources :jobs
-
-  resources :equipment
 
   resources :accessories
 
@@ -28,12 +32,7 @@ Rails.application.routes.draw do
         post :registration
     end
   end
-  # retailers
-  # devise_for :retailers, :skip => [:registrations],  :controllers => { :users => "users" }
-
-  # devise_for :editors, :skip => [:registrations],  :controllers => { :registrations => "editors" }
-  # devise_for :retailers,   :skip => [:registrations],:controllers => { :registrations => "retailers/registration" }
-  # The priority is based upon order of creation: first created -> highest priority.
+ 
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

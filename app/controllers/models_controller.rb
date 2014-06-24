@@ -70,7 +70,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:brand_id,:name, :color, :manufacturer, :warranty, :image)
+      params.require(:model).permit(:brand_id,:name,:serial_no_location,:color, :manufacturer, :warranty, :image)
       .merge(user: current_user)
     end
 end

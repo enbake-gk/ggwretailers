@@ -20,6 +20,7 @@ class RetailersController < ApplicationController
     @retailer = User.new
   end
 
+ 
   # GET /retailers/1/edit
   def edit
   end

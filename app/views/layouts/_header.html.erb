@@ -3,10 +3,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        
-        <%#= link_to "Bidderui",'/',class: "navbar-brand" %>
        <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
+<<<<<<< HEAD
             <% if user_signed_in? 
                 if current_user.is_admin? %>
                   <li><%= link_to 'Brand',brands_path %></li>
@@ -17,6 +16,16 @@
                   <li><%= link_to 'Customers',customer_detail_users_path %></li>
               <% end %>
 
+=======
+            <% if user_signed_in? %>
+            <li><%= link_to 'Brand',brands_path %></li>
+            <li><%= link_to 'Model',models_path %></li>
+            <li><%= link_to 'Accessories',accessories_path %></li>
+            <li><%= link_to 'Retailers',new_retailer_path %></li>
+            <li><%= link_to 'Retailer Group',retailer_groups_path %></li>
+            <li><%= link_to 'Equipments',equipment_index_path %></li>
+            <li><%= link_to 'Retailers',users_path(:type=>2) %></li>
+>>>>>>> e971a46217c86aafc3dbaa30aba777d3b3b2bdc8
             <% end %>
           </ul>
            <p class="navbar-text navbar-right">

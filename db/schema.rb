@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623124545) do
+ActiveRecord::Schema.define(version: 20140623133332) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -69,11 +69,14 @@ ActiveRecord::Schema.define(version: 20140623124545) do
     t.datetime "purchase_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "customer_id"
+    t.string   "serial_number"
   end
 
   add_index "equipment", ["accessory_id"], name: "index_equipment_on_accessory_id", using: :btree
   add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree
   add_index "equipment", ["model_id"], name: "index_equipment_on_model_id", using: :btree
+  add_index "equipment", ["serial_number"], name: "index_equipment_on_serial_number", unique: true, using: :btree
   add_index "equipment", ["user_id"], name: "index_equipment_on_user_id", using: :btree
 
   create_table "jobs", force: true do |t|
@@ -97,10 +100,17 @@ ActiveRecord::Schema.define(version: 20140623124545) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "serial_no_location"
   end
 
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
   add_index "models", ["user_id"], name: "index_models_on_user_id", using: :btree
+
+  create_table "retailer_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sale_histories", force: true do |t|
     t.integer  "equipment_id"
