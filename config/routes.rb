@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   resources :models
 
   resources :brands
-  
+   
+  devise_for :users
+ 
   resources :users
 
-  devise_for :users
 
   resources :retailers do
     collection do

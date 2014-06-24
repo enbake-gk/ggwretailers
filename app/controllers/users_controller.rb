@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
@@ -27,19 +28,19 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
    def create
-    resource = build_resource(sign_up_params)
-    if resource.save
-      UserMailer.welcome_email(resource).deliver
-      format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully created.' }
-    else
-      clean_up_passwords resource
-      respond_with resource
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        UserMailer.welcome_email(@user).deliver
+        format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
   end
-
-
  
-   # PATCH/PUT /users/1
+  # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
