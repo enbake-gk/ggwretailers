@@ -13,3 +13,8 @@
       = f.text_field :serial_number, :class => 'form-control'
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), equipment_index_path, :class => 'btn btn-default'
+
+
+= form_tag import_equipment_index_path, multipart: true do
+  = file_field_tag :filele
+  = submit_tag "Import"

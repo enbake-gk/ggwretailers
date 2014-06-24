@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   
  
 
-  resources :equipment
+  resources :equipment do
+    post :import,on: :collection
+  end
 
   resources :retailer_groups
 

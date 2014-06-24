@@ -36,7 +36,9 @@ gem 'devise'       # for authentication
 gem "html2haml"    # For converting erb file into haml(rails generate devise:views{it create .erb file})
 gem 'rmagick'      # For image cropping(Dependent on carrierwave)
 gem 'carrierwave'  # For file upload
-# gem 'sextant'      # To see routes on browser
+# gem 'sextant'    # To see routes on browser
+gem "iconv"        #  Dependency to roo gem
+gem 'roo'          # Read OpenOffice/Excel/Google spreadsheets/Excelx/LibreOffice/CSV file  
 ruby "2.0.0"
 
 # Use ActiveModel has_secure_password
