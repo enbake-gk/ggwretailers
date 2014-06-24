@@ -17,13 +17,16 @@ Rails.application.routes.draw do
   resources :models
 
   resources :brands
-
+   
   devise_for :users
+ 
+  resources :users
 
-  resources :retailers,:only=>[:new,:index] do
-   collection do
+
+  resources :retailers do
+    collection do
         post :registration
-      end
+    end
   end
  
   # See how all your routes lay out with "rake routes".

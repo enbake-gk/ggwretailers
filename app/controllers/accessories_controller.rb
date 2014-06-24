@@ -1,5 +1,6 @@
 class AccessoriesController < ApplicationController
   before_action :set_accessory, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /accessories
   # GET /accessories.json

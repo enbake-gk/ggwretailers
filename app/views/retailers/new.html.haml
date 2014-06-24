@@ -1,47 +1,5 @@
-%h2 Sign up
-= form_for(@user, url: registration_retailers_path) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this sale_history from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  %div
-    = f.label :contact_person
-    %br/
-    = f.text_field :contact_person
-  %div
-    = f.label :website
-    %br/
-    = f.text_field :website
-  %div
-  %div
-    = f.label :Group
-    %br/
-    = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},:include_blank => true, :class => 'form-control'
-  %div
-  %div
-    = f.label :retailer_name
-    %br/
-    = f.text_field :retailer_name
-  %div
-  %div
-    = f.label :phone_number
-    %br/
-    = f.text_field :phone_number
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  %div= f.submit "Sign up"
 
-\
+.page-header
+  %h1.title New retailer
+= render 'form',:myaction => "create"
 

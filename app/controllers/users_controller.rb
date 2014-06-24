@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @users = @users.retailer if (params[:type].try(:to_i) == 2)
+    @users = @users.order("id desc")
+    @users = @users.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1
@@ -24,27 +28,26 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
    def create
-    build_resource(sign_up_params)
-    if resource.save
-      redirect_to models_path
-    else
-      clean_up_passwords resource
-      respond_with resource
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        UserMailer.welcome_email(@user).deliver
+        format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
   end
-
-
  
-   # PATCH/PUT /users/1
+  # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +57,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_path(:type=>2), notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,6 +70,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email)
+      params.require(:user).permit(:contact_person, :website, :retailer_name, :phone_number, :email, :password, :password_confirmation,:role_id).merge(:role_id=>"2")
     end
 end

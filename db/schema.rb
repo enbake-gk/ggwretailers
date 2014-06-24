@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20140623133332) do
     t.integer  "retailer_group_id"
     t.integer  "role_id"
     t.string   "retailer_name"
-    t.integer  "phone_number"
+    t.string   "phone_number"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
