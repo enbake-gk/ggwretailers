@@ -14,19 +14,3 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
-.powenv
-.env
-.powrc
-.rvmrc
-.pub
-
-/config/database.yml
-/lib/tasks/deploy.rake
-
-/app/assets/stylesheets/twitter-bootstrap-static/bootstrap.css.map.css
-
-/config/s3_env.rb
-/public/uploads/tmp
-/public/system
-/spring
