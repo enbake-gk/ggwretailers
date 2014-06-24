@@ -16,7 +16,11 @@ Rails.application.routes.draw do
    
   devise_for :users
  
-  resources :users
+  resources :users do
+    collection do
+      get :customer_detail
+    end
+  end
 
 
   resources :retailers do

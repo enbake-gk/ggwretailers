@@ -62,6 +62,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def customer_detail
+      @customer = Equipment.all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
