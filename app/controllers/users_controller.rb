@@ -66,6 +66,34 @@ class UsersController < ApplicationController
       @customer = Equipment.all
   end
 
+  def customer_new
+
+  end
+  
+  def customer_create
+
+  end
+
+  def customer_edit
+
+  end
+
+  def customer_update
+
+  end
+
+
+  def check_email_uniq
+    id = params[:id]
+    email = params[:user][:email]
+    check_email = User.where("email =?",email)
+    if check_email.present? && check_email.first.try(:id) != id.try(:to_i)
+      render :status => :ok,:text => "false"
+    else
+      render  :status => :ok,:text=>"true"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -74,6 +102,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:contact_person, :website, :retailer_name, :phone_number, :email, :password, :password_confirmation,:role_id).merge(:role_id=>"2")
+      params.require(:user).permit(:contact_person, :website, :retailer_name, :phone_number, :email, :password, :password_confirmation,:role_id,:first_name,:last_name).merge(:role_id=>"2")
     end
 end

@@ -1,0 +1,21 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".retailer_form_validate").validate({
+			rules: {
+				"user[email]": {
+						required: true,
+						email: true,
+					  remote: "/users/check_email_uniq?id="+$("input[name='user[email]']").attr('rel')
+	    		},
+				"user[password_confirmation]": {
+						equalTo: ".user_password"
+	    	}
+			},
+			messages: {
+        "user[email]":{
+            remote: "This email is already used !"
+        }        
+      }
+		});
+	});
+</script>
