@@ -6,6 +6,9 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories.json
   def index
     @sale_histories = SaleHistory.all
+                     .order("id desc")
+                     .paginate(:page => params[:page], :per_page => 5)
+
   end
 
   # GET /sale_histories/1
@@ -62,6 +65,39 @@ class SaleHistoriesController < ApplicationController
     end
   end
 
+  def equipment_list_by_srno
+
+      sr_no = params[:query]
+      @equipment = Equipment.select("equipment.id,equipment.serial_number")
+                  .where("equipment.serial_number LIKE ? ","%#{sr_no}%")
+
+      respond_to do |format|
+        format.json { render json: @equipment   }
+      end
+
+  end
+
+  def equipment_detail
+      id = params[:id]
+      @equipment = Equipment.select("models.name as mname,brands.name as bname")
+                  .joins(:model,:brand)
+                  .where("equipment.id = ? ",id)
+
+      respond_to do |format|
+        format.json { render json: @equipment.try(:first)   }
+      end
+  end
+
+  def retailer_list_by_srno
+       sr_no = params[:query]
+       @retailer = User.retailer.select("id, CONCAT(first_name, ' ', last_name) AS usr_name ")
+                  .where("users.first_name LIKE ?  or users.last_name  LIKE ?","%#{sr_no}%","%#{sr_no}%")
+
+      respond_to do |format|
+        format.json { render json: @retailer }
+      end
+   
+  end 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sale_history
@@ -70,6 +106,6 @@ class SaleHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_history_params
-      params.require(:sale_history).permit(:equipment_id, :serial_no, :brand_id, :model_id, :customer_id, :selling_date)
+      params.require(:sale_history).permit(:equipment_id, :customer_id, :selling_date)
     end
 end

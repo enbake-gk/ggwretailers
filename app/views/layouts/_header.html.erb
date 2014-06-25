@@ -13,6 +13,7 @@
                   <li><%= link_to 'Retailers',users_path(:type=>2) %></li>
                   <li><%= link_to 'Retailer Group',retailer_groups_path %></li>
                   <li><%= link_to 'Equipments',equipment_index_path %></li>
+                  <li><%= link_to 'Sell Equipment',sale_histories_path %></li>
               <% elsif current_user.is_retailer? %>
                   <li><%= link_to 'Customers',customer_detail_users_path %></li>
               <% end %>

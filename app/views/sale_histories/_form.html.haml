@@ -6,23 +6,26 @@
         - @sale_history.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :equipment
-    = f.text_field :equipment
-  .field
-    = f.label :serial_no
-    = f.number_field :serial_no
-  .field
-    = f.label :brand
-    = f.text_field :brand
-  .field
-    = f.label :model
-    = f.text_field :model
-  .field
-    = f.label :customer_id
-    = f.number_field :customer_id
-  .field
-    = f.label :selling_date
-    = f.datetime_select :selling_date
-  .actions
-    = f.submit 'Save'
+  .form-group
+    = f.label :equipment_id, :class => 'control-label'
+    .controls
+      = text_field_tag "equipment_id",'', :class => 'form-control typeahead_equipment',:autocomplete => "off"
+      = f.hidden_field :equipment_id, :class => 'form-control equipment_id_hidden'
+  .form-group
+    = label_tag "Brand", raw('Brand : <span class="brand_name"> </span>'), {:class => 'control-label'}
+  .form-group
+    = label_tag "Model", raw('Model : <span class="model_name"> </span>'),{:class => 'control-label'}
+  .form-group
+    = f.label :customer_id,'Retailer', :class => 'control-label'
+    .controls
+      = text_field_tag "customer_id",'', :class => 'form-control typeahead_customer',:autocomplete => "off"
+      = f.hidden_field :customer_id, :class => 'form-control customer_id_hidden'
+  .form-group
+    = f.label :selling_date, :class => 'control-label'
+    .controls
+      = f.datetime_select :selling_date, :class => 'form-control'
+
+  = f.submit "Save", :class => 'btn btn-primary'
+  = link_to "Cancel",  sale_histories_path, :class => 'btn btn-default'
+
+  = render 'autocomp.js'

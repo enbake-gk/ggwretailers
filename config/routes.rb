@@ -8,7 +8,13 @@ Rails.application.routes.draw do
 
   resources :retailer_groups
 
-  resources :sale_histories
+  resources :sale_histories do
+      collection do 
+        get :equipment_list_by_srno
+        get :equipment_detail
+        get :retailer_list_by_srno
+      end
+  end
 
   resources :jobs
 
