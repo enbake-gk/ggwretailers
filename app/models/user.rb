@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   scope :admin, -> { where(role_id: 1) }
   scope :retailer, -> { where(role_id: 2) }
   scope :customer, -> { where(role_id: 2) }
+  #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
 
   def is_admin?
