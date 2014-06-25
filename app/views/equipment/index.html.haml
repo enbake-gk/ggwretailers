@@ -5,20 +5,34 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:serial_number)
-      %th= model_class.human_attribute_name(:model_id)
       %th= model_class.human_attribute_name(:brand_id)
+      %th= model_class.human_attribute_name(:model_id)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @equipment.includes(:model,:brand).each do |equipment| 
       %tr
         %td= equipment.serial_number
-        %td= link_to equipment.brand.name,brand_path(equipment.brand.id)    
-        %td= link_to equipment.model.name,model_path(equipment.model.id)        
+        %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
+        %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)        
         %td=equipment.created_at.strftime("%A, %d %b %Y %l:%M %p")
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(equipment), :class => 'btn btn-default btn-xs'
           = link_to t('.show', :default => t("helpers.links.show")), equipment_path(equipment), :class => 'btn btn-primary btn-sm'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), equipment_path(equipment), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
-
+= will_paginate @equipment, renderer: BootstrapPagination::Rails  
 = link_to t('.new', :default => t("helpers.links.new")), new_equipment_path, :class => 'btn btn-primary'
+
+= form_for @product_import,:url=>import_equipment_index_path do |f|
+  - if @product_import.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@product_import.errors.count, "error")
+        prohibited this import from completing:
+      %ul
+        - @product_import.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.file_field :file
+  .buttons= f.submit "Import"
+

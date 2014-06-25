@@ -5,7 +5,11 @@ class EquipmentController < ApplicationController
   # GET /equipment
   # GET /equipment.json
   def index
-    @equipment = Equipment.all
+    # puts Brand.delete_all
+    # puts Model.delete_all
+    # puts Equipment.delete_all
+    @equipment = Equipment.paginate(:page => params[:page], :per_page => 12)
+    @product_import = EquipmentImport.new
   end
 
   # GET /equipment/1
@@ -26,7 +30,6 @@ class EquipmentController < ApplicationController
   # POST /equipment.json
   def create
     @equipment = Equipment.new(equipment_params)
-
     respond_to do |format|
       if @equipment.save
         format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
@@ -64,19 +67,13 @@ class EquipmentController < ApplicationController
 
 
   def import 
-
-    # abort import_file.to_yaml
-    # abort params[:filele].original_filename.to_yaml
-
-    @equipment=Equipment.import(params[:file])
-    respond_to do |format|
-      if @equipment.save
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
-        format.json { render :show, status: :created, location: @equipment }
-      else
-        format.html { render :new }
-        format.json { render json: @equipment.errors, status: :unprocessable_entity }
-      end
+    # @equipment=Equipment.import(params[:file],current_user.id)
+    # redirect_to equipment_index_path, notice: 'Equipment was successfully created.'
+     @product_import = EquipmentImport.new(params[:equipment_import])
+    if @product_import.save
+      redirect_to equipment_index_path, notice: "Imported products successfully."
+    else
+      render :import
     end
   end
 

@@ -5,8 +5,7 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all
-    # abort Brand.delete_all.to_yaml
+    @models = Model.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /models/1
