@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 20140623133332) do
     t.string   "name"
     t.string   "url"
     t.string   "price"
-    t.string   "user_id"
-    t.string   "brand_id"
-    t.string   "model_id"
-    t.string   "accessory_id"
+    t.integer  "user_id"
+    t.integer  "brand_id"
+    t.integer  "model_id"
+    t.integer  "accessory_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 20140623133332) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree
+  add_index "equipment", ["model_id"], name: "index_equipment_on_model_id", using: :btree
+  add_index "equipment", ["serial_number"], name: "index_equipment_on_serial_number", unique: true, using: :btree
+  add_index "equipment", ["user_id"], name: "index_equipment_on_user_id", using: :btree
 
   create_table "jobs", force: true do |t|
     t.datetime "date_of_job"

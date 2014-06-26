@@ -4,10 +4,10 @@ class CreateEquipment < ActiveRecord::Migration
       t.string :name
       t.string :url
       t.string :price
-      t.string :user_id
-      t.string :brand_id
-      t.string :model_id
-      t.string :accessory_id
+      t.references :user, index: true
+      t.references :brand, index: true
+      t.references :model, index: true
+      t.integer :accessory_id
       t.string :first_name
       t.string :last_name
       t.string :address
