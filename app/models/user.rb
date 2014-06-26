@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def is_customer?
- 		self.role_id.try(:to_i) == 3
+ 		self.role_id.try(:to_i) ==3
   end
 
   validates :email, :uniqueness => true
