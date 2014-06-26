@@ -18,6 +18,14 @@
     .controls
       = f.text_field :contact_person, :class => 'form-control'
   .form-group
+    = f.label :retailer_name , :class => 'control-label'
+    .controls
+      = f.text_field :retailer_name, :class => 'form-control'
+  .form-group
+    = f.label :retailer_group, :class => 'control-label'
+    .controls
+      = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},{ include_blank: true }, :class => 'form-control'
+  .form-group
     = f.label :website, :class => 'control-label'
     .controls
       = f.text_field :website, :class => 'form-control'
@@ -29,15 +37,6 @@
     = f.label :email, :class => 'control-label'
     .controls
       = f.text_field :email, :class => 'form-control', :rel=> @user.try(:id)
-  .form-group
-    = f.label :password, :class => 'control-label'
-    .controls
-      = f.text_field :password, :class => 'form-control user_password'
-  .form-group
-    = f.label :password_confirmation, :class => 'control-label'
-    .controls
-      = f.text_field :password_confirmation , :class => 'form-control'
-
   = f.submit "Save", :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), retailers_path, :class => 'btn btn-default'
 

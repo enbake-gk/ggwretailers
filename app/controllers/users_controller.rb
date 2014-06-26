@@ -6,14 +6,14 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    @users = @users.retailer if (params[:type].try(:to_i) == 2)
-    @users = @users.order("id desc")
+    @users = @users.retailer #if (params[:type].try(:to_i) == 2)
     @users = @users.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+  
   end
 
   # GET /users/new
@@ -85,6 +85,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:contact_person, :website, :retailer_name, :phone_number, :email, :password, :password_confirmation,:role_id,:first_name,:last_name).merge(:role_id=>"2")
+      params.require(:user).permit(:retailer_name,:contact_person, :website, :retailer_name, :phone_number, :email, :first_name,:last_name).merge(:role_id=>"2",:password => Devise.friendly_token.first(8))
     end
 end

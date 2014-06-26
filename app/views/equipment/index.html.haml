@@ -10,7 +10,7 @@
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
-    - @equipment.includes(:model,:brand).each do |equipment| 
+    - @equipment.each do |equipment| 
       %tr
         %td= equipment.serial_number
         %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    

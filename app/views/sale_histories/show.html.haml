@@ -1,23 +1,20 @@
 %p#notice= notice
 
 %p
-  %b Equipment:
-  = @sale_history.equipment
-%p
   %b Serial no:
-  = @sale_history.serial_no
+  = @sale_history.equipment.try(:serial_number)
 %p
   %b Brand:
-  = @sale_history.brand
+  = @sale_history.equipment.brand.try(:name)
 %p
   %b Model:
-  = @sale_history.model
+  = @sale_history.equipment.model.try(:name)
 %p
   %b Customer:
-  = @sale_history.customer_id
+  = @sale_history.user.try(:user_name)
 %p
   %b Selling date:
-  = @sale_history.selling_date
+  = @sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')
 
 = link_to 'Edit', edit_sale_history_path(@sale_history)
 \|

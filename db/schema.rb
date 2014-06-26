@@ -50,34 +50,28 @@ ActiveRecord::Schema.define(version: 20140623133332) do
   create_table "equipment", force: true do |t|
     t.string   "name"
     t.string   "url"
-    t.integer  "price"
-    t.integer  "user_id"
-    t.integer  "brand_id"
-    t.integer  "model_id"
-    t.integer  "accessory_id"
+    t.string   "price"
+    t.string   "user_id"
+    t.string   "brand_id"
+    t.string   "model_id"
+    t.string   "accessory_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
     t.string   "town"
     t.string   "city"
-    t.integer  "post_code"
-    t.integer  "telephone"
-    t.integer  "mobile"
+    t.string   "post_code"
+    t.string   "telephone"
+    t.string   "mobile"
     t.string   "email"
-    t.datetime "dob"
-    t.text     "customer_note"
-    t.datetime "purchase_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "dob"
+    t.string   "customer_note"
+    t.string   "purchase_date"
     t.integer  "customer_id"
     t.string   "serial_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "equipment", ["accessory_id"], name: "index_equipment_on_accessory_id", using: :btree
-  add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree
-  add_index "equipment", ["model_id"], name: "index_equipment_on_model_id", using: :btree
-  add_index "equipment", ["serial_number"], name: "index_equipment_on_serial_number", unique: true, using: :btree
-  add_index "equipment", ["user_id"], name: "index_equipment_on_user_id", using: :btree
 
   create_table "jobs", force: true do |t|
     t.datetime "date_of_job"

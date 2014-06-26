@@ -2,26 +2,21 @@
 
 %p
   %b Contact person:
-  = @retailer.contact_person
+  = @user.contact_person
 %p
   %b Website:
-  = @retailer.website
+  = @user.website
 %p
   %b Retailer name:
-  = @retailer.retailer_name
+  = @user.retailer_name
 %p
   %b Phone number:
-  = @retailer.phone_number
+  = @user.phone_number
 %p
   %b Email:
-  = @retailer.email
-%p
-  %b Password:
-  = @retailer.password
-%p
-  %b Password confirmation:
-  = @retailer.password_confirmation
+  = @user.email
 
-= link_to 'Edit', edit_retailer_path(@retailer)
+
+= link_to 'Edit', edit_user_path(@user)
 \|
 = link_to 'Back', retailers_path

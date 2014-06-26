@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
+  default_scope { order('created_at desc') }
   belongs_to :retailer_groups
   has_one :sale_history
   devise :database_authenticatable,

@@ -13,13 +13,13 @@
     - if @sale_histories.present?
       - @sale_histories.each do |sale_history|
         %tr
-          %td= sale_history.equipment.try(:serial_number)
-          %td= sale_history.equipment.brand.try(:name)
-          %td= sale_history.equipment.model.try(:name)
-          %td= sale_history.user.try(:user_name)
+          %td= link_to sale_history.equipment.try(:serial_number),equipment_path(sale_history.equipment.try(:id))
+          %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
+          %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
+          %td= link_to sale_history.user.try(:user_name),user_path(sale_history.user.try(:id))
           %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')
           %td
-            =# link_to 'Show', sale_history, :class => 'btn btn-primary btn-sm'
+            = link_to 'Show', sale_history, :class => 'btn btn-primary btn-sm'
             = link_to 'Edit', edit_sale_history_path(sale_history),:class => 'btn btn-info btn-sm'
             = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-sm  btn-danger'
     - else
