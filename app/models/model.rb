@@ -4,4 +4,5 @@ class Model < ActiveRecord::Base
   belongs_to :brand
   belongs_to :user
   mount_uploader :image, AvatarUploader
+  validates :name, presence: true
 end

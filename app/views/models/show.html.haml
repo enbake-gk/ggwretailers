@@ -29,7 +29,7 @@
 %p
   %strong= model_class.human_attribute_name(:image) + ':'
   %br
-  =  image_tag(@model.image.thumb)   
+  =  image_tag(@model.image.thumb)  if @model.image.present? 
 %p
 
 = link_to t('.back', :default => t("helpers.links.back")), models_path, :class => 'btn btn-default'
