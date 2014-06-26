@@ -21,7 +21,7 @@ class CreateEquipment < ActiveRecord::Migration
       t.string :customer_note
       t.string :purchase_date
       t.integer :customer_id
-      t.string :serial_number
+      t.integer :serial_number
       t.timestamps
     end
   end
