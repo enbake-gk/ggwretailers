@@ -2,9 +2,8 @@
   function display_equipment_detail(item) {
     $('.equipment_id_hidden').val(item.value);
     $.get('/sale_histories/equipment_detail', { id: item.value }, function (data) {
-            console.log(JSON.stringify(data));
-            $('span.brand_name').text(data.bname);
-            $('span.model_name').text(data.mname);
+        $('span.brand_name').text(data.bname);
+        $('span.model_name').text(data.mname);
     });
   }
   function set_hidden_id(item) {

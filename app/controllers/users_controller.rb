@@ -62,26 +62,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def customer_detail
-      @customer = Equipment.all
+  def serial_key_list
+      @serial_keys = SaleHistory.where("customer_id=?", current_user.id)
   end
-
-  def customer_new
-
-  end
-  
-  def customer_create
-
-  end
-
-  def customer_edit
-
-  end
-
-  def customer_update
-
-  end
-
 
   def check_email_uniq
     id = params[:id]

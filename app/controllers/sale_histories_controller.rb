@@ -32,7 +32,7 @@ class SaleHistoriesController < ApplicationController
 
     respond_to do |format|
       if @sale_history.save
-        format.html { redirect_to @sale_history, notice: 'Sale history was successfully created.' }
+        format.html { redirect_to sale_histories_url, notice: 'Data was successfully created.' }
         format.json { render :show, status: :created, location: @sale_history }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class SaleHistoriesController < ApplicationController
   def update
     respond_to do |format|
       if @sale_history.update(sale_history_params)
-        format.html { redirect_to @sale_history, notice: 'Sale history was successfully updated.' }
+        format.html { redirect_to sale_histories_url, notice: 'Data was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale_history }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class SaleHistoriesController < ApplicationController
   def destroy
     @sale_history.destroy
     respond_to do |format|
-      format.html { redirect_to sale_histories_url, notice: 'Sale history was successfully destroyed.' }
+      format.html { redirect_to sale_histories_url, notice: 'Data was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

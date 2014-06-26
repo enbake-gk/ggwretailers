@@ -3,12 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   belongs_to :retailer_groups
+  has_one :sale_history
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable#, :validatable  :registerable,
 
   scope :admin, -> { where(role_id: 1) }
   scope :retailer, -> { where(role_id: 2) }
-  scope :customer, -> { where(role_id: 2) }
+  scope :customer, -> { where(role_id: 3) }
   #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
 
