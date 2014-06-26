@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
  
+  resources :customers
 
   resources :equipment do
     post :import,on: :collection
@@ -28,8 +29,9 @@ Rails.application.routes.draw do
  
   resources :users do
     collection do
-      get :customer_detail
+      get :serial_key_list
       get :check_email_uniq
+
     end
   end
 

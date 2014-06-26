@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 		if current_user.is_admin? 	
 			redirect_to brands_path
 		elsif current_user.is_retailer?
-			redirect_to customer_detail_users_path
+			redirect_to serial_key_list_users_path
 		else
 			redirect_to "/users/sign_in"
 		end

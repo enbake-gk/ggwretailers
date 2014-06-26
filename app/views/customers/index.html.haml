@@ -1,0 +1,29 @@
+.page-header
+  %h1.title Customers listing
+%table.table.table-bordered 
+  %thead
+    %tr
+      %th name
+      %th Phone number
+      %th Email
+      %th Created On
+      %th Actions
+  %tbody
+    - if @users.present?
+      - @users.each do |user|
+        %tr
+          %td= user.user_name
+          %td= user.phone_number
+          %td= user.email
+          %td= user.created_at.strftime('%m-%d-%Y') 
+          %td
+            = link_to 'Show', "/users/#{user.id}", :class => 'btn btn-primary btn-sm'
+            = link_to 'Edit', edit_user_path(user),:class => 'btn btn-info btn-sm'
+            = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-sm  btn-danger'
+    - else
+      %tr
+        %td{colspan: "9"} No data available.
+%br
+= will_paginate @users, renderer: BootstrapPagination::Rails 
+
+= link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'

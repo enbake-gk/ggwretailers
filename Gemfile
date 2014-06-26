@@ -49,9 +49,6 @@ ruby "2.0.0"
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
-gem 'jquery-ui-rails'
-gem 'jquery-timepicker-addon-rails'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
