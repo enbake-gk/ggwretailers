@@ -18,7 +18,7 @@ class EquipmentController < ApplicationController
   end
 
   # GET /equipment/new
-  def new
+  def new                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
     @equipment = Equipment.new
   end
 
