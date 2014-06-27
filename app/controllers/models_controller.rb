@@ -5,7 +5,8 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.paginate(:page => params[:page], :per_page => 12)
+    @search = Model.search(params[:q])
+    @models = @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /models/1
