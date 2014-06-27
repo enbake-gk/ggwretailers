@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623133332) do
+ActiveRecord::Schema.define(version: 20140626135044) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -120,6 +120,23 @@ ActiveRecord::Schema.define(version: 20140623133332) do
     t.datetime "selling_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "url"
+    t.string   "price"
+    t.integer  "accessory_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "town"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "telephone"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "dob"
+    t.string   "customer_note"
+    t.string   "purchase_date"
+    t.string   "serial_number"
   end
 
   add_index "sale_histories", ["brand_id"], name: "index_sale_histories_on_brand_id", using: :btree

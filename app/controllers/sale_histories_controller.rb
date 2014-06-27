@@ -21,6 +21,20 @@ class SaleHistoriesController < ApplicationController
     @sale_history = SaleHistory.new
   end
 
+  def user
+    @sale_history = SaleHistory.new(sale_history_params)
+
+    respond_to do |format|
+      if @sale_history.save
+        format.html { redirect_to sale_histories_url, notice: 'Data was successfully created.' }
+        format.json { render :show, status: :created, location: @sale_history }
+      else
+        format.html { render :new }
+        format.json { render json: @sale_history.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /sale_histories/1/edit
   def edit
   end

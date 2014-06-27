@@ -1,0 +1,65 @@
+= form_for SaleHistory.new,:url=>user_sale_histories_path, :html => { :class => 'form-horizontal retailer_form_validate' }  do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this retailer from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+        t.string :name
+        t.string :url
+        t.string :price
+        t.integer :accessory_id
+        t.string :first_name
+        t.string :last_name
+        t.string :address
+        t.string :town
+        t.string :city
+        t.string :post_code
+        t.string :telephone
+        t.string :mobile
+        t.string :email
+        t.string :dob
+        t.string :customer_note
+        t.string :purchase_date
+        t.string :serial_number
+
+  .form-group
+    = f.label :serial_number, :class => 'control-label'
+    .controls
+      = f.text_field :serial_number, :class => 'form-control'
+  .form-group
+    = f.label :first_name, :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'form-control'
+  .form-group
+    = f.label :price, :class => 'control-label'
+    .controls
+      = f.text_field :price, :class => 'form-control'
+  .form-group
+    = f.label :address , :class => 'control-label'
+    .controls
+      = f.text_field :address, :class => 'form-control'
+  .form-group
+    = f.label :town , :class => 'control-label'
+    .controls
+      = f.text_field :town, :class => 'form-control'
+  .form-group
+    = f.label :retailer_group, :class => 'control-label'
+    .controls
+      = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},{ include_blank: true }, :class => 'form-control'
+  .form-group
+    = f.label :city, :class => 'control-label'
+    .controls
+      = f.text_field :city, :class => 'form-control'
+  .form-group
+    = f.label :phone_number , :class => 'control-label'
+    .controls
+      = f.text_field :phone_number, :class => 'form-control'
+  .form-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.text_field :email, :class => 'form-control', :rel=> @user.try(:id)
+  = f.submit "Save", :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), retailers_path, :class => 'btn btn-default'
+
