@@ -19,9 +19,9 @@
           %td= link_to sale_history.user.try(:user_name),user_path(sale_history.try(:id))
           %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')
           %td
-            = link_to 'Show', sale_history, :class => 'btn btn-primary btn-sm'
-            = link_to 'Edit', edit_sale_history_path(sale_history),:class => 'btn btn-info btn-sm'
-            = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-sm  btn-danger'
+            = link_to 'Edit', edit_sale_history_path(sale_history),:class => 'btn btn-warning btn-xs'
+            = link_to 'Show', sale_history, :class => 'btn btn-primary btn-xs'
+            = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
     - else
       %tr
         %td{colspan: "9"} No data available.
