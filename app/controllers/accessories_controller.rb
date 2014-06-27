@@ -5,8 +5,8 @@ class AccessoriesController < ApplicationController
   # GET /accessories
   # GET /accessories.json
   def index
-    # abort Accessoriesmodel.delete_all.to_yaml
-    @accessories = Accessory.paginate(:page => params[:page], :per_page => 12)
+    @search = Accessory.search(params[:q])
+    @accessories = @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /accessories/1

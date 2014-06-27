@@ -4,7 +4,8 @@ class RetailerGroupsController < ApplicationController
   # GET /retailer_groups
   # GET /retailer_groups.json
   def index
-    @retailer_groups = RetailerGroup.all
+    @search = RetailerGroup.search(params[:q])
+    @retailer_groups= @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /retailer_groups/1

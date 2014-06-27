@@ -5,9 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    @users = @users.retailer #if (params[:type].try(:to_i) == 2)
-    @users = @users.paginate(:page => params[:page], :per_page => 5)
+    @search = User.search(params[:q])
+    @users = @search.result.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1

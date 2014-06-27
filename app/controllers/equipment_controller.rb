@@ -8,7 +8,8 @@ class EquipmentController < ApplicationController
     # puts Brand.delete_all
     # puts Model.delete_all
     # puts Equipment.delete_all
-    @equipment = Equipment.paginate(:page => params[:page], :per_page => 12)
+    @search = Equipment.search(params[:q])
+    @equipment = @search.result.paginate(:page => params[:page], :per_page => 12)
     @product_import = EquipmentImport.new
   end
 

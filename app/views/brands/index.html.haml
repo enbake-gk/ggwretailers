@@ -1,3 +1,11 @@
+= search_form_for @search, url: '/brands' do |f|
+  / Brand Name Search 
+  .form-control-col-sm-4
+    = f.label :name_cont, "Brand Name Search"
+    = f.text_field :name_cont
+    = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
+    = link_to "Advance Search", '/user'
+    
 - model_class = Brand
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
