@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626135044) do
+ActiveRecord::Schema.define(version: 20140627110709) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -133,15 +133,19 @@ ActiveRecord::Schema.define(version: 20140626135044) do
     t.string   "telephone"
     t.string   "mobile"
     t.string   "email"
-    t.string   "dob"
+    t.datetime "dob"
     t.string   "customer_note"
     t.string   "purchase_date"
     t.string   "serial_number"
+    t.integer  "seller_id"
+    t.integer  "buyer_id"
   end
 
   add_index "sale_histories", ["brand_id"], name: "index_sale_histories_on_brand_id", using: :btree
+  add_index "sale_histories", ["buyer_id"], name: "index_sale_histories_on_buyer_id", using: :btree
   add_index "sale_histories", ["equipment_id"], name: "index_sale_histories_on_equipment_id", using: :btree
   add_index "sale_histories", ["model_id"], name: "index_sale_histories_on_model_id", using: :btree
+  add_index "sale_histories", ["seller_id"], name: "index_sale_histories_on_seller_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

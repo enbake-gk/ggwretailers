@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
  
+  resources :sale_to_customers 
+
   resources :customers
 
   resources :equipment do
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
 
   resources :sale_histories do
       collection do 
-        get :user
         get :equipment_list_by_srno
         get :equipment_detail
         get :retailer_list_by_srno

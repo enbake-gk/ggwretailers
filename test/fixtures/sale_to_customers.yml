@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  equipment_id: MyString
+  serial_no: MyString
+  brand_id: MyString
+  model_id: MyString
+  customer_id: MyString
+  selling_date: MyString
+  created_at: MyString
+  updated_at: MyString
+  name: MyString
+  url: MyString
+  price: MyString
+  accessory_id: MyString
+  first_name: MyString
+  last_name: MyString
+  address: MyString
+  town: MyString
+  city: MyString
+  post_code: MyString
+  telephone: MyString
+  mobile: MyString
+  email: MyString
+  dob: MyString
+  customer_note: MyString
+  purchase_date: MyString
+  serial_number: MyString
+
+two:
+  equipment_id: MyString
+  serial_no: MyString
+  brand_id: MyString
+  model_id: MyString
+  customer_id: MyString
+  selling_date: MyString
+  created_at: MyString
+  updated_at: MyString
+  name: MyString
+  url: MyString
+  price: MyString
+  accessory_id: MyString
+  first_name: MyString
+  last_name: MyString
+  address: MyString
+  town: MyString
+  city: MyString
+  post_code: MyString
+  telephone: MyString
+  mobile: MyString
+  email: MyString
+  dob: MyString
+  customer_note: MyString
+  purchase_date: MyString
+  serial_number: MyString

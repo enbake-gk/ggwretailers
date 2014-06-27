@@ -1,0 +1,34 @@
+- model_class = SaleHistory
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:serial_no)
+      %th= model_class.human_attribute_name(:brand_id)
+      %th= model_class.human_attribute_name(:model_id)
+      %th= model_class.human_attribute_name(:first_name)
+      %th= model_class.human_attribute_name(:last_name)
+      %th= model_class.human_attribute_name(:price)
+      %th= model_class.human_attribute_name(:mobile)
+      %th= model_class.human_attribute_name(:email)
+      %th= model_class.human_attribute_name(:selling_date)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @sale_to_customers.each do |sale_to_customer|
+      %tr
+        %td= sale_to_customer.try(:equipment).try(:serial_number)
+        %td= link_to sale_to_customer.try(:equipment).try(:brand).try(:name),brand_path(sale_to_customer.try(:equipment).try(:brand).try(:id))
+        %td= link_to sale_to_customer.try(:equipment).try(:model).try(:name),model_path(sale_to_customer.try(:equipment).try(:model).try(:id))
+        %td= sale_to_customer.first_name
+        %td= sale_to_customer.last_name
+        %td= sale_to_customer.price
+        %td= sale_to_customer.mobile
+        %td= sale_to_customer.email
+        %td= sale_to_customer.selling_date.strftime("%A, %d %b %Y %l:%M %p")
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_to_customer_path(sale_to_customer), :class => 'btn btn-default btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), sale_to_customer_path(sale_to_customer), :class => 'btn btn-primary btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), sale_to_customer_path(sale_to_customer), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_sale_to_customer_path, :class => 'btn btn-primary'
