@@ -7,7 +7,7 @@
 
 .page-header
   %h1.title Retailers listing
-%table.table.table-bordered 
+%table.table.table-striped 
   %thead
     %tr
       %th Contact person
@@ -26,9 +26,9 @@
           %td= user.email
           %td= user.created_at.strftime('%m-%d-%Y') 
           %td
-            = link_to 'Show', "/users/#{user.id}", :class => 'btn btn-primary btn-sm'
-            = link_to 'Edit', edit_user_path(user),:class => 'btn btn-info btn-sm'
-            = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-sm  btn-danger'
+            = link_to 'Edit', edit_user_path(user),:class => 'btn btn-warning btn-xs'
+            = link_to 'Show', "/users/#{user.id}", :class => 'btn btn-primary btn-xs'
+            = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
     - else
       %tr
         %td{colspan: "9"} No data available.

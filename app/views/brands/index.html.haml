@@ -20,8 +20,8 @@
         %td= brand.name
         %td=brand.created_at.strftime("%A, %d %b %Y %l:%M %p")
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_brand_path(brand), :class => 'btn btn-default btn-xs'
-          = link_to t('.show', :default => t("helpers.links.show")), brand_path(brand), :class => 'btn btn-primary btn-sm'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_brand_path(brand), :class => 'btn btn-warning btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), brand_path(brand), :class => 'btn btn-primary btn-xs'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), brand_path(brand), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 = will_paginate @brands, renderer: BootstrapPagination::Rails  
 = link_to t('.new', :default => t("helpers.links.new")), new_brand_path, :class => 'btn btn-primary'

@@ -20,8 +20,8 @@
         %td= retailer_group.name
         %td=retailer_group.created_at.strftime("%A, %d %b %Y %l:%M %p")
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_retailer_group_path(retailer_group), :class => 'btn btn-default btn-xs'
-          = link_to t('.show', :default => t("helpers.links.show")), retailer_group_path(retailer_group), :class => 'btn btn-primary btn-sm'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_retailer_group_path(retailer_group), :class => 'btn btn-warning btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), retailer_group_path(retailer_group), :class => 'btn btn-primary btn-xs'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), retailer_group_path(retailer_group), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_retailer_group_path, :class => 'btn btn-primary'
