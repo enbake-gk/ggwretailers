@@ -2,7 +2,7 @@
 
 %p
   %b Serial no:
-  = @sale_history.equipment.try(:serial_number)
+  = link_to @sale_history.equipment.try(:serial_number),equipment_path(@sale_history.equipment_id)
 %p
   %b Brand:
   = @sale_history.equipment.brand.try(:name)
@@ -11,7 +11,7 @@
   = @sale_history.equipment.model.try(:name)
 %p
   %b Customer:
-  = @sale_history.user.try(:user_name)
+  = @sale_history.buyer.try(:user_name)
 %p
   %b Selling date:
   = @sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')

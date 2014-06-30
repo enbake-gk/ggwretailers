@@ -5,7 +5,7 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories
   # GET /sale_histories.json
   def index
-    @sale_histories = SaleHistory.paginate(:page => params[:page], :per_page => 12)
+    @sale_histories = SaleHistory.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /sale_histories/1
@@ -103,6 +103,6 @@ class SaleHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_history_params
-      params.require(:sale_history).permit(:equipment_id, :customer_id, :selling_date)
+      params.require(:sale_history).permit(:equipment_id, :buyer_id, :selling_date).merge(seller_id: current_user.id)
     end
 end

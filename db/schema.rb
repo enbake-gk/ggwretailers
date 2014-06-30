@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627151606) do
+ActiveRecord::Schema.define(version: 20140630060448) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140627151606) do
     t.string   "telephone"
     t.string   "mobile"
     t.string   "email"
-    t.string   "dob"
+    t.datetime "dob"
     t.string   "customer_note"
     t.string   "purchase_date"
     t.integer  "customer_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140627151606) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "retailer_id"
+    t.datetime "selling_date"
   end
 
   add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree
@@ -113,18 +114,20 @@ ActiveRecord::Schema.define(version: 20140627151606) do
   end
 
   create_table "sale_histories", force: true do |t|
+    t.integer  "equipment_id"
     t.integer  "serial_no"
+    t.integer  "seller_id"
+    t.integer  "buyer_id"
     t.integer  "brand_id"
     t.integer  "model_id"
     t.datetime "selling_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "seller_id"
-    t.integer  "buyer_id"
   end
 
   add_index "sale_histories", ["brand_id"], name: "index_sale_histories_on_brand_id", using: :btree
   add_index "sale_histories", ["buyer_id"], name: "index_sale_histories_on_buyer_id", using: :btree
+  add_index "sale_histories", ["equipment_id"], name: "index_sale_histories_on_equipment_id", using: :btree
   add_index "sale_histories", ["model_id"], name: "index_sale_histories_on_model_id", using: :btree
   add_index "sale_histories", ["seller_id"], name: "index_sale_histories_on_seller_id", using: :btree
 

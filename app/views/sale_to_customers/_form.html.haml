@@ -3,7 +3,6 @@
     = f.label :equipment_id, :class => 'control-label'
     .controls
       = text_field_tag "equipment_id",@sale_to_customer.try(:equipment).try(:serial_number), :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
-      = f.hidden_field :equipment_id, :class => 'form-control equipment_id_hidden'
   .form-group
     = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_to_customer.try(:equipment).try(:brand).try(:name)}</span>"), {:class => 'control-label'}
   .form-group
@@ -11,7 +10,7 @@
   .form-group
     = f.label :retailer, :class => 'control-label'
     .controls
-      = f.select :seller_id,User.retailer.all.map{|b| [b.user_name,b.id]},:selected =>'GoMotorised', :class => 'form-control'
+      = f.select :retailer_id,User.retailer.all.map{|b| [b.user_name,b.id]},:selected =>'GoMotorised', :class => 'form-control'
   .form-group
     = f.label :first_name, :class => 'control-label'
     .controls

@@ -17,15 +17,15 @@
   %tbody
     - @sale_to_customers.each do |sale_to_customer|
       %tr
-        %td= sale_to_customer.try(:equipment).try(:serial_number)
-        %td= link_to sale_to_customer.try(:equipment).try(:brand).try(:name),brand_path(sale_to_customer.try(:equipment).try(:brand).try(:id))
-        %td= link_to sale_to_customer.try(:equipment).try(:model).try(:name),model_path(sale_to_customer.try(:equipment).try(:model).try(:id))
+        %td= link_to sale_to_customer.try(:serial_number),equipment_index_path(sale_to_customer.serial_number)
+        %td= link_to sale_to_customer.try(:brand).try(:name),brand_path(sale_to_customer.brand_id)
+        %td= link_to sale_to_customer.try(:model).try(:name),model_path(sale_to_customer.model_id)
         %td= sale_to_customer.first_name
         %td= sale_to_customer.last_name
         %td= sale_to_customer.price
         %td= sale_to_customer.mobile
         %td= sale_to_customer.email
-        %td= sale_to_customer.selling_date.strftime("%A, %d %b %Y %l:%M %p")
+        %td= sale_to_customer.selling_date
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_to_customer_path(sale_to_customer), :class => 'btn btn-default btn-xs'
           = link_to t('.show', :default => t("helpers.links.show")), sale_to_customer_path(sale_to_customer), :class => 'btn btn-primary btn-xs'
