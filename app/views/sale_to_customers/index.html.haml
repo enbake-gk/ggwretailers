@@ -7,6 +7,7 @@
       %th= model_class.human_attribute_name(:serial_no)
       %th= model_class.human_attribute_name(:brand_id)
       %th= model_class.human_attribute_name(:model_id)
+      %th= model_class.human_attribute_name(:retailer_id)
       %th= model_class.human_attribute_name(:first_name)
       %th= model_class.human_attribute_name(:last_name)
       %th= model_class.human_attribute_name(:price)
@@ -17,9 +18,10 @@
   %tbody
     - @sale_to_customers.each do |sale_to_customer|
       %tr
-        %td= sale_to_customer.try(:equipment).try(:serial_number)
-        %td= link_to sale_to_customer.try(:equipment).try(:brand).try(:name),brand_path(sale_to_customer.try(:equipment).try(:brand).try(:id))
-        %td= link_to sale_to_customer.try(:equipment).try(:model).try(:name),model_path(sale_to_customer.try(:equipment).try(:model).try(:id))
+        %td= link_to sale_to_customer.try(:serial_number),equipment_index_path(sale_to_customer.serial_number)
+        %td= link_to sale_to_customer.try(:brand).try(:name),brand_path(sale_to_customer.brand_id)
+        %td= link_to sale_to_customer.try(:model).try(:name),model_path(sale_to_customer.model_id)
+        %td= link_to sale_to_customer.try(:retailer).try(:user_name),user_path(sale_to_customer.retailer_id)
         %td= sale_to_customer.first_name
         %td= sale_to_customer.last_name
         %td= sale_to_customer.price

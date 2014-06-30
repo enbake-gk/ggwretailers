@@ -5,10 +5,7 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories
   # GET /sale_histories.json
   def index
-    @sale_histories = SaleHistory.all
-                     .order("id desc")
-                     .paginate(:page => params[:page], :per_page => 5)
-
+    @sale_histories = SaleHistory.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /sale_histories/1
@@ -19,20 +16,6 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories/new
   def new
     @sale_history = SaleHistory.new
-  end
-
-  def user
-    # @sale_history = SaleHistory.new(sale_history_params)
-
-    # respond_to do |format|
-    #   if @sale_history.save
-    #     format.html { redirect_to sale_histories_url, notice: 'Data was successfully created.' }
-    #     format.json { render :show, status: :created, location: @sale_history }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @sale_history.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # GET /sale_histories/1/edit
@@ -120,6 +103,7 @@ class SaleHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_history_params
-      params.require(:sale_history).permit(:equipment_id, :customer_id, :selling_date)
+      params.require(:sale_history).permit(:equipment_id, :buyer_id, :selling_date).merge(seller_id: current_user.id)
+      # .merge(seller_id: current_user.id,equipment_attributes: [:sold_to_retailer=>true ])
     end
 end
