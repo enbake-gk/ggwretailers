@@ -35,7 +35,7 @@
   .form-group
     = f.label :model_name_cont, "Model name"
     = f.text_field :model_name_cont
-    / Search by Model name
+    / Search by retailer name
   .form-group
     = f.label :retailer_retailer_name_cont, "Retailer name"
     = f.text_field :retailer_retailer_name_cont
@@ -45,7 +45,7 @@
 - model_class = SaleHistory
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
+%table.table.table-hover
   %thead
     %tr
       %th= model_class.human_attribute_name(:serial_no)
@@ -78,3 +78,4 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), sale_to_customer_path(sale_to_customer), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_sale_to_customer_path, :class => 'btn btn-primary'
+
