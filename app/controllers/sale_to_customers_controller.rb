@@ -6,10 +6,6 @@ class SaleToCustomersController < ApplicationController
   def index
     @search = Equipment.search(params[:q])
     @sale_to_customers = @search.result.sold_to_customer.includes(:brand, :model, :user).paginate(:page => params[:page], :per_page => 12)
-    #@search = Equipment.search(params[:q])
-    #@supervisors = @search.result.includes(:department, :employees)
-   # @sale_to_customers = Equipment.sold_to_customer.paginate(:page => params[:page], :per_page => 12)
-    # abort @sale_to_customers.to_sql
   end
 
   # GET /sale_to_customers/1
