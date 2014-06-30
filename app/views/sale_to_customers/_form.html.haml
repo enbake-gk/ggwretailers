@@ -2,11 +2,11 @@
   .form-group
     = f.label :equipment_id, :class => 'control-label'
     .controls
-      = text_field_tag "equipment_id",@sale_to_customer.try(:equipment).try(:serial_number), :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
+      = text_field_tag "equipment_id",@sale_to_customer.try(:serial_number), :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
   .form-group
-    = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_to_customer.try(:equipment).try(:brand).try(:name)}</span>"), {:class => 'control-label'}
+    = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_to_customer.try(:brand).try(:name)}</span>"), {:class => 'control-label'}
   .form-group
-    = label_tag "Model", raw("Model : <span class=\"model_name\">#{@sale_to_customer.try(:equipment).try(:model).try(:name)}</span>"),{:class => 'control-label'}
+    = label_tag "Model", raw("Model : <span class=\"model_name\">#{@sale_to_customer.try(:model).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
     = f.label :retailer, :class => 'control-label'
     .controls

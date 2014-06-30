@@ -4,7 +4,8 @@ class SaleToCustomersController < ApplicationController
   # GET /sale_to_customers
   # GET /sale_to_customers.json
   def index
-    @sale_to_customers = Equipment.all
+    @sale_to_customers = Equipment.sold_to_customer.paginate(:page => params[:page], :per_page => 12)
+    # abort @sale_to_customers.to_sql
   end
 
   # GET /sale_to_customers/1
@@ -68,6 +69,6 @@ class SaleToCustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_to_customer_params
-      params.require(:sale_to_customer).permit(:retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, :customer_note)
+      params.require(:sale_to_customer).permit(:retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, :customer_note).merge(sold_to_customer: true)
     end
 end
