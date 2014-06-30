@@ -104,5 +104,6 @@ class SaleHistoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_history_params
       params.require(:sale_history).permit(:equipment_id, :buyer_id, :selling_date).merge(seller_id: current_user.id)
+      # .merge(seller_id: current_user.id,equipment_attributes: [:sold_to_retailer=>true ])
     end
 end

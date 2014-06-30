@@ -6,27 +6,18 @@
 %p
   %strong= model_class.human_attribute_name(:serial_no) + ':'
   %br
-  = link_to @sale_to_customer.try(:equipment).try(:serial_number),equipment_path(@sale_to_customer.try(:equipment).try(:id))
+  = link_to @sale_to_customer.try(:serial_number),equipment_path(@sale_to_customer.try(:id))
 %p
   %strong= model_class.human_attribute_name(:brand_id) + ':'
   %br
-  = link_to @sale_to_customer.try(:equipment).try(:brand).try(:name),brand_path(@sale_to_customer.try(:equipment).try(:brand).try(:id))
+  = link_to @sale_to_customer.try(:brand).try(:name),brand_path(@sale_to_customer.try(:brand).try(:id))
 %p
   %strong= model_class.human_attribute_name(:model_id) + ':'
   %br
-  = link_to @sale_to_customer.try(:equipment).try(:model).try(:name),model_path(@sale_to_customer.try(:equipment).try(:model).try(:id))
-%p
-  %strong= model_class.human_attribute_name(:customer_id) + ':'
-  %br
-  = @sale_to_customer.customer_id
+  = link_to @sale_to_customer.try(:model).try(:name),model_path(@sale_to_customer.try(:model).try(:id))
 %p
   %strong= model_class.human_attribute_name(:selling_date) + ':'
   %br
-%p
-  = @sale_to_customer.selling_date.strftime("%A, %d %b %Y %l:%M %p")
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @sale_to_customer.name
 %p
   %strong= model_class.human_attribute_name(:url) + ':'
   %br
@@ -77,16 +68,13 @@
   = @sale_to_customer.email
 %p
   %strong= model_class.human_attribute_name(:dob) + ':'
-  %br
-  = @sale_to_customer.dob
+  %br 
+  = @sale_to_customer.dob.try(:strftime,"%A, %d %b %Y %l:%M %p")
 %p
   %strong= model_class.human_attribute_name(:customer_note) + ':'
   %br
   = @sale_to_customer.customer_note
-%p
-  %strong= model_class.human_attribute_name(:purchase_date) + ':'
-  %br
-  = @sale_to_customer.purchase_date
+
 
 
 
