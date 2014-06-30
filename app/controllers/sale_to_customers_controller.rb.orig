@@ -4,7 +4,13 @@ class SaleToCustomersController < ApplicationController
   # GET /sale_to_customers
   # GET /sale_to_customers.json
   def index
+<<<<<<< HEAD
+    @search = SaleHistory.search(params[:q])
+    @sale_to_customers = @search.result.includes(:equipment)
+    # @sale_to_customers = SaleHistory.all
+=======
     @sale_to_customers = Equipment.all
+>>>>>>> 9ed906dbbbc864604abcf0f90922955d43ce41ef
   end
 
   # GET /sale_to_customers/1

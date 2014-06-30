@@ -2,7 +2,11 @@ class Equipment < ActiveRecord::Base
 	belongs_to :model
 	belongs_to :brand
 	belongs_to :user
+<<<<<<< HEAD
+	has_many :sale_histories
+=======
 	belongs_to :retailer , :class_name=> :User , :foreign_key => "retailer_id"
+>>>>>>> 9ed906dbbbc864604abcf0f90922955d43ce41ef
   # validates :serial_number, presence: true
   # validates :serial_number, uniqueness: true
   validates_presence_of :serial_number
