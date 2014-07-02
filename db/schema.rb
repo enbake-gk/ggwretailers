@@ -116,15 +116,15 @@ ActiveRecord::Schema.define(version: 20140630062934) do
   end
 
   create_table "sale_histories", force: true do |t|
-    t.integer  "equipment_id"
     t.integer  "serial_no"
-    t.integer  "seller_id"
-    t.integer  "buyer_id"
     t.integer  "brand_id"
     t.integer  "model_id"
     t.datetime "selling_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "seller_id"
+    t.integer  "buyer_id"
+    t.integer  "equipment_id"
   end
 
   add_index "sale_histories", ["brand_id"], name: "index_sale_histories_on_brand_id", using: :btree

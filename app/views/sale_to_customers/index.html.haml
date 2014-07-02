@@ -1,7 +1,51 @@
+= search_form_for @search, url: '/sale_to_customers' do |f|
+  / Search by first name
+  .form-group
+    = f.label :first_name_cont, "First name"
+    = f.text_field :first_name_cont
+  / Search by Last name
+  .form-group
+    = f.label :last_name_cont, "Last name"
+    = f.text_field :last_name_cont
+  / Search by Phone number
+  .form-group
+    = f.label :mobile_eq, "Phone Number"
+    = f.text_field :mobile_eq
+  / Search by Purchase between
+  .form-group
+    = f.label :purchase_date_gteq, "Purchase Date Between"
+    = f.text_field :purchase_date_gteq
+    = f.label :purchase_date_lteq, "and"
+    = f.text_field :purchase_date_lteq
+  / Search by selling date between
+  .form-group
+    = f.label :selling_date_gteq, "Selling Date Between"
+    = f.text_field :selling_date_gteq
+    = f.label :selling_date_lteq, "and"
+    = f.text_field :selling_date_lteq
+  / Search by Serial number
+  .form-group
+    = f.label :serial_number_eq, "Serial Number Search"
+    = f.text_field :serial_number_eq
+  / Search by Brand name
+  .form-group
+    = f.label :brand_name_cont, "Brand name"
+    = f.text_field :brand_name_cont
+  / Search by Model name
+  .form-group
+    = f.label :model_name_cont, "Model name"
+    = f.text_field :model_name_cont
+    / Search by retailer name
+  .form-group
+    = f.label :retailer_retailer_name_cont, "Retailer name"
+    = f.text_field :retailer_retailer_name_cont
+
+  .actions= f.submit "Search"
+  %br
 - model_class = SaleHistory
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
+%table.table.table-hover
   %thead
     %tr
       %th= model_class.human_attribute_name(:serial_no)
@@ -34,3 +78,4 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), sale_to_customer_path(sale_to_customer), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_sale_to_customer_path, :class => 'btn btn-primary'
+
