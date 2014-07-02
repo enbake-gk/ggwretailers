@@ -1,0 +1,22 @@
+= form_for @setting,:url=> @setting.new_record? ? settings_path : setting_path(@setting) ,:as=>:setting, :html => { :class => 'form-horizontal' } do |f|
+  .form-group
+    = f.label :first_name, :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'form-control'
+  .form-group
+    = f.label :last_name, :class => 'control-label'
+    .controls
+      = f.text_field :last_name, :class => 'form-control'
+  .form-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.text_field :email, :class => 'form-control'
+  .form-group
+    = f.label :role, :class => 'control-label'
+    .controls
+      = f.radio_button :role_id, "Manager" 
+      = f.label :role_id, "Manager", :value => "4" 
+      = f.radio_button :role_id, "ServiceTech" 
+      = f.label :role_id, "ServiceTech", :value => "3" 
+  = f.submit nil, :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), settings_path, :class => 'btn btn-default'

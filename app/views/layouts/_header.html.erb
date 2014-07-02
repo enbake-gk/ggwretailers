@@ -15,6 +15,7 @@
                   <li><%= link_to 'Equipments',equipment_index_path %></li>
                   <li><%= link_to 'Sale to Retailer',sale_histories_path %></li>
                   <li><%= link_to 'Sale to Customer',sale_to_customers_path  %></li>
+                  <li><%= link_to 'Setting',settings_path  %></li>
               <% elsif current_user.is_retailer? %>
                   <li><%= link_to 'Serial Keys',serial_key_list_users_path %></li>
                   <li><%= link_to 'Customers',customers_path %></li>

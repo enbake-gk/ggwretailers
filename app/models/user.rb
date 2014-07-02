@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
 
   scope :admin, -> { where(role_id: 1) }
   scope :retailer, -> { where(role_id: 2) }
-  scope :customer, -> { where(role_id: 3) }
+  scope :service_tech, -> { where(role_id: 3) }
+  scope :manager, -> { where(role_id: 4) }
   #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
 
@@ -21,9 +22,21 @@ class User < ActiveRecord::Base
  		self.role_id.try(:to_i) == 2
   end
 
-  def is_customer?
+  def is_manager?
+    self.role_id.try(:to_i) == 4
+  end
+
+  def is_service_tech?
  		self.role_id.try(:to_i) ==3
   end
+
+  def role?
+    if self.role_id.try(:to_i) == 4
+     return 'Manager' 
+    elsif self.role_id.try(:to_i) ==3
+     return 'ServiceTech'
+   end
+  end 
 
   validates :email, :uniqueness => true
   def user_name 

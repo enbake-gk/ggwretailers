@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
  
+  resources :settings
+
   resources :sale_to_customers 
 
   resources :customers
