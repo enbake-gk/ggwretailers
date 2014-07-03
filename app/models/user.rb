@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
 
+
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name]])
+  end
+
   def is_admin?
   		self.role_id.try(:to_i) == 1
   end

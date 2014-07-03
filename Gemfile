@@ -14,7 +14,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -22,7 +21,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 # ransack for search
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 
@@ -41,7 +40,6 @@ gem 'devise'       # for authentication
 gem "html2haml"    # For converting erb file into haml(rails generate devise:views{it create .erb file})
 gem 'rmagick'      # For image cropping(Dependent on carrierwave)
 gem 'carrierwave'  # For file upload
-# gem 'sextant'    # To see routes on browser
 gem "iconv"        #  Dependency to roo gem
 gem 'roo'          # Read OpenOffice/Excel/Google spreadsheets/Excelx/LibreOffice/CSV file  
 ruby "2.0.0"
@@ -61,4 +59,3 @@ gem 'will_paginate-bootstrap'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
