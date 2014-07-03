@@ -70,6 +70,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:first_name, :last_name, :email, :admin)
+        params.require(:setting).permit(:first_name, :last_name, :email, :admin, :role_id)
     end
 end
