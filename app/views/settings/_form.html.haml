@@ -14,9 +14,9 @@
   .form-group
     = f.label :role, :class => 'control-label'
     .controls
-      = f.radio_button :role_id, "Manager" 
+      = f.radio_button :role_id, "4" 
       = f.label :role_id, "Manager", :value => "4" 
-      = f.radio_button :role_id, "ServiceTech" 
+      = f.radio_button :role_id, "3" 
       = f.label :role_id, "ServiceTech", :value => "3" 
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), settings_path, :class => 'btn btn-default'
