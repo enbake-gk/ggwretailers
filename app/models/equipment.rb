@@ -8,5 +8,5 @@ class Equipment < ActiveRecord::Base
   validates_presence_of :serial_number
   scope :sold_to_customer, -> { where(sold_to_customer: true) }
   scope :sold_to_retailer, -> { where(sold_to_retailer: true) }
-
+  scope :recent, -> { order('created_at desc')  }
 end

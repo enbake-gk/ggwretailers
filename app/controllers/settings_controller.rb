@@ -1,10 +1,11 @@
 class SettingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
 
   # GET /settings
   # GET /settings.json
   def index
-    @settings = User.service_tech.manager.all
+    @settings = User.recent.setting.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /settings/1
@@ -25,7 +26,6 @@ class SettingsController < ApplicationController
   # POST /settings.json
   def create
     @setting = User.new(setting_params)
-
     respond_to do |format|
       if @setting.save
         UserMailer.welcome_email(@setting).deliver
@@ -43,7 +43,7 @@ class SettingsController < ApplicationController
   def update
     respond_to do |format|
       if @setting.update(setting_params)
-        format.html { redirect_to @setting, notice: 'User was successfully updated.' }
+        format.html { redirect_to setting_path(@setting), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @setting }
       else
         format.html { render :edit }
@@ -70,6 +70,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-        params.require(:setting).permit(:first_name, :last_name, :email, :admin, :role_id)
+        params.require(:setting).permit(:first_name, :last_name, :email, :admin, :role_id).merge(:password => Devise.friendly_token.first(8))
     end
 end

@@ -5,7 +5,7 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories
   # GET /sale_histories.json
   def index
-    @sale_histories = SaleHistory.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
+    @sale_histories = SaleHistory.recent.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /sale_histories/1

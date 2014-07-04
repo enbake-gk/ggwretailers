@@ -46,8 +46,8 @@ class EquipmentImport
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row=spreadsheet.row(i)
-      row[1] = Brand.find_or_create_by(:name=>spreadsheet.row(i)[1]).id # Replace brand name with brand_id
-      row[2] = Model.find_or_create_by(:brand_id=>row[1],:name=>spreadsheet.row(i)[2]).id # Replace model name with model_id
+      row[1] = Brand.find_or_create_by(:name=>spreadsheet.row(i)[1].to_s).id # Replace brand name with brand_id
+      row[2] = Model.find_or_create_by(:brand_id=>row[1],:name=>spreadsheet.row(i)[2].to_s).id # Replace model name with model_id
       row = Hash[[header, row].transpose]
       product = Equipment.find_by_serial_number((row["serial_number"]).to_s) || Equipment.new
       product.attributes = row.to_hash

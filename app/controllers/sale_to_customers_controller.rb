@@ -1,4 +1,5 @@
 class SaleToCustomersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_sale_to_customer, only: [:show, :edit, :update, :destroy]
 
   # GET /sale_to_customers

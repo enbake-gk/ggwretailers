@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
  
+  resources :colours
+
   resources :settings
 
   resources :sale_to_customers 

@@ -6,9 +6,10 @@
        <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <% if user_signed_in? 
-                if current_user.is_admin? %>
+                if ((current_user.is_admin?) || (current_user.is_manager?))%>
                   <li><%= link_to 'Brand',brands_path %></li>
                   <li><%= link_to 'Model',models_path %></li>
+                  <li><%= link_to 'Colours',colours_path %></li>
                   <li><%= link_to 'Accessories',accessories_path %></li>
                   <li><%= link_to 'Retailers',users_path %></li>
                   <li><%= link_to 'Retailer Group',retailer_groups_path %></li>

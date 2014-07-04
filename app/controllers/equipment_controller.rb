@@ -8,7 +8,7 @@ class EquipmentController < ApplicationController
     # puts Brand.delete_all
     # puts Model.delete_all
     # puts Equipment.delete_all
-    @search = Equipment.search(params[:q])
+    @search = Equipment.recent.search(params[:q])
     @equipment = @search.result.paginate(:page => params[:page], :per_page => 12)
     @product_import = EquipmentImport.new
   end
@@ -33,7 +33,7 @@ class EquipmentController < ApplicationController
     @equipment = Equipment.new(equipment_params)
     respond_to do |format|
       if @equipment.save
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
+        format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully created.' }
         format.json { render :show, status: :created, location: @equipment }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class EquipmentController < ApplicationController
   def update
     respond_to do |format|
       if @equipment.update(equipment_params)
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully updated.' }
+        format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully updated.' }
         format.json { render :show, status: :ok, location: @equipment }
       else
         format.html { render :edit }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630062934) do
+ActiveRecord::Schema.define(version: 20140704101333) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20140630062934) do
   end
 
   add_index "brands", ["user_id"], name: "index_brands_on_user_id", using: :btree
+
+  create_table "colours", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "colours", ["user_id"], name: "index_colours_on_user_id", using: :btree
 
   create_table "equipment", force: true do |t|
     t.string   "name"

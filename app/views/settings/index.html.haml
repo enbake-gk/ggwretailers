@@ -1,23 +1,24 @@
-%h1 Listing settings
+%h1 Listing User
 
-%table
-  %tr
-    %th First name
-    %th Last name
-    %th Email
-    %th Admin
-    %th
-    %th
-    %th
-
+%table.table.table-hover
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Email   
+      %th Role
+      %th
+      %th
+  %tbody
   - @settings.each do |setting|
     %tr
       %td= setting.first_name
       %td= setting.last_name
       %td= setting.email
-      %td= link_to 'Show', setting
-      %td= link_to 'Edit', edit_setting_path(setting)
-      %td= link_to 'Destroy', setting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= setting.role?
+      %td= link_to 'Show', setting_path(setting), :class => 'btn btn-primary btn-xs'
+      %td= link_to 'Edit', edit_setting_path(setting) ,:class => 'btn btn-warning btn-xs'
+      %td= link_to 'Destroy', setting_path(setting), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
 
 %br
 

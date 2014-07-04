@@ -1,10 +1,11 @@
 class RetailerGroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_retailer_group, only: [:show, :edit, :update, :destroy]
 
   # GET /retailer_groups
   # GET /retailer_groups.json
   def index
-    @search = RetailerGroup.search(params[:q])
+    @search = RetailerGroup.recent.search(params[:q])
     @retailer_groups= @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
@@ -29,7 +30,7 @@ class RetailerGroupsController < ApplicationController
 
     respond_to do |format|
       if @retailer_group.save
-        format.html { redirect_to @retailer_group, notice: 'Retailer group was successfully created.' }
+        format.html { redirect_to retailer_groups_url, notice: 'Retailer group was successfully created.' }
         format.json { render :show, status: :created, location: @retailer_group }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class RetailerGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @retailer_group.update(retailer_group_params)
-        format.html { redirect_to @retailer_group, notice: 'Retailer group was successfully updated.' }
+        format.html { redirect_to retailer_groups_url, notice: 'Retailer group was successfully updated.' }
         format.json { render :show, status: :ok, location: @retailer_group }
       else
         format.html { render :edit }

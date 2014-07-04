@@ -5,7 +5,7 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @search = Model.search(params[:q])
+    @search = Model.recent.search(params[:q])
     @models = @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
@@ -29,7 +29,7 @@ class ModelsController < ApplicationController
     @model = Model.new(model_params)
     respond_to do |format|
       if @model.save
-        format.html { redirect_to @model, notice: 'Model was successfully created.' }
+        format.html { redirect_to models_url, notice: 'Model was successfully created.' }
         format.json { render :show, status: :created, location: @model }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ModelsController < ApplicationController
   def update
     respond_to do |format|
       if @model.update(model_params)
-        format.html { redirect_to @model, notice: 'Model was successfully updated.' }
+        format.html { redirect_to models_url, notice: 'Model was successfully updated.' }
         format.json { render :show, status: :ok, location: @model }
       else
         format.html { render :edit }

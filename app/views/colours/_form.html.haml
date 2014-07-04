@@ -1,0 +1,7 @@
+= form_for @colour, :html => { :class => 'form-horizontal' } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'form-control'
+  = f.submit nil, :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), colours_path, :class => 'btn btn-default'

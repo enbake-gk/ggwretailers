@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   scope :retailer, -> { where(role_id: 2) }
   scope :service_tech, -> { where(role_id: 3) }
   scope :manager, -> { where(role_id: 4) }
+  scope :setting, -> { where("role_id = '4' OR role_id = '3'") }
+  scope :recent, -> { order('created_at desc')  }
   #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
 
@@ -41,6 +43,10 @@ class User < ActiveRecord::Base
      return 'Manager' 
     elsif self.role_id.try(:to_i) ==3
      return 'ServiceTech'
+    elsif self.role_id.try(:to_i) == 1
+     return 'Admin'
+    elsif self.role_id.try(:to_i) == 2
+     return 'Retailer' 
    end
   end 
 

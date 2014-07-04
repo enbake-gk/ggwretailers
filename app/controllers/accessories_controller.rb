@@ -5,7 +5,7 @@ class AccessoriesController < ApplicationController
   # GET /accessories
   # GET /accessories.json
   def index
-    @search = Accessory.search(params[:q])
+    @search = Accessory.recent.search(params[:q])
     @accessories = @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
@@ -30,7 +30,7 @@ class AccessoriesController < ApplicationController
     @accessory = Accessory.new(accessory_params)
     respond_to do |format|
       if @accessory.save
-        format.html { redirect_to @accessory, notice: 'Accessory was successfully created.' }
+        format.html { redirect_to accessories_url, notice: 'Accessory was successfully created.' }
         format.json { render :show, status: :created, location: @accessory }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class AccessoriesController < ApplicationController
   def update
     respond_to do |format|
       if @accessory.update(accessory_params)
-        format.html { redirect_to @accessory, notice: 'Accessory was successfully updated.' }
+        format.html { redirect_to accessories_url, notice: 'Accessory was successfully updated.' }
         format.json { render :show, status: :ok, location: @accessory }
       else
         format.html { render :edit }

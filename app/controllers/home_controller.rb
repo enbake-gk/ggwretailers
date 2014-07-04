@@ -4,6 +4,8 @@ class HomeController < ApplicationController
 	def index
 		if current_user.is_admin? 	
 			redirect_to brands_path
+		elsif current_user.is_manager? 	
+			redirect_to brands_path
 		elsif current_user.is_retailer?
 			redirect_to serial_key_list_users_path
 		else
