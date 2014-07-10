@@ -1,22 +1,33 @@
 %p#notice= notice
 
-%p
-  %b Contact person:
-  = @user.contact_person
-%p
-  %b Website:
-  = @user.website
-%p
-  %b Retailer name:
-  = @user.retailer_name
-%p
-  %b Phone number:
-  = @user.phone_number
-%p
-  %b Email:
-  = @user.email
+.page-header
+  %h1=t '.title', :default => "Customers list"
+%table.table.table-hover
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Mobile 
+      %th Landline
+      %th Email 
+      %th Address
+      %th Town
+      %th City
+      %th Postal Code 
+      %th Date Of Birth 
 
+  %tbody
+    - @equipments.each do |equipment|
+      %tr
+        %td= equipment.first_name
+        %td= equipment.last_name
+        %td= equipment.mobile
+        %td= equipment.telephone
+        %td= equipment.email
+        %td= equipment.address
+        %td= equipment.town
+        %td= equipment.city
+        %td= equipment.post_code
+        %td= equipment.dob
 
-= link_to 'Edit', edit_user_path(@user)
-\|
 = link_to 'Back', retailers_path

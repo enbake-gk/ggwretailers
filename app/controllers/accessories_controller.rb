@@ -28,8 +28,12 @@ class AccessoriesController < ApplicationController
   # POST /accessories.json
   def create
     @accessory = Accessory.new(accessory_params)
+    models = params[:accessory][:model_id].delete_if{ |x| x.empty? }    
     respond_to do |format|
       if @accessory.save
+        models.each do |model_id|
+          Accessoriesmodel.create(:model_id => model_id, :accessory_id => @accessory.id, :user_id => current_user.id )
+        end
         format.html { redirect_to accessories_url, notice: 'Accessory was successfully created.' }
         format.json { render :show, status: :created, location: @accessory }
       else

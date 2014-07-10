@@ -5,14 +5,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @search = User.search(params[:q])
+    @search = User.not_admin.search(params[:q])
     @users = @search.result.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-  
+    @equipments =Equipment.all.where(:retailer_id => params[:id]).uniq { |e| e[:first_name] }
   end
 
   # GET /users/new
@@ -62,7 +62,13 @@ class UsersController < ApplicationController
   end
 
   def serial_key_list
-      @serial_keys = SaleHistory.where("customer_id=?", current_user.id)
+     # @serial_keys = SaleHistory.where("customer_id=?", current_user.id)
+      @serial_keys = SaleHistory.where("buyer_id=?", current_user.id)
+
+      @search = Equipment.recent.search(params[:q])
+      @equipment = @search.result.paginate(:page => params[:page], :per_page => 12)
+      @product_import = EquipmentImport.new
+ 
   end
 
   def check_email_uniq
@@ -84,6 +90,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:retailer_name,:contact_person, :website, :retailer_name, :phone_number, :email, :first_name,:last_name).merge(:role_id=>"2",:password => Devise.friendly_token.first(8))
+      params.require(:user).permit(:retailer_group_id, :retailer_name,:contact_person, :website, :retailer_name, :phone_number, :email, :first_name,:last_name).merge(:role_id=>"2",:password => Devise.friendly_token.first(8))
     end
 end

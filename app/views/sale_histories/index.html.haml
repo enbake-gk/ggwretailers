@@ -1,5 +1,5 @@
 .page-header
-  %h1.title Sale Histories
+  %h1.title Sell Histories
 %table.table.table-hover
   %thead
     %tr
@@ -30,4 +30,4 @@
 
 = will_paginate @sale_histories, renderer: BootstrapPagination::Rails 
 
-= link_to "Sale to Retailer", new_sale_history_path, :class => 'btn btn-primary'
+= link_to "Sell to Retailer", new_sale_history_path, :class => 'btn btn-primary'

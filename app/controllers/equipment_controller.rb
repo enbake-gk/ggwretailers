@@ -26,6 +26,13 @@ class EquipmentController < ApplicationController
   # GET /equipment/1/edit
   def edit
   end
+  
+  def get_models
+    @models = Model.where("brand_id=?",params[:id])
+    respond_to do |format|
+      format.json { render json: @models }
+    end
+  end
 
   # POST /equipment
   # POST /equipment.json
@@ -33,7 +40,7 @@ class EquipmentController < ApplicationController
     @equipment = Equipment.new(equipment_params)
     respond_to do |format|
       if @equipment.save
-        format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully created.' }
+        format.html { redirect_to serialnumbers_path, notice: 'Serial Number was successfully created.' }
         format.json { render :show, status: :created, location: @equipment }
       else
         format.html { render :new }
@@ -47,7 +54,7 @@ class EquipmentController < ApplicationController
   def update
     respond_to do |format|
       if @equipment.update(equipment_params)
-        format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully updated.' }
+        format.html { redirect_to serialnumbers_path, notice: 'Serial Number was successfully updated.' }
         format.json { render :show, status: :ok, location: @equipment }
       else
         format.html { render :edit }
@@ -61,7 +68,7 @@ class EquipmentController < ApplicationController
   def destroy
     @equipment.destroy
     respond_to do |format|
-      format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully destroyed.' }
+      format.html { redirect_to serialnumbers_path, notice: 'Serial Number was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,7 +79,7 @@ class EquipmentController < ApplicationController
     # redirect_to equipment_index_path, notice: 'Equipment was successfully created.'
      @product_import = EquipmentImport.new(params[:equipment_import])
     if @product_import.save
-      redirect_to equipment_index_path, notice: "Imported products successfully."
+      redirect_to serialnumbers_path, notice: "Imported products successfully."
     else
       render :import
     end
@@ -91,6 +98,6 @@ class EquipmentController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
       # ,:brand=>Brand.find(params[:equipment][:model_id])
-      params.require(:equipment).permit(:model_id,:brand_id,:serial_number).merge(user_id: current_user.id)
+      params.require(:equipment).permit(:model_id,:brand_id,:colour_id,:serial_number).merge(user_id: current_user.id)
     end
 end

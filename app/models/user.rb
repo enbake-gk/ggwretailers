@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable#, :validatable  :registerable,
 
+  scope :not_admin, -> { where.not(role_id: 1) }
   scope :admin, -> { where(role_id: 1) }
   scope :retailer, -> { where(role_id: 2) }
   scope :service_tech, -> { where(role_id: 3) }

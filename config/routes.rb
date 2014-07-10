@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :sale_to_customers 
 
   resources :customers
-
+  match '/serialnumbers' => 'equipment#index',:as => :serialnumbers, via: :get
+  match '/equipments/get_models' => 'equipment#get_models', via: :get
   resources :equipment do
     post :import,on: :collection
   end

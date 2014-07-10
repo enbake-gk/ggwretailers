@@ -1,0 +1,19 @@
+<script type="text/javascript" >
+  $(document).ready(function(){
+      $("#equipment_model_id").hide();
+  	  $('select#equipment_brand_id').change(function(){
+        brand_id = $(this).val();
+        //alert(brand_id);
+        $.get('/equipments/get_models', { id: brand_id }, function (data) {
+            //var data = $.parseJSON(data);
+            $("#equipment_model_id").empty();
+            $("#equipment_model_id").show();
+            var options = $("#equipment_model_id");
+            $.each(data, function () {
+              options.append($("<option />").val(this.id).text(this.name));
+            });
+        }); 
+
+      });
+  });
+</script>

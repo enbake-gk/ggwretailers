@@ -1,13 +1,13 @@
 = search_form_for @search, url: '/retailer_groups' do |f|
   / Retailer group Name Search 
   .form-control-col-sm-4
-    = f.label :name_cont, "Retailers Group Search"
+    = f.label :name_cont, "Buying Group Search"
     = f.text_field :name_cont
     = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
 
 - model_class = RetailerGroup
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1 Buying Group
 %table.table.table-hover
   %thead
     %tr

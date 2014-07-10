@@ -4,4 +4,5 @@ class Accessory < ActiveRecord::Base
   has_many :models,:through => :accessoriesmodels
   accepts_nested_attributes_for :accessoriesmodels
   scope :recent, -> { order('created_at desc')  }
+   
 end

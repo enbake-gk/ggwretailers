@@ -1,3 +1,10 @@
+= search_form_for @search, url: '/equipment' do |f|
+  / equipment no Search 
+  .form-control-col-sm-4
+    = f.label :serial_number_eq, "Serial Number Search"
+    = f.text_field :serial_number_eq
+    = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
+
 .page-header
   %h1.title Serial Key List
 %table.table.table-striped
@@ -6,6 +13,7 @@
       %th Serial Number
       %th Model Id
       %th Brand Id
+      %th Colour
       %th Bought On
       %th Status
   %tbody
@@ -14,11 +22,12 @@
         %tr
           %td= serial_key.try(:equipment).try(:serial_number)
           %td= serial_key.equipment.try(:brand).try(:name)    
-          %td= serial_key.equipment.try(:model).try(:name)        
+          %td= serial_key.equipment.try(:model).try(:name)
+          %td= Equipment.find_by_serial_number(serial_key.equipment.serial_number).colour               
           %td= serial_key.selling_date.try(:strftime,"%A, %d %b %Y %l:%M %p")
           %td
     - else
       %tr
         %td{colspan: "5"} No data available.
 
-= link_to 'Create new customer', new_equipment_path, :class => 'btn btn-primary'
+=# link_to 'Create new customer', new_equipment_path, :class => 'btn btn-primary'

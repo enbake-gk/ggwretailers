@@ -1,3 +1,4 @@
+= render 'show_model.js'
 = form_for @equipment, :html => { :class => 'form-horizontal' } do |f|
   .form-group
     = f.label :brand_id, :class => 'control-label'
@@ -8,9 +9,12 @@
     .controls
       = f.select :model_id,Model.all.map{|b| [b.name,b.id]}, :class => 'form-control'
   .form-group
+    = f.label :colour_id, :class => 'control-label'
+    .controls
+      = f.select :colour_id,Colour.all.map{|b| [b.name,b.id]}, :class => 'form-control'
+  .form-group
     = f.label :serial_number, :class => 'control-label'
     .controls
       = f.text_field :serial_number, :class => 'form-control'
-  = f.submit nil, :class => 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), equipment_index_path, :class => 'btn btn-default'
-
+  = f.submit "Create Serial Key", :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), serialnumbers_path, :class => 'btn btn-default'

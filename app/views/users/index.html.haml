@@ -1,7 +1,7 @@
 = search_form_for @search, url: '/users' do |f|
   / user Name Search 
   .form-control-col-sm-4
-    = f.label :retailer_name_cont, "Retailers Name Search"
+    = f.label :retailer_name_cont, "Stores Name Search"
     = f.text_field :full_name_cont
     = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
 
@@ -9,12 +9,14 @@
 
 
 .page-header
-  %h1.title Retailers listing
+  %h1.title Stores
 %table.table.table-hover
   %thead
     %tr
-      %th Contact person
-      %th name
+      %th Store name
+      %th Buying Group
+      %th First name 
+      %th Last name
       %th Phone number
       %th Email
       %th Created On
@@ -24,7 +26,9 @@
       - @users.each do |user|
         %tr
           %td= user.contact_person
-          %td= user.user_name
+          %td= RetailerGroup.find(user.retailer_group_id) if user.retailer_group_id.present?
+          %td= user.first_name
+          %td= user.last_name
           %td= user.phone_number
           %td= user.email
           %td= user.created_at.strftime('%m-%d-%Y') 

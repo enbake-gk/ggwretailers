@@ -10,17 +10,13 @@
   .form-group
     = f.label :color, :class => 'control-label'
     .controls
-      = f.text_field :color, :class => 'form-control'
-  .form-group
-    = f.label :manufacturer, :class => 'control-label'
-    .controls
-      = f.text_field :manufacturer, :class => 'form-control'
+      = f.select :color,Colour.all.map{|b| [b.name,b.name]}, :class => 'form-control'
   .form-group
     = f.label :where_serial_number_is_found, :class => 'control-label'
     .controls
       = f.text_field :serial_no_location, :class => 'form-control'
   .form-group
-    = f.label "warranty (in month)", :class => 'control-label'
+    = f.label "warranty (in months)", :class => 'control-label'
     .controls
       = f.text_field :warranty, :class => 'form-control'
   .form-group
