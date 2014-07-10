@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save
+      if @user.save!
         UserMailer.welcome_email(@user).deliver
         format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully created.' }
       else
@@ -90,6 +90,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:retailer_group_id, :retailer_name,:contact_person, :website, :retailer_name, :phone_number, :email, :first_name,:last_name).merge(:role_id=>"2",:password => Devise.friendly_token.first(8))
+      params.require(:user).permit(:retailer_group_id, :retailer_name,:contact_person, :website, :retailer_name, :phone_number, :email, :first_name,:last_name).merge(:role_id=>"2",:password => '12345678')
     end
 end
