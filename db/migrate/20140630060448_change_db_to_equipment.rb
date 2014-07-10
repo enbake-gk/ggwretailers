@@ -1,5 +1,6 @@
 class ChangeDbToEquipment < ActiveRecord::Migration
   def change
-  	change_column :equipment, :dob, :datetime
+  	remove_column :equipment, :dob
+  	add_column :equipment, :dob, :datetime
   end
 end
