@@ -70,6 +70,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-        params.require(:setting).permit(:first_name, :last_name, :email, :admin, :role_id).merge(:password => Devise.friendly_token.first(8))
+        params.require(:setting).permit(:first_name, :last_name, :email, :admin, :role_id).merge(:password => 'U1tZyyLVTD')
     end
 end

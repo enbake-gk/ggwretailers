@@ -46,7 +46,7 @@
           %li= msg
   %br        
   .field
-    = f.file_field :file unless current_user.is_retailer?
+    = f.file_field :file, :required => true unless current_user.is_retailer?
     %h6= "choose only c.s.v or x.l.s file"  unless current_user.is_retailer?
   .buttons= f.submit "Import" unless current_user.is_retailer?
 

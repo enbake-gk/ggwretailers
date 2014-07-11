@@ -9,7 +9,7 @@
   .form-group
     = f.label :equipment_id, :class => 'control-label'
     .controls
-      = text_field_tag "equipment_id",@sale_history.try(:equipment).try(:serial_number), :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
+      = text_field_tag "equipment_id",@sale_history.try(:equipment).try(:serial_number), :required => true, :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
       = f.hidden_field :equipment_id, :class => 'form-control equipment_id_hidden'
   .form-group
     = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_history.try(:equipment).try(:brand).try(:name)}</span>"), {:class => 'control-label'}
@@ -18,7 +18,7 @@
   .form-group
     = f.label :customer_id,'Retailer', :class => 'control-label'
     .controls
-      = text_field_tag "customer_id",@sale_history.try(:buyer).try(:user_name), :class => 'form-control typeahead_customer',:autocomplete => "off",:placeholder=>"Search Retailer..."
+      = text_field_tag "customer_id",@sale_history.try(:buyer).try(:user_name), :required => true, :class => 'form-control typeahead_customer',:autocomplete => "off",:placeholder=>"Search Retailer..."
       = f.hidden_field :buyer_id, :class => 'form-control customer_id_hidden'
   .form-group
     = f.label :selling_date, :class => 'control-label'

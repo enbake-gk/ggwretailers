@@ -6,7 +6,7 @@
   .form-group
     = f.label :name, :class => 'control-label'
     .controls
-      = f.text_field :name, :class => 'form-control'
+      = f.text_field :name, :required => true, :class => 'form-control'
   .form-group
     = f.label :color, :class => 'control-label'
     .controls
@@ -14,15 +14,15 @@
   .form-group
     = f.label :where_serial_number_is_found, :class => 'control-label'
     .controls
-      = f.text_field :serial_no_location, :class => 'form-control'
+      = f.text_field :serial_no_location, :required => true, :class => 'form-control'
   .form-group
     = f.label "warranty (in months)", :class => 'control-label'
     .controls
-      = f.text_field :warranty, :class => 'form-control'
+      = f.text_field :warranty, :required => true, :class => 'form-control'
   .form-group
     = f.label :image, :class => 'control-label'
     .controls
-      = f.file_field :image, :class => ''
+      = f.file_field :image, :required => true, :class => ''
       
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), models_path, :class => 'btn btn-default'

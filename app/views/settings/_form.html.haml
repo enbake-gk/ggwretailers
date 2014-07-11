@@ -2,19 +2,19 @@
   .form-group
     = f.label :first_name, :class => 'control-label'
     .controls
-      = f.text_field :first_name, :class => 'form-control'
+      = f.text_field :first_name, :required => true, :class => 'form-control'
   .form-group
     = f.label :last_name, :class => 'control-label'
     .controls
-      = f.text_field :last_name, :class => 'form-control'
+      = f.text_field :last_name, :required => true, :class => 'form-control'
   .form-group
     = f.label :email, :class => 'control-label'
     .controls
-      = f.text_field :email, :class => 'form-control'
+      = f.text_field :email, :required => true, :class => 'form-control'
   .form-group
     = f.label :role, :class => 'control-label'
     .controls
-      = f.radio_button :role_id, "4" 
+      = f.radio_button :role_id, "4" , :checked => "checked"
       = f.label :role_id, "Manager", :value => "4" 
       = f.radio_button :role_id, "3" 
       = f.label :role_id, "ServiceTech", :value => "3" 

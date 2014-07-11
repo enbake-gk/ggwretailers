@@ -2,7 +2,7 @@
   .form-group
     = f.label :equipment_id, :class => 'control-label'
     .controls
-      = text_field_tag "equipment_id",@sale_to_customer.try(:serial_number), :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
+      = text_field_tag "equipment_id",@sale_to_customer.try(:serial_number), :required => true, :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
   .form-group
     = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_to_customer.try(:brand).try(:name)}</span>"), {:class => 'control-label'}
   .form-group
@@ -14,39 +14,39 @@
   .form-group
     = f.label :first_name, :class => 'control-label'
     .controls
-      = f.text_field :first_name, :class => 'form-control'
+      = f.text_field :first_name, :required => true, :class => 'form-control'
   .form-group
     = f.label :last_name, :class => 'control-label'
     .controls
-      = f.text_field :last_name, :class => 'form-control'
+      = f.text_field :last_name, :required => true, :class => 'form-control'
   .form-group
     = f.label :address, :class => 'control-label'
     .controls
-      = f.text_area :address, :class => 'form-control'
+      = f.text_area :address, :required => true, :class => 'form-control'
   .form-group
     = f.label :town, :class => 'control-label'
     .controls
-      = f.text_field :town, :class => 'form-control'
+      = f.text_field :town, :required => true, :class => 'form-control'
   .form-group
     = f.label :city, :class => 'control-label'
     .controls
-      = f.text_field :city, :class => 'form-control'
+      = f.text_field :city, :required => true, :class => 'form-control'
   .form-group
     = f.label :post_code, :class => 'control-label'
     .controls
-      = f.text_field :post_code, :class => 'form-control'
+      = f.text_field :post_code, :required => true, :class => 'form-control'
   .form-group
     = f.label :telephone, :class => 'control-label'
     .controls
-      = f.text_field :telephone, :class => 'form-control'
+      = f.text_field :telephone, :required => true, :class => 'form-control'
   .form-group
     = f.label :mobile, :class => 'control-label'
     .controls
-      = f.text_field :mobile, :class => 'form-control'
+      = f.text_field :mobile, :required => true, :class => 'form-control'
   .form-group
     = f.label :email, :class => 'control-label'
     .controls
-      = f.text_field :email, :class => 'form-control'
+      = f.text_field :email, :required => true, :class => 'form-control'
   .form-group
     = f.label :customer_note, :class => 'control-label'
     .controls
@@ -58,7 +58,7 @@
   .form-group
     = f.label :price, :class => 'control-label'
     .controls
-      = f.text_field :price, :class => 'form-control'   
+      = f.text_field :price, :required => true, :class => 'form-control'   
   .form-group
     = f.label :date_of_birth, :class => 'control-label'
     .controls
