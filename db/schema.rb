@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20140714100625) do
     t.string   "email"
     t.datetime "dob"
     t.string   "customer_note"
-    t.date     "purchase_date"
     t.integer  "customer_id"
     t.string   "serial_number"
     t.datetime "created_at"
@@ -85,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140714100625) do
     t.boolean  "sold_to_customer", default: false
     t.boolean  "sold_to_retailer", default: false
     t.integer  "colour_id"
+    t.date     "purchase_date"
   end
 
   add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree
