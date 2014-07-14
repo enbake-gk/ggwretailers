@@ -1,6 +1,6 @@
 - model_class = SaleHistory
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+  %h1 Register Details
 
 
 %p
@@ -16,12 +16,13 @@
   %br
   = link_to @sale_to_customer.try(:model).try(:name),model_path(@sale_to_customer.try(:model).try(:id))
 %p
-  %strong= model_class.human_attribute_name(:selling_date) + ':'
+  %strong= model_class.human_attribute_name(:colour_id) + ':'
   %br
+  = link_to @sale_to_customer.try(:colour).try(:name),colour_path(@sale_to_customer.try(:colour).try(:id))
 %p
-  %strong= model_class.human_attribute_name(:url) + ':'
+  %strong Date Purchased
   %br
-  = @sale_to_customer.url
+  = @sale_to_customer.selling_date.strftime("%d %b %Y")
 %p
   %strong= model_class.human_attribute_name(:price) + ':'
   %br
@@ -69,7 +70,7 @@
 %p
   %strong= model_class.human_attribute_name(:dob) + ':'
   %br 
-  = @sale_to_customer.dob.try(:strftime,"%A, %d %b %Y %l:%M %p")
+  = @sale_to_customer.dob.try(:strftime,"%A, %d %b %Y ")
 %p
   %strong= model_class.human_attribute_name(:customer_note) + ':'
   %br

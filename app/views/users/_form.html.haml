@@ -12,7 +12,7 @@
   .form-group
     = f.label :retailer_group,"Buying Group", :class => 'control-label'
     .controls
-      = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},{ }, :class => 'form-control'
+      = f.select :retailer_group_id,RetailerGroup.all.map{|b| [b.name,b.id]},{ :include_blank => true, :selected => RetailerGroup.find_by_name('GoMotorised').id}, :class => 'form-control'
   .form-group
     = f.label :first_name, :class => 'control-label'
     .controls
@@ -21,10 +21,10 @@
     = f.label :last_name, :class => 'control-label'
     .controls
       = f.text_field :last_name, :class => 'form-control'
-  .form-group
-    = f.label :retailer_name , :class => 'control-label'
-    .controls
-      = f.text_field :retailer_name, :class => 'form-control'
+  / .form-group
+  /   =# f.label :retailer_name , :class => 'control-label'
+  /   .controls
+  /     =# f.text_field :retailer_name, :class => 'form-control'
   .form-group
     = f.label :phone_number , :class => 'control-label'
     .controls
@@ -38,5 +38,5 @@
     .controls
       = f.text_field :website, :class => 'form-control'
   = f.submit "Save", :class => 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), retailers_path, :class => 'btn btn-default'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), stores_path, :class => 'btn btn-default'
 

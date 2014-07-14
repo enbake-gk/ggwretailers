@@ -29,7 +29,7 @@ class SettingsController < ApplicationController
     respond_to do |format|
       if @setting.save
         UserMailer.welcome_email(@setting).deliver
-        format.html { redirect_to setting_path(@setting), notice: 'User was successfully created.' }
+        format.html { redirect_to show_user_path(@setting), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @setting }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SettingsController < ApplicationController
   def update
     respond_to do |format|
       if @setting.update(setting_params)
-        format.html { redirect_to setting_path(@setting), notice: 'User was successfully updated.' }
+        format.html { redirect_to show_user_path(@setting), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @setting }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class SettingsController < ApplicationController
   def destroy
     @setting.destroy
     respond_to do |format|
-      format.html { redirect_to settings_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

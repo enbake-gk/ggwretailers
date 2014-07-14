@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def index
     @search = User.not_admin.search(params[:q])
     @users = @search.result.paginate(:page => params[:page], :per_page => 12)
+    render :template => "users/index"
   end
 
   # GET /users/1
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         UserMailer.welcome_email(@user).deliver
-        format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully created.' }
+        format.html { redirect_to stores_path, notice: 'Store was successfully created.' }
       else
         format.html { render :new }
       end
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_path(:type=>2), notice: 'Retailer was successfully updated.' }
+        format.html { redirect_to stores_path, notice: 'Store was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_path(:type=>2), notice: 'User was successfully destroyed.' }
+      format.html { redirect_to stores_path, notice: 'Store was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

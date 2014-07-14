@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
 
   ransacker :full_name do |parent|
-    Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name]])
+    Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name], parent.table[:contact_person]])
   end
 
   def is_admin?

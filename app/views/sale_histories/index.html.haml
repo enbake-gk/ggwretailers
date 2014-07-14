@@ -7,7 +7,7 @@
       %th Brand
       %th Model
       %th Retailer
-      %th Selling date
+      %th Purchase date
       %th Actions
   %tbody
     - if @sale_histories.present?
@@ -17,10 +17,10 @@
           %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
           %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
           %td= link_to sale_history.buyer.try(:user_name),user_path(sale_history.try(:buyer_id))
-          %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')
+          %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y')
           %td
-            = link_to 'Edit', edit_sale_history_path(sale_history),:class => 'btn btn-warning btn-xs'
-            = link_to 'Show', sale_history, :class => 'btn btn-primary btn-xs'
+            = link_to 'Edit', edit_sell_to_retailer_path(sale_history),:class => 'btn btn-warning btn-xs'
+            = link_to 'Show', show_sell_to_retailer_path(sale_history), :class => 'btn btn-primary btn-xs'
             = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
     - else
       %tr
@@ -30,4 +30,4 @@
 
 = will_paginate @sale_histories, renderer: BootstrapPagination::Rails 
 
-= link_to "Sell to Retailer", new_sale_history_path, :class => 'btn btn-primary'
+= link_to "Sell to Retailer", new_sell_to_retailer_path, :class => 'btn btn-primary'

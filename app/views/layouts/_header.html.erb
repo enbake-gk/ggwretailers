@@ -7,21 +7,40 @@
           <ul class="nav navbar-nav">
             <% if user_signed_in? 
                 if ((current_user.is_admin?) || (current_user.is_manager?))%>
-                  <li><%= link_to 'Brand',brands_path %></li>
-                  <li><%= link_to 'Model',models_path %></li>
-                  <li><%= link_to 'Colours',colours_path %></li>
-                  <li><%= link_to 'Accessories',accessories_path %></li>
-                  <li><%= link_to 'Retailers Stores',users_path %></li>
-                  <li><%= link_to 'Retailer Group',retailer_groups_path %></li>
-                  <li><%= link_to 'Serial Number',serialnumbers_path %></li>
-                  <li><%= link_to 'Sell to Retailer',sale_histories_path %></li>
-                  <li><%= link_to 'Sell to Customer',sale_to_customers_path  %></li>
-                  <li><%= link_to 'Users',settings_path  %></li>
+                  <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sell to <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Retailer',sell_to_retailer_path %></li>
+                        <li><%= link_to 'Customer',new_sale_to_customer_path  %></li>
+                      </ul>
+                  </li>
+                  <li><%= link_to 'Customers',sell_to_customers_path  %></li>
+                  <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Equipment <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Serial Number',serialnumbers_path %></li>
+                        <li><%= link_to 'Brand',brands_path %></li>
+                        <li><%= link_to 'Model',models_path %></li>
+                        <li><%= link_to 'Accessories',accessories_path %></li>
+                        <li><%= link_to 'Colours',colours_path %></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Retailers <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Stores',stores_path %></li>
+                        <li><%= link_to 'Group',retailer_groups_path %></li>
+                      </ul>
+                  </li>
+                  <li><a href="#">Reporting</a></li>
+                  <li><%= link_to 'Users',users_path  %></li>
               <% elsif current_user.is_retailer? %>
                   <li><%= link_to 'Serial Keys',serial_key_list_users_path %></li>
                   <li><%= link_to 'Customers',customers_path %></li>
-                  <li><%= link_to 'Sell to Customer',sale_to_customers_path  %></li>
+                  <li><%= link_to 'Sell to Retailer',sale_histories_path %></li>
+                  <li><%= link_to 'Sell to Customer',sale_to_customers_path  %></li>             
               <% end %>
+        
             <% end %>
           </ul>
            <p class="navbar-text navbar-right">

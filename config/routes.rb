@@ -1,13 +1,27 @@
 Rails.application.routes.draw do
   
- 
+  # match '/warrantyregistration' => 'home#warrantyregistration', :as => :warrantyregistration, via: :get
+  # match '/warrantyregistration/:id' => 'home#warrantyregistration_update', :as => :warrantyregistration_update, via: :put
   resources :colours
 
   resources :settings
 
   resources :sale_to_customers 
 
+  match '/customers' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
+
   resources :customers
+  
+  match '/user' => 'settings#index',:as => :users, via: :get
+  match '/users/new' => 'settings#new', :as => :new_user, via: :get
+  match '/users/:id' => 'settings#show', :as => :show_user, via: :get
+  match '/users/:id/edit' => 'settings#edit', :as => :edit_user, via: :get
+
+  match '/sell_to_retailer' => 'sale_histories#index', :as => :sell_to_retailer, via: :get
+  match '/sell_to_retailer/new' => 'sale_histories#new', :as => :new_sell_to_retailer, via: :get
+  match '/sell_to_retailer/:id' => 'sale_histories#show', :as => :show_sell_to_retailer, via: :get
+  match '/sell_to_retailer/:id/edit' => 'sale_histories#edit', :as => :edit_sell_to_retailer, via: :get
+  
   match '/serialnumbers' => 'equipment#index',:as => :serialnumbers, via: :get
   match '/equipments/get_models' => 'equipment#get_models', via: :get
   resources :equipment do
@@ -31,7 +45,14 @@ Rails.application.routes.draw do
   resources :models
 
   resources :brands
-   
+
+  match '/stores' => 'users#index',:as => :stores, via: :get
+  match '/stores/new' => 'users#new', :as => :new_store, via: :get
+  match '/stores/:id' => 'users#show', :as => :show_store, via: :get
+  match '/stores/:id/edit' => 'users#edit', :as => :edit_store, via: :get
+
+  
+
   devise_for :users
  
   resources :users do

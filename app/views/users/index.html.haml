@@ -19,7 +19,6 @@
       %th Last name
       %th Phone number
       %th Email
-      %th Created On
       %th Actions
   %tbody
     - if @users.present?
@@ -31,10 +30,9 @@
           %td= user.last_name
           %td= user.phone_number
           %td= user.email
-          %td= user.created_at.strftime('%m-%d-%Y') 
           %td
-            = link_to 'Edit', edit_user_path(user),:class => 'btn btn-warning btn-xs'
-            = link_to 'Show', "/users/#{user.id}", :class => 'btn btn-primary btn-xs'
+            = link_to 'Edit', edit_store_path(user),:class => 'btn btn-warning btn-xs'
+            = link_to 'Show', "/stores/#{user.id}", :class => 'btn btn-primary btn-xs'
             = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
     - else
       %tr
@@ -42,4 +40,4 @@
 %br
 = will_paginate @users, renderer: BootstrapPagination::Rails 
 
-= link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_store_path, :class => 'btn btn-primary'

@@ -13,22 +13,18 @@
     %tr
       %th= model_class.human_attribute_name(:brand_id)
       %th= model_class.human_attribute_name(:model)
-      %th= model_class.human_attribute_name(:color)
       %th= model_class.human_attribute_name(:serial_no_location)
       %th= model_class.human_attribute_name("warranty(in months)")
       %th= model_class.human_attribute_name(:image)
-      %th= model_class.human_attribute_name(:created_at)
       %th{width: "16%"}=t '.actions', :default => t("helpers.actions")
   %tbody
     - @models.includes(:brand).each do |model|
       %tr
         %td= link_to model.try(:brand).try(:name),brand_path(model.brand_id)
         %td= model.name
-        %td= model.color
         %td= model.serial_no_location
         %td= model.warranty
         %td= image_tag(model.image.thumb) if model.image.present?
-        %td=model.created_at.strftime("%A, %d %b %Y %l:%M %p")
         %td   
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_model_path(model), :class => 'btn btn-warning btn-xs'
           = link_to t('.show', :default => t("helpers.links.show")), model_path(model), :class => 'btn btn-primary btn-xs'

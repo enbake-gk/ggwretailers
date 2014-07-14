@@ -8,10 +8,6 @@
     .controls
       = f.text_field :name, :required => true, :class => 'form-control'
   .form-group
-    = f.label :color, :class => 'control-label'
-    .controls
-      = f.select :color,Colour.all.map{|b| [b.name,b.name]}, :class => 'form-control'
-  .form-group
     = f.label :where_serial_number_is_found, :class => 'control-label'
     .controls
       = f.text_field :serial_no_location, :required => true, :class => 'form-control'
@@ -22,7 +18,7 @@
   .form-group
     = f.label :image, :class => 'control-label'
     .controls
-      = f.file_field :image, :required => true, :class => ''
+      = f.file_field :image, :class => ''
       
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), models_path, :class => 'btn btn-default'

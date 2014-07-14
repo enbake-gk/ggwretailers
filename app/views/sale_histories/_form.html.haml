@@ -16,16 +16,18 @@
   .form-group
     = label_tag "Model", raw("Model : <span class=\"model_name\">#{@sale_history.try(:equipment).try(:model).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
+    = label_tag "Colour", raw("Colour : <span class=\"colour_name\">#{@sale_history.try(:equipment).try(:colour).try(:name)}</span>"),{:class => 'control-label'}
+  .form-group
     = f.label :customer_id,'Retailer', :class => 'control-label'
     .controls
       = text_field_tag "customer_id",@sale_history.try(:buyer).try(:user_name), :required => true, :class => 'form-control typeahead_customer',:autocomplete => "off",:placeholder=>"Search Retailer..."
       = f.hidden_field :buyer_id, :class => 'form-control customer_id_hidden'
   .form-group
-    = f.label :selling_date, :class => 'control-label'
+    = f.label :selling_date,"Purchase Date", :class => 'control-label'
     .controls
-      = f.datetime_select :selling_date, :class => 'form-control'
+      = f.date_select :selling_date, :class => 'form-control'
 
   = f.submit "Save", :class => 'btn btn-primary'
-  = link_to "Cancel",  sale_histories_path, :class => 'btn btn-default'
+  = link_to "Cancel",  sell_to_retailer_path, :class => 'btn btn-default'
 
   = render 'autocomp.js'

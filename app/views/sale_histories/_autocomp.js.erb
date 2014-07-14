@@ -4,6 +4,8 @@
     $.get('/sale_histories/equipment_detail', { id: item.value }, function (data) {
         $('span.brand_name').text(data.bname);
         $('span.model_name').text(data.mname);
+        $('span.colour_name').text(data.cname);
+
     });
   }
   function set_hidden_id(item) {

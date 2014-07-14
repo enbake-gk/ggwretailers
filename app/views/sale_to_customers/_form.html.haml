@@ -1,12 +1,14 @@
 = form_for @sale_to_customer,:url=> @sale_to_customer.new_record? ? sale_to_customers_path : sale_to_customer_path(@sale_to_customer) ,:as=>:sale_to_customer, :html => { :class => 'form-horizontal' } do |f|
   .form-group
-    = f.label :equipment_id, :class => 'control-label'
+    = f.label :equipment_id,'Serial Number', :class => 'control-label'
     .controls
       = text_field_tag "equipment_id",@sale_to_customer.try(:serial_number), :required => true, :class => 'form-control typeahead_equipment',:placeholder=>"Search serial numnber...",:autocomplete => "off"
   .form-group
     = label_tag "Brand", raw("Brand : <span class=\"brand_name\">#{@sale_to_customer.try(:brand).try(:name)}</span>"), {:class => 'control-label'}
   .form-group
     = label_tag "Model", raw("Model : <span class=\"model_name\">#{@sale_to_customer.try(:model).try(:name)}</span>"),{:class => 'control-label'}
+  .form-group
+    = label_tag "Colour", raw("Colour : <span class=\"colour_name\">#{@sale_history.try(:equipment).try(:colour).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
     = f.label :retailer, :class => 'control-label'
     .controls
@@ -52,21 +54,17 @@
     .controls
       = f.text_area :customer_note, :class => 'form-control'
   .form-group
-    = f.label :url, :class => 'control-label'
-    .controls
-      = f.text_field :url, :class => 'form-control'
-  .form-group
     = f.label :price, :class => 'control-label'
     .controls
       = f.text_field :price, :required => true, :class => 'form-control'   
   .form-group
     = f.label :date_of_birth, :class => 'control-label'
     .controls
-      = f.datetime_select :dob, :class => 'form-control'  
+      = f.date_select :dob, :class => 'form-control'  
   .form-group
-    = f.label :selling_date, :class => 'control-label'
+    = f.label :selling_date,'Date Purchased', :class => 'control-label'
     .controls
-      = f.datetime_select :selling_date, :class => 'form-control'
+      = f.date_select :selling_date, :class => 'form-control'
   
-  = f.submit nil, :class => 'btn btn-primary'
+  = f.submit 'Register', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'

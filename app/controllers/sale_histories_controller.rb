@@ -29,7 +29,7 @@ class SaleHistoriesController < ApplicationController
 
     respond_to do |format|
       if @sale_history.save
-        format.html { redirect_to sale_histories_url, notice: 'Data was successfully created.' }
+        format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully created.' }
         format.json { render :show, status: :created, location: @sale_history }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SaleHistoriesController < ApplicationController
   def update
     respond_to do |format|
       if @sale_history.update(sale_history_params)
-        format.html { redirect_to sale_histories_url, notice: 'Data was successfully updated.' }
+        format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale_history }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class SaleHistoriesController < ApplicationController
   def destroy
     @sale_history.destroy
     respond_to do |format|
-      format.html { redirect_to sale_histories_url, notice: 'Data was successfully destroyed.' }
+      format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,8 +76,8 @@ class SaleHistoriesController < ApplicationController
 
   def equipment_detail
       id = params[:id]
-      @equipment = Equipment.select("models.name as mname,brands.name as bname")
-                  .joins(:model,:brand)
+      @equipment = Equipment.select("models.name as mname,brands.name as bname,colours.name as cname")
+                  .joins(:model,:brand,:colour)
                   .where("equipment.id = ? ",id)
 
       respond_to do |format|

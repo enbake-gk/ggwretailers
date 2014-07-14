@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710062419) do
+ActiveRecord::Schema.define(version: 20140714100625) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20140710062419) do
     t.string   "email"
     t.datetime "dob"
     t.string   "customer_note"
-    t.string   "purchase_date"
+    t.date     "purchase_date"
     t.integer  "customer_id"
     t.string   "serial_number"
     t.datetime "created_at"

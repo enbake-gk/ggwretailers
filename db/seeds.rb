@@ -5,4 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(email: "gwretailers@enbake.com", password: "gwretailers", reset_password_token: nil,:role_id=>'1', reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 6, current_sign_in_at: "2014-06-24 07:16:53", last_sign_in_at: "2014-06-24 07:07:32", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, failed_attempts: 0, unlock_token: nil, locked_at: nil)
+#User.create(email: "gwretailers@enbake.com", password: "gwretailers", reset_password_token: nil,:role_id=>'1', reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 6, current_sign_in_at: "2014-06-24 07:16:53", last_sign_in_at: "2014-06-24 07:07:32", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, failed_attempts: 0, unlock_token: nil, locked_at: nil)
+RetailerGroup.create(name: "GoMotorised")

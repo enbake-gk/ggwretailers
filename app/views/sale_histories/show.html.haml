@@ -13,9 +13,9 @@
   %b Customer:
   = @sale_history.buyer.try(:user_name)
 %p
-  %b Selling date:
-  = @sale_history.selling_date.try(:strftime,'%m-%d-%Y %H:%M %p')
+  %b Purchase date:
+  = @sale_history.selling_date.try(:strftime,'%m-%d-%Y')
 
-= link_to 'Edit', edit_sale_history_path(@sale_history)
+= link_to 'Edit', edit_sell_to_retailer_path(@sale_history)
 \|
-= link_to 'Back', sale_histories_path
+= link_to 'Back', sell_to_retailer_path

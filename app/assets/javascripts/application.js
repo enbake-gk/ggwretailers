@@ -16,3 +16,20 @@
 //= require turbolinks
 //= require jquery.validate
 //= require_tree .
+
+$(document).ready(function(){
+	  $('.search_div').hide();
+	  $('input#filter_ckbox').click(function(){
+        // If checked
+        if ($("#filter_ckbox").is(":checked"))
+        {
+            //show the hidden div
+            $(".search_div").show();
+        }
+        else
+        {
+            //otherwise, hide it
+            $(".search_div").hide();
+        }
+      });
+});

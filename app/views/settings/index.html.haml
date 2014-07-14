@@ -16,10 +16,10 @@
       %td= setting.last_name
       %td= setting.email
       %td= setting.role?
-      %td= link_to 'Show', setting_path(setting), :class => 'btn btn-primary btn-xs'
-      %td= link_to 'Edit', edit_setting_path(setting) ,:class => 'btn btn-warning btn-xs'
+      %td= link_to 'Show', show_user_path(setting), :class => 'btn btn-primary btn-xs'
+      %td= link_to 'Edit', edit_user_path(setting) ,:class => 'btn btn-warning btn-xs'
       %td= link_to 'Destroy', setting_path(setting), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
 
 %br
 
-= link_to 'New User', new_setting_path
+= link_to 'New User', new_user_path
