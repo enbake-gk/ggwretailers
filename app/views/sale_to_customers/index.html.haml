@@ -37,11 +37,11 @@
       = f.label :mobile_eq, "Phone Number"
       = f.text_field :mobile_eq
     / Search by Purchase between
-    / .form-group
-    /   = f.label :purchase_date_gteq, "Purchase Date Between"
-    /   = f.date_select :purchase_date_gteq
-    /   = f.label :purchase_date_lteq, "and"
-    /   = f.date_select :purchase_date_lteq
+    .form-group
+      = f.label :purchase_date_gteq, "Purchase Date Between"
+      = f.date_select :purchase_date_gteq
+      = f.label :purchase_date_lteq, "and"
+      = f.date_select :purchase_date_lteq
     / Search by selling date between
     / .form-group
     /   = f.label :selling_date_gteq, "Selling Date Between"
@@ -92,7 +92,7 @@
         %td= sale_to_customer.price
         %td= sale_to_customer.mobile
         %td= sale_to_customer.email
-        %td= sale_to_customer.selling_date.strftime("%d %b %Y")
+        %td= sale_to_customer.purchase_date.strftime("%d %b %Y")
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_to_customer_path(sale_to_customer), :class => 'btn btn-default btn-xs'
           = link_to t('.show', :default => t("helpers.links.show")), sale_to_customer_path(sale_to_customer), :class => 'btn btn-primary btn-xs'

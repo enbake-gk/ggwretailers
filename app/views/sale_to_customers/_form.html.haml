@@ -62,9 +62,9 @@
     .controls
       = f.date_select :dob, :class => 'form-control'  
   .form-group
-    = f.label :selling_date,'Date Purchased', :class => 'control-label'
+    = f.label :purchase_date,'Date Purchased', :class => 'control-label'
     .controls
-      = f.date_select :selling_date, :class => 'form-control'
+      = f.date_select :purchase_date, :class => 'form-control'
   
   = f.submit 'Register', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'

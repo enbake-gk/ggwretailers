@@ -22,7 +22,7 @@
 %p
   %strong Date Purchased
   %br
-  = @sale_to_customer.selling_date.strftime("%d %b %Y")
+  = @sale_to_customer.purchase_date.strftime("%d %b %Y")
 %p
   %strong= model_class.human_attribute_name(:price) + ':'
   %br
