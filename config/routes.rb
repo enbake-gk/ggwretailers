@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   resources :brands
 
+  match '/user' => 'users#create', :as => :create_store, via: :post
   match '/stores' => 'users#index',:as => :stores, via: :get
   match '/stores/new' => 'users#new', :as => :new_store, via: :get
   match '/stores/:id' => 'users#show', :as => :show_store, via: :get
