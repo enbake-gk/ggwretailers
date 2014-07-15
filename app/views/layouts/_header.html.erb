@@ -39,7 +39,10 @@
                   <li><%= link_to 'Customers',customers_path %></li>
                   <li><%= link_to 'Sell to Customer',sale_to_customers_path  %></li>             
               <% end %>
-        
+            <% else %>
+              <p class="navbar-text navbar-right">
+                <%= link_to 'Login',new_user_session_path %>
+              </p>
             <% end %>
           </ul>
            <p class="navbar-text navbar-right">

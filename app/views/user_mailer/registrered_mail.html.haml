@@ -1,0 +1,48 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p
+      Hi #{@equipment.first_name}
+      %br
+      Your Product registered successfully.
+      %br
+      Details of your product are as follows
+      %br
+      Brand Name: #{@equipment.brand.name if @equipment.brand.present? }
+      %br
+      Model Name: #{@equipment.model.name if @equipment.model.present? }
+      %br
+      Colur Name: #{@equipment.colour.name if @equipment.colour.present? }
+      %br
+      Serial Key: #{@equipment.serial_number}
+      %br
+      Purchase Date: #{@equipment.purchase_date.try(:strftime,'%m-%d-%Y')} 
+      %br
+      price: #{@equipment.price}
+      %br
+      %br
+      Customer Datails are as follows
+      %br
+      First Name: #{@equipment.first_name}
+      %br
+      Last Name: #{@equipment.last_name}
+      %br
+      Address: #{@equipment.address}
+      %br
+      Town: #{@equipment.town}
+      %br
+      City: #{@equipment.city}
+      %br
+      Post Code: #{@equipment.post_code}
+      %br
+      Telephone: #{@equipment.telephone}
+      %br
+      Mobile: #{@equipment.mobile}
+      %br
+      Email: #{@equipment.email}
+      %br
+      DOB: #{@equipment.dob.try(:strftime,'%m-%d-%Y')}
+      %br
+      

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714100625) do
+ActiveRecord::Schema.define(version: 20140715082203) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140714100625) do
     t.boolean  "sold_to_retailer", default: false
     t.integer  "colour_id"
     t.date     "purchase_date"
+    t.boolean  "is_registered"
   end
 
   add_index "equipment", ["brand_id"], name: "index_equipment_on_brand_id", using: :btree

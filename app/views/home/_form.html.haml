@@ -1,0 +1,36 @@
+.form-group
+  = f.label :first_name, :class => 'control-label'
+  .controls
+    = f.text_field :first_name, :value =>@result.first_name, :class => 'form-control'
+.form-group
+  = f.label :last_name, :class => 'control-label'
+  .controls
+    = f.text_field :last_name, :value =>@result.last_name, :class => 'form-control'
+.form-group
+  = f.label :address, :class => 'control-label'
+  .controls
+    = f.text_area :address, :value =>@result.address, :class => 'form-control'
+.form-group
+  = f.label :town, :class => 'control-label'
+  .controls
+    = f.text_field :town, :value =>@result.town, :class => 'form-control'
+.form-group
+  = f.label :city, :class => 'control-label'
+  .controls
+    = f.text_field :city, :value =>@result.city, :class => 'form-control'
+.form-group
+  = f.label :post_code, :class => 'control-label'
+  .controls
+    = f.text_field :post_code, :value =>@result.post_code, :class => 'form-control'
+.form-group
+  = f.label :telephone, :class => 'control-label'
+  .controls
+    = f.text_field :telephone, :value =>@result.telephone, :class => 'form-control'
+.form-group
+  = f.label :mobile, :class => 'control-label'
+  .controls
+    = f.text_field :mobile, :value =>@result.mobile, :class => 'form-control'
+.form-group
+  = f.label :date_of_birth, :class => 'control-label'
+  .controls
+    = f.date_select :dob, :class => 'form-control'

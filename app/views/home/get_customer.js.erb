@@ -1,0 +1,10 @@
+<%if @result.present? %>
+$('#equipment_first_name').val('<%=@result.first_name%>');
+$('#equipment_last_name').val('<%=@result.last_name%>');
+$('#equipment_address').val('<%=@result.address%>');
+$('#equipment_town').val('<%=@result.town%>');
+$('#equipment_city').val('<%=@result.city%>');
+$('#equipment_post_code').val('<%=@result.post_code%>');
+$('#equipment_telephone').val('<%=@result.telephone%>');
+$('#equipment_mobile').val('<%=@result.mobile%>');
+<%end%>

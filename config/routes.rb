@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  
-  # match '/warrantyregistration' => 'home#warrantyregistration', :as => :warrantyregistration, via: :get
-  # match '/warrantyregistration/:id' => 'home#warrantyregistration_update', :as => :warrantyregistration_update, via: :put
+
+  get '/get_customer/' => 'home#get_customer'
+  match '/warrantyregistration_edit/' => 'home#warrantyregistration_edit', :as => :warrantyregistration_edit, via: :get  
+  match '/warrantyregistration' => 'home#warrantyregistration', :as => :warrantyregistration, via: :get
+  match '/warrantyregistration/:id' => 'home#warrantyregistration_update', :as => :warrantyregistration_update, via: :patch
   resources :colours
 
   resources :settings
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
   match '/customers' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
 
   resources :customers
-  
+    
    match '/user' => 'settings#index',:as => :users, via: :get
    match '/users/new' => 'settings#new', :as => :new_user, via: :get
    match '/user/:id' => 'settings#show', :as => :show_user, via: :get

@@ -1,0 +1,10 @@
+<script type="text/javascript" >
+  $(document).ready(function(){
+    $(document).on("keyup", "#email_auto", function() {
+        var email = $(this).val();
+      $.getScript('/get_customer?email='+email)
+    });
+    
+  });
+
+</script>

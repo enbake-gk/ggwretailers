@@ -98,6 +98,6 @@ class EquipmentController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
       # ,:brand=>Brand.find(params[:equipment][:model_id])
-      params.require(:equipment).permit(:model_id,:brand_id,:colour_id,:serial_number).merge(user_id: current_user.id)
+      params.require(:equipment).permit(:model_id,:brand_id,:colour_id,:serial_number)
     end
 end
