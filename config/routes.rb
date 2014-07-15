@@ -12,10 +12,10 @@ Rails.application.routes.draw do
 
   resources :customers
   
-  match '/user' => 'settings#index',:as => :users, via: :get
-  match '/users/new' => 'settings#new', :as => :new_user, via: :get
-  match '/users/:id' => 'settings#show', :as => :show_user, via: :get
-  match '/users/:id/edit' => 'settings#edit', :as => :edit_user, via: :get
+   match '/user' => 'settings#index',:as => :users, via: :get
+   match '/users/new' => 'settings#new', :as => :new_user, via: :get
+   match '/user/:id' => 'settings#show', :as => :show_user, via: :get
+   match '/users/:id/edit' => 'settings#edit', :as => :edit_user, via: :get
 
   match '/sell_to_retailer' => 'sale_histories#index', :as => :sell_to_retailer, via: :get
   match '/sell_to_retailer/new' => 'sale_histories#new', :as => :new_sell_to_retailer, via: :get
