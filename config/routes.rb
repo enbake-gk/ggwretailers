@@ -42,6 +42,9 @@ Rails.application.routes.draw do
       end
   end
 
+  get 'jobs/get_serial_numbers/' => 'home#get_serial_numbers'
+  match '/check_serial_key/' => 'jobs#check_serial_key', :as => :check_serial_key, via: :get  
+  match '/jobs/new/:key' => 'jobs#new', :as => :new_jobs_with_params, via: :get
   resources :jobs
 
   resources :accessories

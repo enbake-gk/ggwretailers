@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :except => [:new, :create, :show, :check_serial_key]
 
   # GET /jobs
   # GET /jobs.json
@@ -16,6 +16,20 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
+    @search = Equipment.recent.search(params[:q])
+  end
+
+  def check_serial_key 
+    @search = Equipment.recent.search(params[:q])
+      if params[:q].present?
+        @result = Equipment.find_by_serial_number(params[:q][:serial_number_eq])
+      end
+      if !@result.present?
+        redirect_to new_job_path, notice: 'No Record Found.'
+        return
+      else
+        redirect_to new_jobs_with_params_path(:key => @result.serial_number)
+      end
   end
 
   # GET /jobs/1/edit
@@ -29,7 +43,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to new_job_path, notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -70,6 +84,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech)
+      params.require(:job).permit(:serial_number, :claim_amount, :date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech)
     end
 end

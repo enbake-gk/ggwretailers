@@ -1,0 +1,25 @@
+<script type="text/javascript" >
+  function display_equipment_detail(item) {
+    $('#sno_job_key').val(item.value);
+   
+  }
+  $(document).ready(function(){
+    $('#claim_amount_id').hide();
+
+    $('#job_claimed_yes').click(function () {
+      $('#claim_amount_id').show('slow');
+    });
+    
+    $('#job_claimed_no').click(function () {
+          $('#claim_amount_id').hide('slow');
+     });
+    
+    $('#sno_job_key').typeahead({
+          ajax: '/get_serial_numbers',
+          displayField: 'serial_number',
+          valueField: 'id',
+          onSelect: display_equipment_detail
+      }); 
+  });
+
+</script>

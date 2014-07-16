@@ -1,5 +1,13 @@
 %h1 New job
 
-= render 'form'
+= search_form_for @search , url: '/check_serial_key/' do |f|
+  / equipment no Search 
+  .form-control-col-sm-4
+    = f.label :serial_number_eq, "Serial Number Search"
+    = f.text_field :serial_number_eq, :id => 'sno_job_key', :placeholder=>"Search serial numnber...", :autocomplete => "off"
+    = actions = f.submit "Search", class: 'btn btn-primary btn-xs'
 
-= link_to 'Back', jobs_path
+= render :partial => "new_form" if params[:key].present?
+= render 'autocomp.js'
+
+= link_to 'Back', warrantyregistration_path

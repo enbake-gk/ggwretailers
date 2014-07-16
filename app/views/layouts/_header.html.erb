@@ -41,7 +41,8 @@
               <% end %>
             <% else %>
               <p class="navbar-text navbar-right">
-                <%= link_to 'Login',new_user_session_path %>
+                <li><%= link_to 'Login',new_user_session_path %></li>
+                <li><%= link_to 'Register Job', new_job_path%></li>
               </p>
             <% end %>
           </ul>
