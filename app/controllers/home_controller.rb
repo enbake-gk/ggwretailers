@@ -68,7 +68,7 @@ class HomeController < ApplicationController
  	def get_serial_numbers
  		key = params[:query]
 		@key_results = Equipment.select("equipment.id,equipment.serial_number")
-                  .where("equipment.serial_number LIKE ? ","%#{key}%")
+                  .where("equipment.serial_number LIKE ? AND equipment.sold_to_customer = true ","%#{key}%")
 		respond_to do |format|
 			format.json { render json: @key_results   }
 		end
