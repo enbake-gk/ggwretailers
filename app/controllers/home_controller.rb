@@ -26,7 +26,7 @@ class HomeController < ApplicationController
  	    if !@result.present?
  	   	  redirect_to warrantyregistration_path, notice: 'No Record Found.'
  	   	  return
- 	   	elsif @result.present? && @result.is_registered == 'true'
+ 	   	elsif @result.present? && @result.is_registered == true
  	   	  redirect_to warrantyregistration_path, notice: 'Your Product is Already registered'
  	   	  return
  	   	end
