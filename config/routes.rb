@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+  get '/thanks/' => 'home#thanks', :as => :thanks
   get '/get_customer/' => 'home#get_customer'
+  get '/get_serial_numbers/' => 'home#get_serial_numbers'
   match '/warrantyregistration_edit/' => 'home#warrantyregistration_edit', :as => :warrantyregistration_edit, via: :get  
   match '/warrantyregistration' => 'home#warrantyregistration', :as => :warrantyregistration, via: :get
   match '/warrantyregistration/:id' => 'home#warrantyregistration_update', :as => :warrantyregistration_update, via: :patch

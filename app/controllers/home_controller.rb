@@ -17,10 +17,16 @@ class HomeController < ApplicationController
 
 	def warrantyregistration
      	@search = Equipment.recent.search(params[:q])
+ 		if params[:q].present?
+    		@result = Equipment.find_by_serial_number(params[:q][:serial_number_eq])
+    	elsif params[:key].present?
+    		@result = Equipment.find_by_serial_number(params[:key])
+    	end
  	end
  	
  	def warrantyregistration_edit
- 		if params[:q].present?
+     	@search = Equipment.recent.search(params[:q])
+     	if params[:q].present?
  	    	@result = Equipment.find_by_serial_number(params[:q][:serial_number_eq])
  	    end
  	    if !@result.present?
@@ -29,17 +35,18 @@ class HomeController < ApplicationController
  	   	elsif @result.present? && @result.is_registered == true
  	   	  redirect_to warrantyregistration_path, notice: 'Your Product is Already registered'
  	   	  return
+ 	   	else
+		  	redirect_to warrantyregistration_path(:key => @result.serial_number)
  	   	end
  	end
 
  	def warrantyregistration_update
-	 puts params
 	  @equipment = Equipment.find(params[:id])
 	  @equipment.is_registered = true
 	    respond_to do |format|
 	      if @equipment.update(equipment_params)
 	      	UserMailer.registrered_mail(@equipment).deliver!
-	        format.html { redirect_to warrantyregistration_path, notice: 'Serial Number was successfully updated.' }
+	        format.html { redirect_to thanks_path, notice: 'Serial Number was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @equipment }
 	      else
 	        format.html { render :edit }
@@ -48,10 +55,22 @@ class HomeController < ApplicationController
 	    end		
  	end
 
+ 	def thanks
+ 	end
+
  	def get_customer
  		@result = Equipment.where(:email => params[:email]).first
  		respond_to do |format|
 	    	format.js
+		end
+ 	end
+
+ 	def get_serial_numbers
+ 		key = params[:query]
+		@key_results = Equipment.select("equipment.id,equipment.serial_number")
+                  .where("equipment.serial_number LIKE ? ","%#{key}%")
+		respond_to do |format|
+			format.json { render json: @key_results   }
 		end
  	end	
 

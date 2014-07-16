@@ -1,10 +1,19 @@
 <script type="text/javascript" >
+  function display_equipment_detail(item) {
+    $('#sno_register_id').val(item.value);
+   
+  }
   $(document).ready(function(){
     $(document).on("keyup", "#email_auto", function() {
         var email = $(this).val();
       $.getScript('/get_customer?email='+email)
     });
-    
+    $('#sno_register_id').typeahead({
+          ajax: 'get_serial_numbers',
+          displayField: 'serial_number',
+          valueField: 'id',
+          onSelect: display_equipment_detail
+      }); 
   });
 
 </script>

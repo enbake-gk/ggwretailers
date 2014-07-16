@@ -28,8 +28,7 @@
     = f.label :purchase_date, :class => 'control-label'
     .controls
       = f.date_select :purchase_date, :class => 'form-control'
-  
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), warrantyregistration_path, :class => 'btn btn-default'
-
-= render 'autocomp.js'
+  
+  
