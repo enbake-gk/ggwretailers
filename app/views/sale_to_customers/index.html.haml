@@ -22,9 +22,9 @@
     / Search by Purchase between
     .form-group
       = f.label :purchase_date_gteq, "Purchase Date Between"
-      = f.date_select :purchase_date_gteq, :order => [:day, :month, :year]
+      = f.date_select :purchase_date_gteq, :order => [:day, :month, :year], :id =>'from_date'
       = f.label :purchase_date_lteq, "and"
-      = f.date_select :purchase_date_lteq, :order => [:day, :month, :year]
+      = f.date_select :purchase_date_lteq, :order => [:day, :month, :year], :id => 'to_date'
     / Search by selling date between
     / .form-group
     /   = f.label :selling_date_gteq, "Selling Date Between"
