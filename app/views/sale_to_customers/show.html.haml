@@ -20,6 +20,10 @@
   %br
   = link_to @sale_to_customer.try(:colour).try(:name),colour_path(@sale_to_customer.try(:colour).try(:id))
 %p
+  %strong Store Name
+  %br
+  = @sale_to_customer.try(:retailer).try(:user_name)
+%p
   %strong Date Purchased
   %br
   = @sale_to_customer.purchase_date.strftime("%d %b %Y")

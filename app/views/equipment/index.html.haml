@@ -8,8 +8,8 @@
 
 - model_class = Equipment
 .page-header
-  %h1= "Serial Number List" unless current_user.is_retailer?
-  %h1= "Serial Key List" unless !current_user.is_retailer?
+  %h1= "Serial Numbers" unless current_user.is_retailer?
+  %h1= "Serial Numbers" unless !current_user.is_retailer?
 
 %table.table.table-hover
   %thead

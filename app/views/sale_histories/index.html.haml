@@ -6,7 +6,8 @@
       %th Serial no
       %th Brand
       %th Model
-      %th Retailer
+      %th Colour
+      %th Store Name
       %th Purchase date
       %th Actions
   %tbody
@@ -16,6 +17,7 @@
           %td= link_to sale_history.equipment.try(:serial_number),equipment_path(sale_history.equipment.try(:id))
           %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
           %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
+          %td= link_to sale_history.equipment.colour.try(:name),colour_path(sale_history.equipment.colour.try(:id))
           %td= link_to sale_history.buyer.try(:user_name),user_path(sale_history.try(:buyer_id))
           %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y')
           %td

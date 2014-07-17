@@ -10,7 +10,7 @@
   .form-group
     = label_tag "Colour", raw("Colour : <span class=\"colour_name\">#{@sale_history.try(:equipment).try(:colour).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
-    = f.label :retailer, :class => 'control-label'
+    = f.label :retailer,'Store Name', :class => 'control-label'
     .controls
       = f.select :retailer_id,User.retailer.all.map{|b| [b.user_name,b.id]},:selected =>'GoMotorised', :class => 'form-control'
   .form-group

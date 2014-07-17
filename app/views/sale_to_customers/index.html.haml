@@ -65,33 +65,35 @@
   %br
 - model_class = SaleHistory
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1 Purchases
 %table.table.table-hover
   %thead
     %tr
+      %th= model_class.human_attribute_name(:first_name)
+      %th= model_class.human_attribute_name(:last_name)
       %th= model_class.human_attribute_name(:serial_no)
       %th= model_class.human_attribute_name(:brand_id)
       %th= model_class.human_attribute_name(:model_id)
+      %th= model_class.human_attribute_name(:colour_id)
       %th Store Name
-      %th= model_class.human_attribute_name(:first_name)
-      %th= model_class.human_attribute_name(:last_name)
       %th= model_class.human_attribute_name(:price)
-      %th= model_class.human_attribute_name(:mobile)
-      %th= model_class.human_attribute_name(:email)
+      / %th= model_class.human_attribute_name(:mobile)
+      / %th= model_class.human_attribute_name(:email)
       %th Date Purchased
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @sale_to_customers.each do |sale_to_customer|
       %tr
+        %td= sale_to_customer.first_name
+        %td= sale_to_customer.last_name
         %td= link_to sale_to_customer.try(:serial_number),equipment_index_path(sale_to_customer.serial_number)
         %td= link_to sale_to_customer.try(:brand).try(:name),brand_path(sale_to_customer.brand_id)
         %td= link_to sale_to_customer.try(:model).try(:name),model_path(sale_to_customer.model_id)
+        %td= link_to sale_to_customer.try(:colour).try(:name),colour_path(sale_to_customer.colour_id)
         %td= link_to sale_to_customer.try(:retailer).try(:user_name),user_path(sale_to_customer.retailer_id)
-        %td= sale_to_customer.first_name
-        %td= sale_to_customer.last_name
         %td= sale_to_customer.price
-        %td= sale_to_customer.mobile
-        %td= sale_to_customer.email
+        / %td= sale_to_customer.mobile
+        / %td= sale_to_customer.email
         %td= sale_to_customer.purchase_date.strftime("%d %b %Y")
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_to_customer_path(sale_to_customer), :class => 'btn btn-default btn-xs'
