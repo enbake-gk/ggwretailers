@@ -10,7 +10,7 @@
                   <li class="dropdown">
                       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sell to <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                        <li><%= link_to 'Retailer',sell_to_retailer_path %></li>
+                        <li><%= link_to 'Retailer',new_sell_to_retailer_path %></li>
                         <li><%= link_to 'Customer',new_sale_to_customer_path  %></li>
                       </ul>
                   </li>
@@ -28,8 +28,9 @@
                   <li class="dropdown">
                       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Retailers <b class="caret"></b></a>
                       <ul class="dropdown-menu">
+                        <li><%= link_to 'Sales History',sell_to_retailer_path %></li>
                         <li><%= link_to 'Stores',stores_path %></li>
-                        <li><%= link_to 'Group',retailer_groups_path %></li>
+                        <li><%= link_to 'Groups',retailer_groups_path %></li>
                       </ul>
                   </li>
                   <li><a href="#">Reporting</a></li>
