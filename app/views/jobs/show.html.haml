@@ -2,22 +2,31 @@
 
 %p
   %b Date of job:
-  = @job.date_of_job
+  = @job.date_of_job.strftime("%d %b %Y")
+%p
+  %b Serial Number:
+  = @job.serial_number
 %p
   %b Service notes:
   = @job.service_notes
 %p
-  %b Time spent:
-  = @job.time_spent
+  %b Warrenty job:
+  = @job.warrenty_job
 %p
   %b Claimed:
   = @job.claimed
 %p
-  %b Warrenty job:
-  = @job.warrenty_job
+  %b Claim Amount:
+  = @job.claim_amount
+%p
+  %b Cost:
+  = @job.cost
 %p
   %b Servicetech:
   = @job.servicetech
+%p
+  %b Time spent:
+  = @job.time_spent
 
 = link_to 'Edit', edit_job_path(@job)
 \|

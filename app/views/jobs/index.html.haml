@@ -1,29 +1,35 @@
-%h1 Listing jobs
-
-%table
-  %tr
-    %th Date of job
-    %th Service notes
-    %th Time spent
-    %th Claimed
-    %th Warrenty job
-    %th Servicetech
-    %th
-    %th
-    %th
-
-  - @jobs.each do |job|
+.page-header
+  %h1 Listing jobs
+%table.table.table-hover
+  %thead
     %tr
-      %td= job.date_of_job
-      %td= job.service_notes
-      %td= job.time_spent
-      %td= job.claimed
-      %td= job.warrenty_job
-      %td= job.servicetech
-      %td= link_to 'Show', job
-      %td= link_to 'Edit', edit_job_path(job)
-      %td= link_to 'Destroy', job, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+      %th Date of job
+      %th Serial Number
+      %th Service notes
+      %th Time spent
+      %th Cost
+      %th Claimed
+      %th Warrenty job
+      %th Servicetech
+      %th Claimed amount
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @jobs.each do |job|
+      %tr
+        %td= job.date_of_job.strftime("%d %b %Y")
+        %td= job.serial_number
+        %td= job.service_notes
+        %td= job.time_spent
+        %td= job.cost
+        %td= job.claimed
+        %td= job.warrenty_job
+        %td= job.servicetech
+        %td= job.claim_amount
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_job_path(job), :class => 'btn btn-warning btn-xs'
+          = link_to t('.show', :default => t("helpers.links.show")), job_path(job), :class => 'btn btn-primary btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), job_path(job), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 %br
+= will_paginate @jobs, renderer: BootstrapPagination::Rails  
 
-= link_to 'New Job', new_job_path
+=# link_to 'New Job', new_job_path

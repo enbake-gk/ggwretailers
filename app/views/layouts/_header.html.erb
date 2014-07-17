@@ -33,6 +33,7 @@
                       </ul>
                   </li>
                   <li><a href="#">Reporting</a></li>
+                  <li><%= link_to 'Jobs',jobs_path  %></li>
                   <li><%= link_to 'Users',users_path  %></li>
               <% elsif current_user.is_retailer? %>
                   <li><%= link_to 'Serial Keys',serial_key_list_users_path %></li>

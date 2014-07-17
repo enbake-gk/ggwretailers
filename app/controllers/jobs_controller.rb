@@ -5,7 +5,8 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    #@jobs = Job.all
+     @jobs = Job.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /jobs/1
@@ -84,6 +85,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:serial_number, :claim_amount, :date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech)
+      params.require(:job).permit(:cost, :serial_number, :claim_amount, :date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech)
     end
 end
