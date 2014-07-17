@@ -2,12 +2,6 @@
   
   $(document).ready(function(){
   	$('.search_div').hide();
-    $("#q_purchase_date_gteq_3i").val('')
-    $("#q_purchase_date_gteq_2i").val('')
-    $("#q_purchase_date_gteq_1i").val('')
-    $("#q_purchase_date_lteq_3i").val('')
-    $("#q_purchase_date_lteq_2i").val('')
-    $("#q_purchase_date_lteq_1i").val('')
 	  $('input#filter_ckbox').click(function(){
         // If checked
         if ($("#filter_ckbox").is(":checked"))
@@ -19,13 +13,6 @@
         {
             //otherwise, hide it
             $(".search_div").hide();
-            $("#q_purchase_date_gteq_3i").val('')
-            $("#q_purchase_date_gteq_2i").val('')
-            $("#q_purchase_date_gteq_1i").val('')
-            $("#q_purchase_date_lteq_3i").val('')
-            $("#q_purchase_date_lteq_2i").val('')
-            $("#q_purchase_date_lteq_1i").val('')
-
         }
       });
     $(document).on("keyup", "#email_customer", function() {
