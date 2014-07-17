@@ -1,20 +1,3 @@
-:javascript
-  $(document).ready(function(){
-      $('.search_div').hide();
-      $('input#filter_ckbox').click(function(){
-          // If checked
-          if ($("#filter_ckbox").is(":checked"))
-          {
-              //show the hidden div
-              $(".search_div").show();
-          }
-          else
-          {
-              //otherwise, hide it
-              $(".search_div").hide();
-          }
-        });
-  });
 = search_form_for @search, url: '/sale_to_customers' do |f|
   / Search by Serial number
   .form-group
@@ -101,4 +84,5 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), sale_to_customer_path(sale_to_customer), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_sale_to_customer_path, :class => 'btn btn-primary'
+= render 'autocomp.js'
 
