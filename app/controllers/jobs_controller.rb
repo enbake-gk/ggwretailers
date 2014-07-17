@@ -58,6 +58,13 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
+        puts "=================================================="
+        puts job_params
+        puts "=================================================="
+        puts params
+        puts "cost" 
+        puts @job.cost
+        puts "==================================================="
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
