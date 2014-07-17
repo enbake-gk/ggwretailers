@@ -14,41 +14,11 @@
     .controls
       = f.select :retailer_id,User.retailer.all.map{|b| [b.user_name,b.id]},:selected =>'GoMotorised', :class => 'form-control'
   .form-group
-    = f.label :first_name, :class => 'control-label'
-    .controls
-      = f.text_field :first_name, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :last_name, :class => 'control-label'
-    .controls
-      = f.text_field :last_name, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :address, :class => 'control-label'
-    .controls
-      = f.text_area :address, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :town, :class => 'control-label'
-    .controls
-      = f.text_field :town, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :city, :class => 'control-label'
-    .controls
-      = f.text_field :city, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :post_code, :class => 'control-label'
-    .controls
-      = f.text_field :post_code, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :telephone, :class => 'control-label'
-    .controls
-      = f.text_field :telephone, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :mobile, :class => 'control-label'
-    .controls
-      = f.text_field :mobile, :required => true, :class => 'form-control'
-  .form-group
     = f.label :email, :class => 'control-label'
     .controls
-      = f.text_field :email, :required => true, :class => 'form-control'
+      = f.text_field :email,:id => 'email_customer', :required => true, :class => 'form-control'
+  #get_customer_details
+    = render 'customer_form',:f => f
   .form-group
     = f.label :customer_note, :class => 'control-label'
     .controls
@@ -58,13 +28,10 @@
     .controls
       = f.text_field :price, :required => true, :class => 'form-control'   
   .form-group
-    = f.label :date_of_birth, :class => 'control-label'
-    .controls
-      = f.date_select :dob, :class => 'form-control'  
-  .form-group
     = f.label :purchase_date,'Date Purchased', :class => 'control-label'
     .controls
       = f.date_select :purchase_date, :class => 'form-control'
   
   = f.submit 'Register', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'
+  = render 'autocomp.js'

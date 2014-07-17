@@ -1,0 +1,11 @@
+<script type="text/javascript" >
+  
+  $(document).ready(function(){
+    $(document).on("keyup", "#email_customer", function() {
+        var email = $(this).val();
+      $.getScript('/get_customer_details?email='+email)
+    });
+     
+  });
+
+</script>
