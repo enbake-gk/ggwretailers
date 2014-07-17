@@ -1,5 +1,6 @@
 class ColoursController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_admin
   before_action :set_colour, only: [:show, :edit, :update, :destroy]
 
   # GET /colours

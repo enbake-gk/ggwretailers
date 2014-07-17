@@ -1,7 +1,8 @@
 class RetailersController < ApplicationController
-  before_action :set_retailer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+  before_action :is_admin
+  before_action :set_retailer, only: [:show, :edit, :update, :destroy]
+  
   # GET /retailers
   # GET /retailers.json
   def index

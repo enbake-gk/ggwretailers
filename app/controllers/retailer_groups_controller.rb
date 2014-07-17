@@ -1,5 +1,6 @@
 class RetailerGroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_admin
   before_action :set_retailer_group, only: [:show, :edit, :update, :destroy]
 
   # GET /retailer_groups

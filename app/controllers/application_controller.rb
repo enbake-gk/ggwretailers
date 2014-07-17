@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
  #   	 abort user.to_yaml
  #        user_url(user)
  #    end
+ def is_admin
+    if current_user.is_retailer?
+      flash[:error] = "You are not allowed to view this page"
+      redirect_to customers_path
+    end
+  end
 end

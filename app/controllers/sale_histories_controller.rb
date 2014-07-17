@@ -1,6 +1,7 @@
 class SaleHistoriesController < ApplicationController
-  before_action :set_sale_history, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :is_admin
+  before_action :set_sale_history, only: [:show, :edit, :update, :destroy]
 
   # GET /sale_histories
   # GET /sale_histories.json

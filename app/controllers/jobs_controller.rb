@@ -1,6 +1,8 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  
   before_action :authenticate_user!, :except => [:new, :create, :show, :check_serial_key]
+  before_action :is_admin, :except => [:new, :create, :show, :check_serial_key]
+  before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
   # GET /jobs.json

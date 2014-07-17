@@ -1,7 +1,8 @@
 class ModelsController < ApplicationController
-  before_action :set_model, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+  before_action :is_admin
+  before_action :set_model, only: [:show, :edit, :update, :destroy]
+  
   # GET /models
   # GET /models.json
   def index
