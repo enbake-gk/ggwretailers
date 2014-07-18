@@ -33,7 +33,7 @@ class HomeController < ApplicationController
  	   	  redirect_to warrantyregistration_path, notice: 'No Record Found.'
  	   	  return
  	   	elsif @result.present? && @result.is_registered == true
- 	   	  redirect_to warrantyregistration_path, notice: 'Your Product is Already registered'
+ 	   	  redirect_to warrantyregistration_path, notice: 'This Product is Already registered'
  	   	  return
  	   	else
 		  	redirect_to warrantyregistration_path(:key => @result.serial_number)
