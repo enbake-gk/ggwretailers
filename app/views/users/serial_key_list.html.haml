@@ -7,27 +7,27 @@
 
 .page-header
   %h1.title Serial Key List
-%table.table.table-striped
-  %thead
-    %tr
-      %th Serial Number
-      %th Model Id
-      %th Brand Id
-      %th Colour
-      %th Bought On
-      %th Status
-  %tbody
-    - if @serial_keys.present?
-      - @serial_keys.includes(:model,:brand).each do |serial_key| 
-        %tr
-          %td= serial_key.try(:equipment).try(:serial_number)
-          %td= serial_key.equipment.try(:brand).try(:name)    
-          %td= serial_key.equipment.try(:model).try(:name)
-          %td= Equipment.find_by_serial_number(serial_key.equipment.serial_number).colour               
-          %td= serial_key.selling_date.try(:strftime,"%A, %d %b %Y %l:%M %p")
-          %td
-    - else
+-if !@serial_keys.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-striped
+    %thead
       %tr
-        %td{colspan: "5"} No data available.
+        %th Serial Number
+        %th Model Id
+        %th Brand Id
+        %th Colour
+        %th Bought On
+    %tbody
+    - @serial_keys.includes(:model,:brand).each do |serial_key| 
+      %tr
+        %td= serial_key.try(:equipment).try(:serial_number)
+        %td= serial_key.equipment.try(:brand).try(:name)    
+        %td= serial_key.equipment.try(:model).try(:name)
+        %td= Equipment.find_by_serial_number(serial_key.equipment.serial_number).colour.name               
+        %td= serial_key.selling_date.try(:strftime,"%A, %d %b %Y %l:%M %p")
+      
+ 
 
 =# link_to 'Create new customer', new_equipment_path, :class => 'btn btn-primary'
