@@ -28,7 +28,7 @@ class SaleHistoriesController < ApplicationController
   def create
     @sale_history = SaleHistory.new(sale_history_params)
     @equipment = Equipment.find(params[:sale_history][:equipment_id])
-    if @equipment.sold_to_customer == true
+    if @equipment.sold_to_retailer == true
       redirect_to new_sell_to_retailer_path, notice: 'Equipment Was already Sold.' 
       return
     end
