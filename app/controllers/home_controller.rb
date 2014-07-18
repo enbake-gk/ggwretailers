@@ -46,7 +46,7 @@ class HomeController < ApplicationController
 	    respond_to do |format|
 	      if @equipment.update(equipment_params)
 	      	UserMailer.registrered_mail(@equipment).deliver!
-	        format.html { redirect_to thanks_path, notice: 'Serial Number was successfully updated.' }
+	        format.html { redirect_to thanks_path, notice: 'Product is successfully registered.' }
 	        format.json { render :show, status: :ok, location: @equipment }
 	      else
 	        format.html { render :edit }
