@@ -8,18 +8,22 @@
 - model_class = RetailerGroup
 .page-header
   %h1 Buying Group
-%table.table.table-hover
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:name)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @retailer_groups.each do |retailer_group|
+-if !@retailer_groups.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td= retailer_group.name
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_retailer_group_path(retailer_group), :class => 'btn btn-warning btn-xs'
-          = link_to t('.show', :default => t("helpers.links.show")), retailer_group_path(retailer_group), :class => 'btn btn-primary btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), retailer_group_path(retailer_group), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+        %th= model_class.human_attribute_name(:name)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @retailer_groups.each do |retailer_group|
+        %tr
+          %td= retailer_group.name
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_retailer_group_path(retailer_group), :class => 'btn btn-warning btn-xs' unless RetailerGroup.find_by_name('GoMotorised').id == retailer_group.id 
+            = link_to t('.show', :default => t("helpers.links.show")), retailer_group_path(retailer_group), :class => 'btn btn-primary btn-xs' unless RetailerGroup.find_by_name('GoMotorised').id == retailer_group.id 
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), retailer_group_path(retailer_group), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger' unless RetailerGroup.find_by_name('GoMotorised').id == retailer_group.id 
 
 = link_to t('.new', :default => t("helpers.links.new")), new_retailer_group_path, :class => 'btn btn-primary'

@@ -1,25 +1,28 @@
 .page-header
   %h1 Listing User
-
-%table.table.table-hover
-  %thead
-    %tr
-      %th First name
-      %th Last name
-      %th Email   
-      %th Role
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @settings.each do |setting|
+-if !@settings.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td= setting.first_name
-        %td= setting.last_name
-        %td= setting.email
-        %td= setting.role?
-        %td
-          = link_to 'Show', show_user_path(setting), :class => 'btn btn-primary btn-xs'
-          = link_to 'Edit', edit_user_path(setting) ,:class => 'btn btn-warning btn-xs'
-          = link_to 'Destroy', setting_path(setting), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
+        %th First name
+        %th Last name
+        %th Email   
+        %th Role
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @settings.each do |setting|
+        %tr
+          %td= setting.first_name
+          %td= setting.last_name
+          %td= setting.email
+          %td= setting.role?
+          %td
+            = link_to 'Show', show_user_path(setting), :class => 'btn btn-primary btn-xs'
+            = link_to 'Edit', edit_user_path(setting) ,:class => 'btn btn-warning btn-xs'
+            = link_to 'Destroy', setting_path(setting), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
 
 %br
 

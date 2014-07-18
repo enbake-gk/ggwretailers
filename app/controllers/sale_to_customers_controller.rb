@@ -10,6 +10,11 @@ class SaleToCustomersController < ApplicationController
       @search = Equipment.where(:retailer_id => current_user.id).search(params[:q])
     end
      @sale_to_customers = @search.result.sold_to_customer.includes(:brand, :model, :user).paginate(:page => params[:page], :per_page => 12)
+      
+      respond_to do |format|
+        format.html
+        format.csv { send_data @sale_to_customers.to_csv }
+      end
   end
 
   # GET /sale_to_customers/1

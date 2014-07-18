@@ -8,7 +8,12 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     #@jobs = Job.all
-     @jobs = Job.paginate(:page => params[:page], :per_page => 12)
+     @search = Job.recent.search(params[:q])
+     @jobs = @search.result.paginate(:page => params[:page], :per_page => 12)
+      respond_to do |format|
+        format.html
+        format.csv { send_data @jobs.to_csv }
+      end
   end
 
   # GET /jobs/1

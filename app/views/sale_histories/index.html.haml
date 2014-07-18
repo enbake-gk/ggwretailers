@@ -1,33 +1,33 @@
 .page-header
   %h1.title Sales History
-%table.table.table-hover
-  %thead
-    %tr
-      %th Serial no
-      %th Brand
-      %th Model
-      %th Colour
-      %th Store Name
-      %th Purchase date
-      %th Actions
-  %tbody
-    - if @sale_histories.present?
-      - @sale_histories.each do |sale_history|
-        %tr
-          %td= link_to sale_history.equipment.try(:serial_number),equipment_path(sale_history.equipment.try(:id))
-          %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
-          %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
-          %td= link_to sale_history.equipment.colour.try(:name),colour_path(sale_history.equipment.colour.try(:id))
-          %td= link_to sale_history.buyer.try(:user_name),user_path(sale_history.try(:buyer_id))
-          %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y')
-          %td
-            = link_to 'Edit', edit_sell_to_retailer_path(sale_history),:class => 'btn btn-warning btn-xs'
-            = link_to 'Show', show_sell_to_retailer_path(sale_history), :class => 'btn btn-primary btn-xs'
-            = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
-    - else
+-if !@sale_histories.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td{colspan: "9"} No data available.
-
+        %th Serial no
+        %th Brand
+        %th Model
+        %th Colour
+        %th Store Name
+        %th Purchase date
+        %th Actions
+    %tbody
+    - @sale_histories.each do |sale_history|
+      %tr
+        %td= link_to sale_history.equipment.try(:serial_number),equipment_path(sale_history.equipment.try(:id))
+        %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
+        %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
+        %td= link_to sale_history.equipment.colour.try(:name),colour_path(sale_history.equipment.colour.try(:id))
+        %td= link_to sale_history.buyer.try(:user_name),user_path(sale_history.try(:buyer_id))
+        %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y')
+        %td
+          = link_to 'Edit', edit_sell_to_retailer_path(sale_history),:class => 'btn btn-warning btn-xs'
+          = link_to 'Show', show_sell_to_retailer_path(sale_history), :class => 'btn btn-primary btn-xs'
+          = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
+    
 %br
 
 = will_paginate @sale_histories, renderer: BootstrapPagination::Rails 

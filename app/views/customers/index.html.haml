@@ -1,21 +1,25 @@
 .page-header
   %h1=t '.title', :default => "Customers list"
-%table.table.table-hover
-  %thead
-    %tr
-      %th First Name
-      %th Last Name
-      %th Town
-      %th City
-      %th Postal Code 
-      %th Date Of Birth 
-
-  %tbody
-    - @equipments.each do |equipment|
+-if !@equipments.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td= equipment.first_name
-        %td= equipment.last_name
-        %td= equipment.town
-        %td= equipment.city
-        %td= equipment.post_code
-        %td= equipment.dob.strftime('%m/%d/%Y')
+        %th First Name
+        %th Last Name
+        %th Town
+        %th City
+        %th Postal Code 
+        %th Date Of Birth 
+
+    %tbody
+      - @equipments.each do |equipment|
+        %tr
+          %td= equipment.first_name
+          %td= equipment.last_name
+          %td= equipment.town
+          %td= equipment.city
+          %td= equipment.post_code
+          %td= equipment.dob.strftime('%m/%d/%Y')

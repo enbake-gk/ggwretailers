@@ -5,23 +5,23 @@
     = f.text_field :full_name_cont
     = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
 
-
-
-
-.page-header
-  %h1.title Stores
-%table.table.table-hover
-  %thead
-    %tr
-      %th Store name
-      %th Buying Group
-      %th First name 
-      %th Last name
-      %th Phone number
-      %th Email
-      %th Actions
-  %tbody
-    - if @users.present?
+-if !@users.present?
+  %center
+    %h2 No Record Found
+-else
+  .page-header
+    %h1.title Stores
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Store name
+        %th Buying Group
+        %th First name 
+        %th Last name
+        %th Phone number
+        %th Email
+        %th Actions
+    %tbody
       - @users.each do |user|
         %tr
           %td= user.contact_person
@@ -31,12 +31,10 @@
           %td= user.phone_number
           %td= user.email
           %td
-            = link_to 'Edit', edit_store_path(user),:class => 'btn btn-warning btn-xs'
-            = link_to 'Show', "/stores/#{user.id}", :class => 'btn btn-primary btn-xs'
-            = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
-    - else
-      %tr
-        %td{colspan: "9"} No data available.
+            = link_to 'Edit', edit_store_path(user),:class => 'btn btn-warning btn-xs' unless User.find_by_contact_person('GoMotorised').id == user.id
+            = link_to 'Show', "/stores/#{user.id}", :class => 'btn btn-primary btn-xs' unless User.find_by_contact_person('GoMotorised').id == user.id
+            = link_to 'Destroy', "/users/#{user.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger' unless User.find_by_contact_person('GoMotorised').id == user.id
+ 
 %br
 = will_paginate @users, renderer: BootstrapPagination::Rails 
 

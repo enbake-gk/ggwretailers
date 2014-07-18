@@ -1,35 +1,65 @@
+= search_form_for @search, url: '/jobs' do |f|
+  / Search by Serial number
+  .form-group
+    = f.label :warrenty_job, :class => 'control-label' 
+    = f.radio_button :warrenty_job_cont, "Yes" 
+    = f.label :warrenty_job, "Yes" 
+    = f.radio_button :warrenty_job_cont, "No" 
+    = f.label :warrenty_job, "No" 
+  .form-group
+    = f.label :claimed, :class => 'control-label' 
+    = f.radio_button :claimed_cont, "Yes" 
+    = f.label :claimed, "Yes" 
+    = f.radio_button :claimed_cont, "No" 
+    = f.label :claimed, "No" 
+  .form-group
+    = f.label :date_of_job_gteq, "Purchase Date Between"
+    = f.date_select :date_of_job_gteq, :order => [:day, :month, :year], :include_blank => true
+    = f.label :date_of_job_lteq, "and"
+    = f.date_select :date_of_job_lteq, :order => [:day, :month, :year], :include_blank => true
+
+  .actions= f.submit "Search"
+  %br
+
 .page-header
   %h1 Listing jobs
-%table.table.table-hover
-  %thead
-    %tr
-      %th Date of job
-      %th Serial Number
-      %th Service notes
-      %th Time spent
-      %th Cost
-      %th Claimed
-      %th Warrenty job
-      %th Servicetech
-      %th Claimed amount
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @jobs.each do |job|
+-if !@jobs.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td= job.date_of_job.strftime("%d %b %Y")
-        %td= job.serial_number
-        %td= job.service_notes
-        %td= job.time_spent
-        %td= job.cost
-        %td= job.claimed
-        %td= job.warrenty_job
-        %td= job.servicetech
-        %td= job.claim_amount
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_job_path(job), :class => 'btn btn-warning btn-xs'
-          = link_to t('.show', :default => t("helpers.links.show")), job_path(job), :class => 'btn btn-primary btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), job_path(job), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+        %th Date of job
+        %th Serial Number
+        %th Service notes
+        %th Time spent
+        %th Cost
+        %th Claimed
+        %th Warrenty job
+        %th Servicetech
+        %th Claimed amount
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @jobs.each do |job|
+        %tr
+          %td= job.date_of_job.strftime("%d %b %Y")
+          %td= job.serial_number
+          %td= job.service_notes
+          %td= job.time_spent
+          %td= job.cost
+          %td= job.claimed
+          %td= job.warrenty_job
+          %td= job.servicetech
+          %td= job.claim_amount
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_job_path(job), :class => 'btn btn-warning btn-xs'
+            = link_to t('.show', :default => t("helpers.links.show")), job_path(job), :class => 'btn btn-primary btn-xs'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), job_path(job), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 %br
 = will_paginate @jobs, renderer: BootstrapPagination::Rails  
+%p 
+  %b Download link
+= link_to "CSV", jobs_path(format: "csv") 
 
 =# link_to 'New Job', new_job_path
