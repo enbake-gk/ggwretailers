@@ -1,6 +1,6 @@
 class SaleHistoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_admin
+  before_action :is_admin , :except => [:equipment_list_by_srno, :equipment_detail, :retailer_list_by_srno]
   before_action :set_sale_history, only: [:show, :edit, :update, :destroy]
 
   # GET /sale_histories
@@ -27,9 +27,16 @@ class SaleHistoriesController < ApplicationController
   # POST /sale_histories.json
   def create
     @sale_history = SaleHistory.new(sale_history_params)
-
+    @equipment = Equipment.find(params[:sale_history][:equipment_id])
+    if @equipment.sold_to_customer == true
+      redirect_to new_sell_to_retailer_path, notice: 'Equipment Was already Sold.' 
+      return
+    end
     respond_to do |format|
       if @sale_history.save
+        @equipment.sold_to_retailer = true
+        @equipment.retailer_id = params[:sale_history][:buyer_id]
+        @equipment.save
         format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully created.' }
         format.json { render :show, status: :created, location: @sale_history }
       else
@@ -67,7 +74,7 @@ class SaleHistoriesController < ApplicationController
 
       sr_no = params[:query]
       @equipment = Equipment.select("equipment.id,equipment.serial_number")
-                  .where("equipment.serial_number LIKE ? ","%#{sr_no}%")
+                  .where("equipment.serial_number LIKE ?","%#{sr_no}%")
 
       respond_to do |format|
         format.json { render json: @equipment   }
@@ -77,10 +84,19 @@ class SaleHistoriesController < ApplicationController
 
   def equipment_detail
       id = params[:id]
-      @equipment = Equipment.select("models.name as mname,brands.name as bname,colours.name as cname")
+      @equipment = Equipment.select("users.contact_person as rname, models.name as mname,brands.name as bname,colours.name as cname")
+                  .joins(:model,:brand,:colour,:retailer)
+                  .where("equipment.id = ? ",id)
+      puts "===================================="
+      puts @equipment
+      puts "================================="
+      if !@equipment.present?
+        @equipment = Equipment.select("models.name as mname,brands.name as bname,colours.name as cname")
                   .joins(:model,:brand,:colour)
                   .where("equipment.id = ? ",id)
-
+      puts @equipment
+      end     
+      puts "========================"             
       respond_to do |format|
         format.json { render json: @equipment.try(:first)   }
       end

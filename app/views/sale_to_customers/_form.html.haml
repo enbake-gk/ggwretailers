@@ -12,7 +12,8 @@
   .form-group
     = f.label :retailer,'Store Name', :class => 'control-label'
     .controls
-      = f.select :retailer_id,User.retailer.all.map{|b| [b.user_name,b.id]},:selected =>'GoMotorised', :class => 'form-control'
+      = f.select :retailer_id,User.retailer.all.map{|b| [b.user_name,b.id]},{ :selected => User.find_by_contact_person('GoMotorised').id}, :class => 'form-control' if current_user.is_admin?
+    = label_tag "retailer", raw("<span class=\"retailer_name\">#{@sale_history.try(:retailer).try(:contact_person)}</span>"),{:class => 'control-label'} 
   .form-group
     = f.label :purchase_date,'Date Purchased', :class => 'control-label'
     .controls

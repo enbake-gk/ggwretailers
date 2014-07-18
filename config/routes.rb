@@ -12,7 +12,8 @@ Rails.application.routes.draw do
 
   resources :sale_to_customers 
   get '/get_customer_details/' => 'sale_to_customers#get_customer'
-  match '/customers' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
+  
+  match '/customer' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
 
   resources :customers
     

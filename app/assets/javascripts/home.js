@@ -4,7 +4,11 @@
         $('span.brand_name').text(data.bname);
         $('span.model_name').text(data.mname);
         $('span.colour_name').text(data.cname);
-
+        if (data.rname.length > 0)
+        {
+          $('span.retailer_name').text(data.rname);
+          $('#sale_to_customer_retailer_id').hide();
+        }
     });
   }
   function set_hidden_id(item) {
