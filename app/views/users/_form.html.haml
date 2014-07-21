@@ -8,7 +8,7 @@
   .form-group
     = f.label :contact_person , "Store Name", :class => 'control-label'
     .controls
-      = f.text_field :contact_person, :class => 'form-control'
+      = f.text_field :contact_person, :required =>true, :class => 'form-control'
   .form-group
     = f.label :retailer_group,"Buying Group", :class => 'control-label'
     .controls
