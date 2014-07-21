@@ -1,4 +1,4 @@
-= search_form_for @search, url: '/equipment' do |f|
+= search_form_for @search, url: '/users/serial_key_list' do |f|
   / equipment no Search 
   .form-control-col-sm-4
     = f.label :serial_number_eq, "Serial Number Search"
@@ -7,7 +7,7 @@
 
 .page-header
   %h1.title Serial Key List
--if !@serial_keys.present?
+-if !@equipment.present?
   %center
     %h2 No Record Found
 -else
@@ -18,15 +18,13 @@
         %th Model Id
         %th Brand Id
         %th Colour
-        %th Bought On
     %tbody
-    - @serial_keys.includes(:model,:brand).each do |serial_key| 
+    - @equipment.includes(:model,:brand).each do |equipment| 
       %tr
-        %td= serial_key.try(:equipment).try(:serial_number)
-        %td= serial_key.equipment.try(:brand).try(:name)    
-        %td= serial_key.equipment.try(:model).try(:name)
-        %td= Equipment.find_by_serial_number(serial_key.equipment.serial_number).colour.name               
-        %td= serial_key.selling_date.try(:strftime,"%A, %d %b %Y %l:%M %p")
+        %td= equipment.serial_number
+        %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
+        %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)   
+        %td= equipment.colour.name if equipment.colour.present?    
       
  
 

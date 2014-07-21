@@ -73,11 +73,11 @@
         %tr
           %td= sale_to_customer.first_name
           %td= sale_to_customer.last_name
-          %td= link_to sale_to_customer.try(:serial_number),equipment_index_path(sale_to_customer.serial_number)
+          %td= link_to sale_to_customer.try(:serial_number), equipment_path(sale_to_customer.id)
           %td= link_to sale_to_customer.try(:brand).try(:name),brand_path(sale_to_customer.brand_id)
           %td= link_to sale_to_customer.try(:model).try(:name),model_path(sale_to_customer.model_id)
           %td= link_to sale_to_customer.try(:colour).try(:name),colour_path(sale_to_customer.colour_id)
-          %td= link_to sale_to_customer.try(:retailer).try(:user_name),user_path(sale_to_customer.retailer_id)
+          %td= link_to sale_to_customer.try(:retailer).try(:contact_person),user_path(sale_to_customer.retailer_id)
           %td= sale_to_customer.price
           / %td= sale_to_customer.mobile
           / %td= sale_to_customer.email

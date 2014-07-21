@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable#, :validatable  :registerable,
 
   scope :not_admin, -> { where.not(role_id: 1) }
+  scope :not_setting, -> { where.not("role_id = '4' OR role_id = '3'") }
   scope :admin, -> { where(role_id: 1) }
   scope :retailer, -> { where(role_id: 2) }
   scope :service_tech, -> { where(role_id: 3) }

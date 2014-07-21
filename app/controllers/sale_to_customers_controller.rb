@@ -20,6 +20,7 @@ class SaleToCustomersController < ApplicationController
   # GET /sale_to_customers/1
   # GET /sale_to_customers/1.json
   def show
+    @items = Equipment.where('email=?',@sale_to_customer.email) 
   end
 
   # GET /sale_to_customers/new

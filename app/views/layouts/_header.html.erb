@@ -16,6 +16,21 @@
                   </li>
                   <li><%= link_to 'Customers',sell_to_customers_path  %></li>
                   <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Retailers <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Sales History',sell_to_retailer_path %></li>
+                        <li><%= link_to 'Stores',stores_path %></li>
+                        <li><%= link_to 'Groups',retailer_groups_path %></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Service <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                         <li><%= link_to 'Add Job',new_job_path  %></li>      
+                         <li><%= link_to 'Work History',jobs_path  %></li>      
+                      </ul>
+                  </li>
+                  <li class="dropdown">
                       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Equipment <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                         <li><%= link_to 'Serial Number',serialnumbers_path %></li>
@@ -25,14 +40,7 @@
                         <li><%= link_to 'Colours',colours_path %></li>
                       </ul>
                   </li>
-                  <li class="dropdown">
-                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Retailers <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><%= link_to 'Sales History',sell_to_retailer_path %></li>
-                        <li><%= link_to 'Stores',stores_path %></li>
-                        <li><%= link_to 'Groups',retailer_groups_path %></li>
-                      </ul>
-                  </li>
+                  
                   <li><%= link_to 'Reporting',jobs_path  %></li>
                   <li><%= link_to 'Users',users_path  %></li>
               <% elsif current_user.is_retailer? %>
@@ -43,7 +51,6 @@
             <% else %>
               <p class="navbar-text navbar-right">
                 <li><%= link_to 'Login',new_user_session_path %></li>
-                <li><%= link_to 'Register Job', new_job_path%></li>
               </p>
             <% end %>
           </ul>

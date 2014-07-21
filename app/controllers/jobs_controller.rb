@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:new, :create, :show, :check_serial_key]
-  before_action :is_admin, :except => [:new, :create, :show, :check_serial_key]
+  before_action :is_admin
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
@@ -24,7 +24,9 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
-    @search = Equipment.recent.search(params[:q])
+    @job.serial_number = params[:key]
+    @equipment = Equipment.find_by_serial_number(params[:key])
+     @search = Equipment.recent.search(params[:q])
   end
 
   def check_serial_key 
@@ -42,6 +44,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
+      @equipment = Equipment.find_by_serial_number(@job.serial_number)
   end
 
   # POST /jobs
@@ -51,7 +54,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to new_job_path, notice: 'Job was successfully created.' }
+        format.html { redirect_to jobs_path, notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }

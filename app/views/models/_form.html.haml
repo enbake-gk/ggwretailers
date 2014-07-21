@@ -14,7 +14,7 @@
   .form-group
     = f.label "warranty (in months)", :class => 'control-label'
     .controls
-      = f.text_field :warranty, :required => true, :class => 'form-control'
+      = f.number_field :warranty, :required => true, :min => '0', :class => 'form-control'
   .form-group
     = f.label :image, :class => 'control-label'
     .controls

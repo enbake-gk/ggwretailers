@@ -21,7 +21,6 @@
         %th= model_class.human_attribute_name(:brand_id)
         %th= model_class.human_attribute_name(:model_id)
         %th= model_class.human_attribute_name(:colour_id)
-        %th= model_class.human_attribute_name(:created_at)
         %th=t '.actions', :default => t("helpers.actions") unless current_user.is_retailer?
     %tbody
       - @equipment.includes(:brand,:model).each do |equipment| 
@@ -30,7 +29,6 @@
           %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
           %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)   
           %td= equipment.colour.name if equipment.colour.present?       
-          %td=equipment.created_at.strftime("%A, %d %b %Y %l:%M %p")
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(equipment), :class => 'btn btn-warning btn-xs' unless current_user.is_retailer?
             = link_to t('.show', :default => t("helpers.links.show")), equipment_path(equipment), :class => 'btn btn-primary btn-xs' unless current_user.is_retailer?

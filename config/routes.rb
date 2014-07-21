@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :sale_to_customers 
   get '/get_customer_details/' => 'sale_to_customers#get_customer'
   
-  match '/customer' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
+  match '/customers' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
 
   resources :customers
     
@@ -46,7 +46,9 @@ Rails.application.routes.draw do
   get 'jobs/get_serial_numbers/' => 'home#get_serial_numbers'
   match '/check_serial_key/' => 'jobs#check_serial_key', :as => :check_serial_key, via: :get  
   match '/jobs/new/:key' => 'jobs#new', :as => :new_jobs_with_params, via: :get
-  resources :jobs
+  
+  resources :service_history, :as => :jobs, :controller => :jobs
+  #resources :jobs, :as :service_history
 
   resources :accessories
 

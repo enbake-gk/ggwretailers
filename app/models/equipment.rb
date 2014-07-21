@@ -4,6 +4,7 @@ class Equipment < ActiveRecord::Base
 	belongs_to :user
   belongs_to :colour
 	belongs_to :retailer , :class_name=> :User , :foreign_key => "retailer_id"
+  has_one :sale_history
   # validates :serial_number, presence: true
   # validates :serial_number, uniqueness: true
   validates_presence_of :serial_number

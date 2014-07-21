@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin,:except => [:serial_key_list, :check_email_uniq]
   before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
   def index
-    @search = User.not_admin.search(params[:q])
+    @search = User.not_admin.not_setting.search(params[:q])
     @users = @search.result.paginate(:page => params[:page], :per_page => 12)
-    render :template => "users/index"
+    #render :template => "users/index"
   end
 
   # GET /users/1
@@ -64,9 +65,9 @@ class UsersController < ApplicationController
 
   def serial_key_list
      # @serial_keys = SaleHistory.where("customer_id=?", current_user.id)
-      @serial_keys = SaleHistory.where("buyer_id=?", current_user.id)
+      #@serial_keys = SaleHistory.where("buyer_id=?", current_user.id)
 
-      @search = Equipment.recent.search(params[:q])
+      @search = Equipment.where("retailer_id=?", current_user.id).recent.search(params[:q])
       @equipment = @search.result.paginate(:page => params[:page], :per_page => 12)
       @product_import = EquipmentImport.new
  

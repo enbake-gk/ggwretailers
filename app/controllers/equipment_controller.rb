@@ -1,7 +1,7 @@
 class EquipmentController < ApplicationController
   before_action :set_equipment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :is_admin
+  before_action :is_admin, :except => [:index]
 
   # GET /equipment
   # GET /equipment.json
@@ -17,6 +17,7 @@ class EquipmentController < ApplicationController
   # GET /equipment/1
   # GET /equipment/1.json
   def show
+    @jobs = Job.where('serial_number = ?', @equipment.serial_number)
   end
 
   # GET /equipment/new
