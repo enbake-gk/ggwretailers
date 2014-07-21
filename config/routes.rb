@@ -63,7 +63,10 @@ Rails.application.routes.draw do
   match '/stores/:id/edit' => 'users#edit', :as => :edit_store, via: :get
 
   
-
+  devise_scope :user do
+    get ":contact_person/sign_in" => "devise/sessions#new"
+  end  
+  
   devise_for :users
  
   resources :users do

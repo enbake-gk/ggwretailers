@@ -3,7 +3,11 @@ class UserMailer < ActionMailer::Base
   
   def welcome_email(user)
     @user = user
-    @url  = 'http://gwretailers.herokuapp.com/users/sign_in'
+    if @user.is_retailer?
+      @url  = 'http://gwretailers.herokuapp.com/'+"#{@user.contact_person.gsub(' ','')}"+'/sign_in'
+    else
+      @url  = 'http://gwretailers.herokuapp.com/users/sign_in'
+    end
     mail(to: @user.email, subject: 'Welcome to GoRegister.co.nz, Your New Customer Warranty Tracking Tool')
   end
 
