@@ -2,7 +2,7 @@
 
 %p
   %b Date of job:
-  = @job.date_of_job.strftime("%d %b %Y")
+  = @job.date_of_job.try(:strftime,"%d %b %Y ")
 %p
   %b Serial Number:
   = @job.serial_number

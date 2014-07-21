@@ -22,4 +22,4 @@
           %td= equipment.town
           %td= equipment.city
           %td= equipment.post_code
-          %td= equipment.dob.strftime('%m/%d/%Y')
+          %td= equipment.dob.try(:strftime,"%m/%d/%Y")

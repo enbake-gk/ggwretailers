@@ -81,7 +81,7 @@
           %td= sale_to_customer.price
           / %td= sale_to_customer.mobile
           / %td= sale_to_customer.email
-          %td= sale_to_customer.purchase_date.strftime("%d %b %Y")
+          %td= sale_to_customer.purchase_date.try(:strftime,"%d %b %Y ")
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_to_customer_path(sale_to_customer), :class => 'btn btn-default btn-xs'
             = link_to t('.show', :default => t("helpers.links.show")), sale_to_customer_path(sale_to_customer), :class => 'btn btn-primary btn-xs'

@@ -15,8 +15,8 @@
       %td= @equipment.serial_number
       %td= link_to @equipment.try(:brand).try(:name),brand_path(@equipment.brand_id)    
       %td= link_to @equipment.try(:model).try(:name),model_path(@equipment.model_id)   
-      %td= @equipment.colour.name if @equipment.colour.present?       
-      %td= @equipment.model.warranty
+      %td= @equipment.try(:colour).try(:name)       
+      %td= @equipment.try(:model).try(:warranty)
       %td
         = link_to t('.back', :default => t("helpers.links.back")), serialnumbers_path, :class => 'btn btn-default'
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(@equipment), :class => 'btn btn-default'
@@ -31,7 +31,7 @@
   %tbody
     %tr
       %td= @equipment.try(:retailer).try(:contact_person)
-      %td= @equipment.try(:sale_history).try(:selling_date).strftime("%d %b %Y ")
+      %td= @equipment.try(:sale_history).try(:selling_date).try(:strftime,"%d %b %Y ")
 .page-header
   %h1 Customer
 %table.table.table-hover
@@ -44,7 +44,7 @@
     %tr
       %td= @equipment.first_name
       %td= @equipment.last_name
-      %td= @equipment.purchase_date.strftime("%d %b %Y ")
+      %td= @equipment.purchase_date.try(:strftime,"%d %b %Y ")
 .page-header
   %h1 Service History
 -if !@jobs.present?
@@ -63,7 +63,7 @@
     %tbody
       - @jobs.each do |job|
         %tr
-          %td= job.date_of_job.strftime("%d %b %Y")
+          %td= job.date_of_job.try(:strftime,"%d %b %Y ")
           %td= job.service_notes
           %td= job.warrenty_job
           %td= job.claimed

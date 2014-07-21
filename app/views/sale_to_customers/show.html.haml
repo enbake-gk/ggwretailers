@@ -23,7 +23,7 @@
       %tr
         %td= @sale_to_customer.first_name
         %td= @sale_to_customer.last_name
-        %td= @sale_to_customer.dob.strftime("%d %b %Y")
+        %td= @sale_to_customer.dob.try(:strftime,"%d %b %Y ")
         %td= @sale_to_customer.email
         %td= @sale_to_customer.telephone
         %td= @sale_to_customer.mobile

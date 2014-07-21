@@ -39,11 +39,11 @@
         %th Warrenty job
         %th Servicetech
         %th Claimed amount
-        %th=t '.actions', :default => t("helpers.actions")
+        %th=t '.actions', :default => t("helpers.actions") 
     %tbody
       - @jobs.each do |job|
         %tr
-          %td= job.date_of_job.strftime("%d %b %Y")
+          %td= job.date_of_job.try(:strftime,"%d %b %Y ")
           %td= job.serial_number
           %td= job.service_notes
           %td= job.time_spent
