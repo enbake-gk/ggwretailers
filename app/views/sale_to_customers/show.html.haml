@@ -53,10 +53,10 @@
     %tbody
       - @items.includes(:brand,:model,:retailer).each do |equipment| 
         %tr
-          %td= equipment.serial_number
-          %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
-          %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)   
-          %td= equipment.colour.name if equipment.colour.present? 
+          %td= link_to equipment.serial_number, equipment_path(equipment.id)
+          %td= equipment.try(:brand).try(:name)    
+          %td= equipment.try(:model).try(:name)   
+          %td= equipment.try(:colour).try(:name)  
           %td= equipment.try(:retailer).try(:contact_person)      
           %td= equipment.purchase_date
           %td= equipment.price      

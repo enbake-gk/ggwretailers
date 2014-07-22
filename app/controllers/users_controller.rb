@@ -73,6 +73,17 @@ class UsersController < ApplicationController
  
   end
 
+   def check_contact_person_uniq
+     id = params[:id]
+     contact_person = params[:user][:contact_person]
+     check_contact_person = User.where("contact_person =?",contact_person)
+     if check_contact_person.present? && check_contact_person.first.try(:id) != id.try(:to_i)
+       render :status => :ok,:text => "false"
+     else
+       render  :status => :ok,:text=>"true"
+     end
+  end
+
   def check_email_uniq
     id = params[:id]
     email = params[:user][:email]

@@ -1,3 +1,34 @@
+= search_form_for @search, url: '/sale_histories' do |f|
+  / Search by Serial number
+  .form-group
+    = f.label :serial_no_eq, "Serial Number Search"
+    = f.text_field :serial_no_eq
+  .form-group
+    %strong Advanced Filters
+    %input{:name => "vehicle", :type => "checkbox", :value => "Car", :id => 'sales_filter_ckbox'}/ 
+  / Search by first name
+  .sales_search_div
+    / Search by Purchase between
+    .form-group
+      = f.label :selling_date_gteq, "Purchase Date Between"
+      = f.date_select :selling_date_gteq, :order => [:day, :month, :year], :include_blank => true
+      = f.label :selling_date_lteq, "and"
+      = f.date_select :selling_date_lteq, :order => [:day, :month, :year], :include_blank => true
+    / Search by Brand name
+    .form-group
+      = f.label :brand_name_cont, "Brand name"
+      = f.text_field :brand_name_cont
+    / Search by Model name
+    .form-group
+      = f.label :model_name_cont, "Model name"
+      = f.text_field :model_name_cont
+      / Search by retailer name
+    .form-group
+      = f.label :buyer_contact_person_cont, "Store Name"
+      = f.text_field :buyer_contact_person_cont
+
+  .actions= f.submit "Search"
+  %br
 .page-header
   %h1.title Sales History
 -if !@sale_histories.present?
@@ -15,14 +46,14 @@
         %th Purchase date
         %th Actions
     %tbody
-    - @sale_histories.each do |sale_history|
+    - @sale_histories.includes(:equipment,:buyer,:brand).each do |sale_history|
       %tr
-        %td= link_to sale_history.equipment.try(:serial_number),equipment_path(sale_history.equipment.try(:id))
-        %td= link_to sale_history.equipment.brand.try(:name),brand_path(sale_history.equipment.brand.try(:id))
-        %td= link_to sale_history.equipment.model.try(:name),model_path(sale_history.equipment.model.try(:id))
-        %td= link_to sale_history.equipment.colour.try(:name),colour_path(sale_history.equipment.colour.try(:id))
-        %td= link_to sale_history.buyer.try(:user_name),user_path(sale_history.try(:buyer_id))
-        %td= sale_history.selling_date.try(:strftime,'%m-%d-%Y')
+        %td= link_to sale_history.try(:equipment).try(:serial_number),equipment_path(sale_history.try(:equipment).try(:id))
+        %td= sale_history.try(:equipment).try(:brand).try(:name)
+        %td= sale_history.try(:equipment).try(:model).try(:name)
+        %td= sale_history.try(:equipment).try(:colour).try(:name)
+        %td= link_to sale_history.try(:buyer).try(:contact_person),show_store_path(sale_history.try(:buyer_id))
+        %td= sale_history.selling_date.try(:strftime,'%d %b %Y ')
         %td
           = link_to 'Edit', edit_sell_to_retailer_path(sale_history),:class => 'btn btn-warning btn-xs'
           = link_to 'Show', show_sell_to_retailer_path(sale_history), :class => 'btn btn-primary btn-xs'
@@ -33,3 +64,4 @@
 = will_paginate @sale_histories, renderer: BootstrapPagination::Rails 
 
 = link_to "Sell to Retailer", new_sell_to_retailer_path, :class => 'btn btn-primary'
+= render 'autocomp.js'

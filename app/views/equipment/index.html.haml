@@ -25,9 +25,9 @@
     %tbody
       - @equipment.includes(:brand,:model).each do |equipment| 
         %tr
-          %td= equipment.serial_number
-          %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
-          %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)   
+          %td= link_to equipment.try(:serial_number), equipment_path(equipment.id)
+          %td= equipment.try(:brand).try(:name)    
+          %td= equipment.try(:model).try(:name)   
           %td= equipment.try(:colour).try(:name)
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(equipment), :class => 'btn btn-warning btn-xs' unless current_user.is_retailer?

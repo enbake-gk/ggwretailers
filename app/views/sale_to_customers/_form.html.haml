@@ -19,6 +19,10 @@
     .controls
       = f.date_select :purchase_date, :class => 'form-control'
   .form-group
+    = f.label :price, :class => 'control-label'
+    .controls
+      = f.text_field :price, :required => true, :class => 'form-control'
+  .form-group
     = f.label :email, :class => 'control-label'
     .controls
       = f.text_field :email,:id => 'email_customer', :required => true, :class => 'form-control'
@@ -27,11 +31,7 @@
   .form-group
     = f.label :customer_note, :class => 'control-label'
     .controls
-      = f.text_area :customer_note, :class => 'form-control'
-  .form-group
-    = f.label :price, :class => 'control-label'
-    .controls
-      = f.text_field :price, :required => true, :class => 'form-control'   
+      = f.text_area :customer_note, :class => 'form-control'  
   
   = f.submit 'Register', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'

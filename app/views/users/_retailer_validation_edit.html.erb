@@ -6,7 +6,11 @@
 						required: true,
 						email: true,
 					  remote: "/users/check_email_uniq?id="+$("input[name='user[email]']").attr('rel')
-	    		},
+	    		},   		
+    			"user[contact_person]": {
+					required: true,
+					remote: "/users/check_contact_person_uniq?id="+$("input[name='user[contact_person]']").attr('rel')
+    		},
 				"user[password_confirmation]": {
 						equalTo: ".user_password"
 	    	}
@@ -14,7 +18,10 @@
 			messages: {
         "user[email]":{
             remote: "This email is already used !"
-        }        
+        },
+        "user[contact_person]":{
+            remote: "This Store Name is already used !"
+        }           
       }
 		});
 	});

@@ -15,10 +15,9 @@ class User < ActiveRecord::Base
   scope :manager, -> { where(role_id: 4) }
   scope :setting, -> { where("role_id = '4' OR role_id = '3'") }
   scope :recent, -> { order('created_at desc')  }
+  
   #attr_accessor :user_name
   #scope :retailer, -> { where(role_id: 2) }
-
-
 
   ransacker :full_name do |parent|
     Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name], parent.table[:contact_person]])

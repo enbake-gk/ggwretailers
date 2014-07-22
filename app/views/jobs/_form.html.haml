@@ -20,7 +20,7 @@
     = label_tag "retailer", raw("Store Name : <span class=\"retailer_name\">#{@equipment.try(:retailer).try(:contact_person)}</span>"),{:class => 'control-label'} 
 
   .form-group
-    = f.label :warrenty_job, :class => 'control-label' 
+    = f.label :warrenty_job,"Warranty", :class => 'control-label' 
     = f.radio_button :warrenty_job, "Yes"
     = f.label :warrenty_job, "Yes" 
     = f.radio_button :warrenty_job, "No"
@@ -57,8 +57,8 @@
       = f.select :servicetech, User.recent.setting.map{|b| [b.first_name,b.first_name]}, :class => 'form-control'
 
   .actions
-    = f.submit 'Save'
-
+    = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), jobs_path, :class => 'btn btn-default'
 
   /     / .form-group
   / /   = f.label :warrenty_job, :class => 'control-label'

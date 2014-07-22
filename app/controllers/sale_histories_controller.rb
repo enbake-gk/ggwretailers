@@ -6,7 +6,8 @@ class SaleHistoriesController < ApplicationController
   # GET /sale_histories
   # GET /sale_histories.json
   def index
-    @sale_histories = SaleHistory.recent.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
+    @search = SaleHistory.recent.search(params[:q])
+    @sale_histories = @search.result.includes(:equipment,:brand,:model,:buyer).paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /sale_histories/1
@@ -28,8 +29,11 @@ class SaleHistoriesController < ApplicationController
   def create
     @sale_history = SaleHistory.new(sale_history_params)
     @equipment = Equipment.find(params[:sale_history][:equipment_id])
+    @sale_history.model_id = @equipment.model_id
+    @sale_history.brand_id = @equipment.brand_id
+    @sale_history.serial_no = @equipment.serial_number
     if @equipment.sold_to_retailer == true
-      redirect_to new_sell_to_retailer_path, notice: 'Equipment Was already Sold.' 
+      redirect_to new_sell_to_retailer_path, notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
       return
     end
     respond_to do |format|
@@ -49,6 +53,19 @@ class SaleHistoriesController < ApplicationController
   # PATCH/PUT /sale_histories/1
   # PATCH/PUT /sale_histories/1.json
   def update
+    @equipment = Equipment.find(params[:sale_history][:equipment_id])
+    if @sale_history.equipment_id != @equipment.id and @equipment.sold_to_retailer == true
+      redirect_to edit_sell_to_retailer_path(@sale_history), notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
+      return
+    elsif @equipment.sold_to_retailer != true
+      @equipment.sold_to_retailer = true
+      @equipment.retailer_id = params[:sale_history][:buyer_id]
+      @equipment.save
+      equipment_old = @sale_history.equipment
+      equipment_old.sold_to_retailer = false
+      equipment_old.save
+    else
+    end
     respond_to do |format|
       if @sale_history.update(sale_history_params)
         format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully updated.' }

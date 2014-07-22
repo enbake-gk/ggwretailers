@@ -1,4 +1,4 @@
-= search_form_for @search, url: '/jobs' do |f|
+= search_form_for @search, :url=> jobs_path do |f|
   / Search by Serial number
   .form-group
     = f.label :warrenty_job, :class => 'control-label' 
@@ -36,15 +36,15 @@
         %th Time spent
         %th Cost
         %th Claimed
-        %th Warrenty job
+        %th Warranty
         %th Servicetech
         %th Claimed amount
         %th=t '.actions', :default => t("helpers.actions") 
     %tbody
-      - @jobs.each do |job|
+      - @jobs.includes(:equipment).each do |job|
         %tr
           %td= job.date_of_job.try(:strftime,"%d %b %Y ")
-          %td= job.serial_number
+          %td= link_to job.try(:equipment).try(:serial_number), equipment_path(job.equipment.id)
           %td= job.service_notes
           %td= job.time_spent
           %td= job.cost

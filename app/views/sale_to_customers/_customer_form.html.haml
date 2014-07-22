@@ -33,4 +33,4 @@
 .form-group
   = f.label :date_of_birth, :class => 'control-label'
   .controls
-    = f.date_select :dob, :class => 'form-control'
+    = f.date_select :dob, :order => [:day, :month, :year], :start_year => 1930, :end_year => Time.now.year, :class => 'form-control'

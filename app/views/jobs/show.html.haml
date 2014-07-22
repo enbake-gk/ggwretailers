@@ -1,33 +1,62 @@
-%p#notice= notice
-
-%p
-  %b Date of job:
-  = @job.date_of_job.try(:strftime,"%d %b %Y ")
-%p
-  %b Serial Number:
-  = @job.serial_number
-%p
-  %b Service notes:
-  = @job.service_notes
-%p
-  %b Warrenty job:
-  = @job.warrenty_job
-%p
-  %b Claimed:
-  = @job.claimed
-%p
-  %b Claim Amount:
-  = @job.claim_amount
-%p
-  %b Cost:
-  = @job.cost
-%p
-  %b Servicetech:
-  = @job.servicetech
-%p
-  %b Time spent:
-  = @job.time_spent
-
-= link_to 'Edit', edit_job_path(@job)
-\|
-= link_to 'Back', jobs_path
+.page-header
+  %h1 Equipment Details
+%table.table.table-hover
+  %thead
+    %tr
+      %th Serial Number
+      %th Brand
+      %th Model
+      %th Colour
+      %th warrenty(on months)
+  %tbody
+    %tr
+      %td= @job.try(:equipment).try(:serial_number)
+      %td= @job.try(:equipment).try(:brand).try(:name)
+      %td= @job.try(:equipment).try(:model).try(:name)   
+      %td= @job.try(:equipment).try(:colour).try(:name)       
+      %td= @job.try(:equipment).try(:model).try(:warranty)
+.page-header
+  %h1 Retailer
+%table.table.table-hover
+  %thead
+    %tr
+      %th Store Name
+      %th Purchase Date
+  %tbody
+    %tr
+      %td= @job.try(:equipment).try(:retailer).try(:contact_person)
+      %td= @job.try(:equipment).try(:sale_history).try(:selling_date).try(:strftime,"%d %b %Y ")
+.page-header
+  %h1 Customer
+%table.table.table-hover
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Purchase Date
+  %tbody
+    %tr
+      %td= @job.try(:equipment).try(:first_name)
+      %td= @job.try(:equipment).try(:last_name)
+      %td= @job.try(:equipment).try(:purchase_date).try(:strftime,"%d %b %Y ")
+.page-header
+  %h1 Service Detail
+%table.table.table-hover
+  %thead
+    %tr
+      %th Date of job
+      %th Notes
+      %th Warrenty
+      %th Claimed
+      %th Time spent
+      %th Servicetech
+  %tbody
+    %tr
+      %td= @job.date_of_job.try(:strftime,"%d %b %Y ")
+      %td= @job.service_notes
+      %td= @job.warrenty_job
+      %td= @job.claimed
+      %td= @job.time_spent
+      %td= @job.servicetech
+= link_to t('.back', :default => t("helpers.links.back")), jobs_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_job_path(@job), :class => 'btn btn-default'

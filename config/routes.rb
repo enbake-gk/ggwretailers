@@ -73,7 +73,7 @@ Rails.application.routes.draw do
     collection do
       get :serial_key_list
       get :check_email_uniq
-
+      get :check_contact_person_uniq
     end
   end
 

@@ -40,13 +40,13 @@ class SaleToCustomersController < ApplicationController
     if @sale_to_customer.sold_to_customer == true
       redirect_to new_sale_to_customer_path, notice: 'Equipment Was already Sold.' 
       return
-    elsif current_user.is_retailer? && (@sale_to_customer.id != current_user.id)
+    elsif current_user.is_retailer? && (@sale_to_customer.retailer_id != current_user.id)
       redirect_to new_sale_to_customer_path, notice: 'Sorry your are trying to sale Equipment that was not assigned to you.' 
       return
     end
      if @sale_to_customer.sold_to_retailer == false
           @sale_to_customer.sold_to_retailer = true
-          SaleHistory.create(selling_date: Date.today, equipment_id: @sale_to_customer.id, serial_no: params[:equipment_id], buyer_id: params[:sale_to_customer][:retailer_id], seller_id: current_user.id)
+          SaleHistory.create(model_id: @sale_to_customer.model_id,brand_id: @sale_to_customer.brand_id, selling_date: Date.today, equipment_id: @sale_to_customer.id, serial_no: params[:equipment_id], buyer_id: params[:sale_to_customer][:retailer_id], seller_id: current_user.id)
         end
      respond_to do |format|
       if @sale_to_customer.update(sale_to_customer_params)

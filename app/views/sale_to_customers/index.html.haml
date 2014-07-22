@@ -25,12 +25,6 @@
       = f.date_select :purchase_date_gteq, :order => [:day, :month, :year], :include_blank => true
       = f.label :purchase_date_lteq, "and"
       = f.date_select :purchase_date_lteq, :order => [:day, :month, :year], :include_blank => true
-    / Search by selling date between
-    / .form-group
-    /   = f.label :selling_date_gteq, "Selling Date Between"
-    /   = f.date_select :selling_date_gteq
-    /   = f.label :selling_date_lteq, "and"
-    /   = f.date_select :selling_date_lteq
     / Search by Brand name
     .form-group
       = f.label :brand_name_cont, "Brand name"
@@ -74,10 +68,10 @@
           %td= sale_to_customer.first_name
           %td= sale_to_customer.last_name
           %td= link_to sale_to_customer.try(:serial_number), equipment_path(sale_to_customer.id)
-          %td= link_to sale_to_customer.try(:brand).try(:name),brand_path(sale_to_customer.brand_id)
-          %td= link_to sale_to_customer.try(:model).try(:name),model_path(sale_to_customer.model_id)
-          %td= link_to sale_to_customer.try(:colour).try(:name),colour_path(sale_to_customer.colour_id)
-          %td= link_to sale_to_customer.try(:retailer).try(:contact_person),user_path(sale_to_customer.retailer_id)
+          %td= sale_to_customer.try(:brand).try(:name)
+          %td= sale_to_customer.try(:model).try(:name)
+          %td= sale_to_customer.try(:colour).try(:name)
+          %td= link_to sale_to_customer.try(:retailer).try(:contact_person),show_store_path(sale_to_customer.retailer_id)
           %td= sale_to_customer.price
           / %td= sale_to_customer.mobile
           / %td= sale_to_customer.email

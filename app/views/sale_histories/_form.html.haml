@@ -20,8 +20,9 @@
   .form-group
     = f.label :customer_id,'Store Name', :class => 'control-label'
     .controls
-      = text_field_tag "customer_id",@sale_history.try(:buyer).try(:user_name), :required => true, :class => 'form-control typeahead_customer',:autocomplete => "off",:placeholder=>"Search Store..."
-      = f.hidden_field :buyer_id, :class => 'form-control customer_id_hidden'
+      = f.select :buyer_id,User.retailer.all.map{|b| [b.contact_person,b.id]},{ :selected => User.find_by_contact_person('GoMotorised').id}, :class => 'form-control'
+      =# text_field_tag "customer_id",@sale_history.try(:buyer).try(:user_name), :required => true, :class => 'form-control typeahead_customer',:autocomplete => "off",:placeholder=>"Search Store..."
+      =# f.hidden_field :buyer_id, :class => 'form-control customer_id_hidden'
   .form-group
     = f.label :selling_date,"Purchase Date", :class => 'control-label'
     .controls
