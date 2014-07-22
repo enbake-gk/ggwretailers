@@ -17,7 +17,6 @@ class EquipmentController < ApplicationController
   # GET /equipment/1
   # GET /equipment/1.json
   def show
-    @jobs = Job.where('serial_number = ?', @equipment.serial_number)
   end
 
   # GET /equipment/new

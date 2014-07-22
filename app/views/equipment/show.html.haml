@@ -47,7 +47,7 @@
       %td= @equipment.purchase_date.try(:strftime,"%d %b %Y ")
 .page-header
   %h1 Service History
--if !@jobs.present?
+-if !@equipment.jobs.present?
   %center
     %h2 No Service History Found
 -else
@@ -61,7 +61,7 @@
         %th Time spent
         %th Servicetech
     %tbody
-      - @jobs.each do |job|
+      - @equipment.jobs.each do |job|
         %tr
           %td= job.date_of_job.try(:strftime,"%d %b %Y ")
           %td= job.service_notes
