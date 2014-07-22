@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   default_scope { order('created_at desc') }
   belongs_to :retailer_groups
-  has_one :sale_history
+  has_one :sale_history #admin user
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable#, :validatable  :registerable,
 

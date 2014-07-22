@@ -38,7 +38,7 @@ gem "therubyracer" # to run lsess
 gem "less-rails"   # for twitter bootstrap
 gem 'devise'       # for authentication
 gem "html2haml"    # For converting erb file into haml(rails generate devise:views{it create .erb file})
-gem 'rmagick'      # For image cropping(Dependent on carrierwave)
+# gem 'rmagick'      # For image cropping(Dependent on carrierwave)
 gem 'carrierwave'  # For file upload
 gem "iconv"        #  Dependency to roo gem
 gem 'roo'          # Read OpenOffice/Excel/Google spreadsheets/Excelx/LibreOffice/CSV file  

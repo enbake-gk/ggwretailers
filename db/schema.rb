@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20140717053342) do
     t.string   "telephone"
     t.string   "mobile"
     t.string   "email"
-    t.datetime "dob"
     t.string   "customer_note"
     t.integer  "customer_id"
     t.string   "serial_number"
@@ -81,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140717053342) do
     t.datetime "updated_at"
     t.integer  "retailer_id"
     t.datetime "selling_date"
+    t.datetime "dob"
     t.boolean  "sold_to_customer", default: false
     t.boolean  "sold_to_retailer", default: false
     t.integer  "colour_id"
