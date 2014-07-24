@@ -101,7 +101,14 @@ class SaleToCustomersController < ApplicationController
   end
 
   def update_customer
+
     customer = User.find_or_initialize_by(:email => params[:sale_to_customer][:customer_attributes][:email], :role_id => 5)
+    
+   #to chnage date fomat
+    event = params[:sale_to_customer][:customer_attributes]
+    dob = Date.new event["dob(1i)"].to_i, event["dob(2i)"].to_i, event["dob(3i)"].to_i
+
+
     customer.update(:first_name => params[:sale_to_customer][:customer_attributes][:first_name],
        :last_name => params[:sale_to_customer][:customer_attributes][:last_name],
        :email => params[:sale_to_customer][:customer_attributes][:email],
@@ -111,7 +118,7 @@ class SaleToCustomersController < ApplicationController
        :town => params[:sale_to_customer][:customer_attributes][:town],
        :city => params[:sale_to_customer][:customer_attributes][:city],
        :post_code => params[:sale_to_customer][:customer_attributes][:post_code],
-       :dob => params[:sale_to_customer][:customer_attributes][:dob],
+       :dob => dob,
        :customer_note => params[:sale_to_customer][:customer_attributes][:customer_note],
        :gender => params[:sale_to_customer][:customer_attributes][:gender],
        :role_id => '5')

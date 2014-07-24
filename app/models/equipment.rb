@@ -12,6 +12,7 @@ class Equipment < ActiveRecord::Base
   scope :sold_to_retailer, -> { where(sold_to_retailer: true) }
   scope :recent, -> { order('created_at desc')  }
   
+  validates_presence_of :colour
   #nested attribute for Customer create at time of sale
   accepts_nested_attributes_for :customer
 

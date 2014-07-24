@@ -82,6 +82,9 @@ class HomeController < ApplicationController
     end
 
     def update_customer
+    	  #to chnage date fomat
+	    event = params[:equipment][:customer_attributes]
+	    dob = Date.new event["dob(1i)"].to_i, event["dob(2i)"].to_i, event["dob(3i)"].to_i
     	@equipment.customer.update(
     			   :first_name => params[:equipment][:customer_attributes][:first_name],
 			       :last_name => params[:equipment][:customer_attributes][:last_name],
@@ -92,7 +95,7 @@ class HomeController < ApplicationController
 			       :town => params[:equipment][:customer_attributes][:town],
 			       :city => params[:equipment][:customer_attributes][:city],
 			       :post_code => params[:equipment][:customer_attributes][:post_code],
-			       :dob => params[:equipment][:customer_attributes][:dob],
+			       :dob => dob,
 			       :customer_note => params[:equipment][:customer_attributes][:customer_note],
 			       :gender => params[:equipment][:customer_attributes][:gender]
     		)

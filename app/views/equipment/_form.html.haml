@@ -1,5 +1,10 @@
 = render 'show_model.js'
 = form_for @equipment, :html => { :class => 'form-horizontal' } do |f|
+  - if @equipment.errors.any?
+    %h2= "#{pluralize(@equipment.errors.count, "error")} prohibited this equipment from being saved:"
+    %ul
+      - @equipment.errors.full_messages.each do |msg|
+        %li= msg
   .form-group
     = f.label :brand_id, :class => 'control-label'
     .controls
@@ -11,7 +16,7 @@
   .form-group
     = f.label :colour_id, :class => 'control-label'
     .controls
-      = f.select :colour_id,Colour.all.map{|b| [b.name,b.id]}, :class => 'form-control'
+      = f.select :colour_id,Colour.all.map{|b| [b.name,b.id]}, :required => true,:class => 'form-control'
   .form-group
     = f.label :serial_number, :class => 'control-label'
     .controls
