@@ -24,14 +24,14 @@
   .form-group
     = f.label :purchase_date,'Date Purchased', :class => 'control-label'
     .controls
-      = f.date_select :purchase_date, :class => 'form-control'
+      = f.date_select :purchase_date, :order => [:day, :month, :year], :class => 'form-control'
   .form-group
     = f.label :price, :class => 'control-label'
     .controls
-      = f.text_field :price, :required => true, :class => 'form-control'
+      = f.text_field :price, :class => 'form-control'
   #get_customer_details
     = f.fields_for :customer do |builder|
       = render "customer_form", :f => builder 
-  = f.submit 'Register', :class => 'btn btn-primary'
+  = f.submit f.object.new_record? ? 'Register' : 'Update', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'
   = render 'autocomp.js'

@@ -27,13 +27,13 @@
   .controls
     = f.text_field :post_code, :required => true, :class => 'form-control'
 .form-group
-  = f.label :phone_number,"Telephone", :class => 'control-label'
-  .controls
-    = f.text_field :phone_number, :required => true, :class => 'form-control'
-.form-group
   = f.label :mobile, :class => 'control-label'
   .controls
-    = f.text_field :mobile, :required => true, :class => 'form-control'
+    = f.text_field :mobile, :class => 'form-control'
+.form-group
+  = f.label :phone_number,"Telephone", :class => 'control-label'
+  .controls
+    = f.text_field :phone_number, :class => 'form-control'
 .form-group
   = f.label :gender,"Gender", :class => 'control-label' 
   = f.radio_button :gender, "Male", :checked => true
