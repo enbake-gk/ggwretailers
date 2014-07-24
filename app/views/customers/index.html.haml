@@ -32,7 +32,7 @@
           %td= customer.try(:town)
           %td= customer.try(:city)
           %td= customer.try(:post_code)
-          %td= customer.dob.try(:strftime,'%d %b %Y ')
+          %td= customer.try(:dob).try(:strftime,'%d %b %Y ')
           %td
             = link_to 'Edit', edit_customer_path(customer),:class => 'btn btn-warning btn-xs'
             = link_to 'Show', customer_path(customer), :class => 'btn btn-primary btn-xs'
