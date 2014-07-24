@@ -29,7 +29,7 @@
         %td= equipment.try(:colour).try(:name)    
         %td= equipment.try(:purchase_date).try(:strftime,"%d %b %Y ")
         %td
-          -if equipment.sold_to_customer != false
+          -if equipment.sold_to_customer == false
             = link_to 'Register', new_sale_to_customer_path, :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
  
 
