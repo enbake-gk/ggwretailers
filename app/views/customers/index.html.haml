@@ -34,9 +34,10 @@
           %td= customer.try(:post_code)
           %td= customer.try(:dob).try(:strftime,'%d %b %Y ')
           %td
-            =# link_to 'Edit', edit_customer_path(customer),:class => 'btn btn-warning btn-xs'
-            =# link_to 'Show', customer_path(customer), :class => 'btn btn-primary btn-xs'
-            =# link_to 'Destroy', customer_path(customer), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger' 
+            -if customer.present?
+              = link_to 'Edit', edit_customer_path(customer),:class => 'btn btn-warning btn-xs'
+              = link_to 'Show', customer_path(customer), :class => 'btn btn-primary btn-xs'
+              = link_to 'Destroy', customer_path(customer), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger' 
  
 %br
 =# will_paginate @users, renderer: BootstrapPagination::Rails 
