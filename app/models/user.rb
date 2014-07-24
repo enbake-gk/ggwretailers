@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   default_scope { order('created_at desc') }
-  belongs_to :retailer_groups
+  belongs_to :retailer_group
   has_one :sale_history #admin user
+  has_many :equipments , :foreign_key => "customer_id", :dependent => :destroy
+
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable#, :validatable  :registerable,
 
@@ -13,6 +15,7 @@ class User < ActiveRecord::Base
   scope :retailer, -> { where(role_id: 2) }
   scope :service_tech, -> { where(role_id: 3) }
   scope :manager, -> { where(role_id: 4) }
+  scope :customer, -> { where(role_id: 5) }
   scope :setting, -> { where("role_id = '4' OR role_id = '3'") }
   scope :recent, -> { order('created_at desc')  }
   
@@ -39,8 +42,14 @@ class User < ActiveRecord::Base
  		self.role_id.try(:to_i) ==3
   end
 
+  def is_customer?
+    self.role_id.try(:to_i) ==5
+  end
+
   def role?
-    if self.role_id.try(:to_i) == 4
+    if self.role_id.try(:to_i) == 5
+     return 'Customer'
+    elsif self.role_id.try(:to_i) == 4
      return 'Manager' 
     elsif self.role_id.try(:to_i) ==3
      return 'ServiceTech'

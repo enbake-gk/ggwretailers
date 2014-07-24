@@ -1,4 +1,4 @@
-= search_form_for @search, url: '/sale_to_customers' do |f|
+= search_form_for @search, :url=> sale_to_customers_path do |f|
   / Search by Serial number
   .form-group
     = f.label :serial_number_eq, "Serial Number Search"
@@ -9,16 +9,16 @@
   / Search by first name
   .search_div
     .form-group
-      = f.label :first_name_cont, "First name"
-      = f.text_field :first_name_cont
+      = f.label :customer_first_name_cont, "First name"
+      = f.text_field :customer_first_name_cont
     / Search by Last name
     .form-group
-      = f.label :last_name_cont, "Last name"
-      = f.text_field :last_name_cont
+      = f.label :customer_last_name_cont, "Last name"
+      = f.text_field :customer_last_name_cont
     / Search by Phone number
     .form-group
-      = f.label :mobile_eq, "Phone Number"
-      = f.text_field :mobile_eq
+      = f.label :customer_mobile_eq, "Phone Number"
+      = f.text_field :customer_mobile_eq
     / Search by Purchase between
     .form-group
       = f.label :purchase_date_gteq, "Purchase Date Between"
@@ -50,8 +50,8 @@
   %table.table.table-hover
     %thead
       %tr
-        %th= model_class.human_attribute_name(:first_name)
-        %th= model_class.human_attribute_name(:last_name)
+        %th First Name
+        %th Last Name
         %th= model_class.human_attribute_name(:serial_no)
         %th= model_class.human_attribute_name(:brand_id)
         %th= model_class.human_attribute_name(:model_id)
@@ -63,10 +63,10 @@
         %th Date Purchased
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
-      - @sale_to_customers.each do |sale_to_customer|
+      - @sale_to_customers.includes(:customer).each do |sale_to_customer|
         %tr
-          %td= sale_to_customer.first_name
-          %td= sale_to_customer.last_name
+          %td= sale_to_customer.try(:customer).try(:first_name)
+          %td= sale_to_customer.try(:customer).try(:last_name)
           %td= link_to sale_to_customer.try(:serial_number), equipment_path(sale_to_customer.id)
           %td= sale_to_customer.try(:brand).try(:name)
           %td= sale_to_customer.try(:model).try(:name)
@@ -86,4 +86,4 @@
 %br
 %p 
   %b Download link
-= link_to "CSV", sell_to_customers_path(format: "csv")
+= link_to "CSV", sale_to_customers_path(format: "csv")

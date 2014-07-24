@@ -13,6 +13,6 @@ class UserMailer < ActionMailer::Base
 
   def registrered_mail(equipment)
   	@equipment = equipment
-  	mail(to: @equipment.email, subject: 'Your product registered successfully')
+  	mail(to: @equipment.customer.email, subject: 'Your product registered successfully')
   end  
 end

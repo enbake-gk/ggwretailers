@@ -6,7 +6,7 @@
     = actions= f.submit "Search", class: 'btn btn-primary btn-xs'
 
 .page-header
-  %h1.title Serial Key List
+  %h1.title My Serial Numbers
 -if !@equipment.present?
   %center
     %h2 No Record Found
@@ -18,14 +18,19 @@
         %th Model Id
         %th Brand Id
         %th Colour
+        %th Purchase Date
+        %th 
     %tbody
-    - @equipment.includes(:model,:brand).each do |equipment| 
+    - @equipment.includes(:model,:brand,:colour).each do |equipment| 
       %tr
         %td= equipment.serial_number
-        %td= link_to equipment.try(:brand).try(:name),brand_path(equipment.brand_id)    
-        %td= link_to equipment.try(:model).try(:name),model_path(equipment.model_id)   
-        %td= equipment.colour.name if equipment.colour.present?    
-      
+        %td= equipment.try(:brand).try(:name)
+        %td= equipment.try(:model).try(:name)
+        %td= equipment.try(:colour).try(:name)    
+        %td= equipment.try(:purchase_date).try(:strftime,"%d %b %Y ")
+        %td
+          -if equipment.sold_to_customer != false
+            = link_to 'Register', new_sale_to_customer_path, :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
  
 
 =# link_to 'Create new customer', new_equipment_path, :class => 'btn btn-primary'

@@ -1,4 +1,8 @@
 .form-group
+  = f.label :email, :class => 'control-label'
+  .controls
+    = f.text_field :email,:id => 'email_customer', :required => true, :class => 'form-control'
+.form-group
   = f.label :first_name, :class => 'control-label'
   .controls
     = f.text_field :first_name, :required => true, :class => 'form-control'
@@ -23,14 +27,24 @@
   .controls
     = f.text_field :post_code, :required => true, :class => 'form-control'
 .form-group
-  = f.label :telephone, :class => 'control-label'
+  = f.label :phone_number,"Telephone", :class => 'control-label'
   .controls
-    = f.text_field :telephone, :required => true, :class => 'form-control'
+    = f.text_field :phone_number, :required => true, :class => 'form-control'
 .form-group
   = f.label :mobile, :class => 'control-label'
   .controls
     = f.text_field :mobile, :required => true, :class => 'form-control'
 .form-group
+  = f.label :gender,"Gender", :class => 'control-label' 
+  = f.radio_button :gender, "Male"
+  = f.label :gender, "Male" 
+  = f.radio_button :gender, "Female"
+  = f.label :gender, "Female"
+.form-group
   = f.label :date_of_birth, :class => 'control-label'
   .controls
     = f.date_select :dob, :order => [:day, :month, :year], :start_year => 1930, :end_year => Time.now.year, :class => 'form-control'
+.form-group
+  = f.label :customer_note, :class => 'control-label'
+  .controls
+    = f.text_area :customer_note, :class => 'form-control' 

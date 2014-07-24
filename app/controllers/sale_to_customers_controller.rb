@@ -20,12 +20,14 @@ class SaleToCustomersController < ApplicationController
   # GET /sale_to_customers/1
   # GET /sale_to_customers/1.json
   def show
-    @items = Equipment.where('email=?',@sale_to_customer.email) 
+    #@items = Equipment.where('email=?',@sale_to_customer.email)
+     #@items = @sale_to_customer.try(:customer).try(:equipments) 
   end
 
   # GET /sale_to_customers/new
   def new
     @sale_to_customer = Equipment.new
+    customer = @sale_to_customer.build_customer
   end
 
   # GET /sale_to_customers/1/edit
@@ -37,6 +39,7 @@ class SaleToCustomersController < ApplicationController
   def create
     @sale_to_customer = Equipment.find_by_serial_number(params[:equipment_id])
     @history = SaleHistory.find_by_equipment_id(params[:equipment_id])
+    
     if @sale_to_customer.sold_to_customer == true
       redirect_to new_sale_to_customer_path, notice: 'Equipment Was already Sold.' 
       return
@@ -44,12 +47,24 @@ class SaleToCustomersController < ApplicationController
       redirect_to new_sale_to_customer_path, notice: 'Sorry your are trying to sale Equipment that was not assigned to you.' 
       return
     end
-     if @sale_to_customer.sold_to_retailer == false
-          @sale_to_customer.sold_to_retailer = true
-          SaleHistory.create(model_id: @sale_to_customer.model_id,brand_id: @sale_to_customer.brand_id, selling_date: Date.today, equipment_id: @sale_to_customer.id, serial_no: params[:equipment_id], buyer_id: params[:sale_to_customer][:retailer_id], seller_id: current_user.id)
-        end
-     respond_to do |format|
+
+    if @sale_to_customer.sold_to_retailer == false
+       @sale_to_customer.sold_to_retailer = true
+       SaleHistory.create(model_id: @sale_to_customer.model_id,brand_id: @sale_to_customer.brand_id, selling_date: Date.today, equipment_id: @sale_to_customer.id, serial_no: params[:equipment_id], buyer_id: params[:sale_to_customer][:retailer_id], seller_id: current_user.id)
+    end
+    
+     mail_user = User.find_by_email(params[:sale_to_customer][:customer_attributes][:email])
+     if mail_user.present? && mail_user.role? != 'Customer' 
+        redirect_to new_sale_to_customer_path, notice: 'Sorry This Email is not Available for you'
+        return 
+     end
+
+    @customer = update_customer
+    @sale_to_customer.customer_id = @customer.id
+    
+    respond_to do |format|
       if @sale_to_customer.update(sale_to_customer_params)
+      #if @sale_to_customer.update(:customer_id => @customer.id, :retailer_id => params[:sale_to_customer][:retailer_id], :purchase_date => params[:sale_to_customer][:purchase_date], :price => params[:sale_to_customer][:price])
         format.html { redirect_to  sale_to_customers_path, notice: 'Sale to customer was successfully created.' }
         format.json { render :show, status: :ok, location: @sale_to_customer }
       else
@@ -63,6 +78,8 @@ class SaleToCustomersController < ApplicationController
   # PATCH/PUT /sale_to_customers/1.json
   def update
     respond_to do |format|
+      @customer = update_customer
+      @sale_to_customer.customer_id = @customer.id
       if @sale_to_customer.update(sale_to_customer_params)
         format.html { redirect_to  sale_to_customers_path, notice: 'Sale to customer was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale_to_customer }
@@ -83,8 +100,45 @@ class SaleToCustomersController < ApplicationController
     end
   end
 
+  def update_customer
+    customer = User.find_or_initialize_by(:email => params[:sale_to_customer][:customer_attributes][:email], :role_id => 5)
+    customer.update(:first_name => params[:sale_to_customer][:customer_attributes][:first_name],
+       :last_name => params[:sale_to_customer][:customer_attributes][:last_name],
+       :email => params[:sale_to_customer][:customer_attributes][:email],
+       :mobile => params[:sale_to_customer][:customer_attributes][:mobile],
+       :phone_number => params[:sale_to_customer][:customer_attributes][:phone_number],
+       :address => params[:sale_to_customer][:customer_attributes][:address],
+       :town => params[:sale_to_customer][:customer_attributes][:town],
+       :city => params[:sale_to_customer][:customer_attributes][:city],
+       :post_code => params[:sale_to_customer][:customer_attributes][:post_code],
+       :dob => params[:sale_to_customer][:customer_attributes][:dob],
+       :customer_note => params[:sale_to_customer][:customer_attributes][:customer_note],
+       :gender => params[:sale_to_customer][:customer_attributes][:gender],
+       :role_id => '5')
+    
+     # customer = User.where(:email => params[:sale_to_customer][:customer_attributes][:email], :role_id => 5).first_or_create { |user|
+     #   user.first_name = params[:sale_to_customer][:customer_attributes][:first_name]
+     #   user.last_name = params[:sale_to_customer][:customer_attributes][:last_name]
+     #   user.email = params[:sale_to_customer][:customer_attributes][:email]
+     #   user.mobile = params[:sale_to_customer][:customer_attributes][:mobile]
+     #   user.phone_number = params[:sale_to_customer][:customer_attributes][:phone_number]
+     #   user.address = params[:sale_to_customer][:customer_attributes][:address]
+     #   user.town = params[:sale_to_customer][:customer_attributes][:town]
+     #   user.city = params[:sale_to_customer][:customer_attributes][:city]
+     #   user.post_code = params[:sale_to_customer][:customer_attributes][:post_code]
+     #   user.dob = params[:sale_to_customer][:customer_attributes][:dob]
+     #   user.customer_note = params[:sale_to_customer][:customer_attributes][:customer_note]
+     #   #user.gender = params[:sale_to_customer][:customer_attributes][:gender]
+     #   user.role_id = '5'
+     #    }
+        customer
+  end
+
   def get_customer
-    @result = Equipment.where(:email => params[:email]).first
+    @result = User.customer.where(:email => params[:email]).first
+    puts "=================="
+    puts @result.first_name
+    puts "==================="
     respond_to do |format|
         format.js
     end
@@ -97,7 +151,10 @@ class SaleToCustomersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # def sale_to_customer_params
+    #   params.require(:sale_to_customer).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, customer_attributes: [:email,:first_name, :last_name, :address, :town, :city, :post_code, :phone_number, :mobile, :dob, :customer_note, :gender]).merge(sold_to_customer: true)
+    # end
     def sale_to_customer_params
-      params.require(:sale_to_customer).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, :customer_note).merge(sold_to_customer: true)
+      params.require(:sale_to_customer).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price).merge(sold_to_customer: true)
     end
 end

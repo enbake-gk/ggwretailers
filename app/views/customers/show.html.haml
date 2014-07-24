@@ -1,9 +1,61 @@
 %p#notice= notice
-
-%p
-  %b Name:
-  = @customer.name
-
-= link_to 'Edit', edit_customer_path(@customer)
-\|
-= link_to 'Back', customers_path
+%h1 Customer Details
+%p= link_to 'Edit', edit_customer_path(@customer), :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
+.page-header
+%table.table.table-hover
+  %thead
+    %tr
+      %th first_name
+      %th last_name
+      %th Gender
+      %th dob
+      %th email
+      %th telephone
+      %th mobile
+      %th address
+      %th town
+      %th city
+      %th post_code
+  %tbody
+    %tr
+      %td= @customer.try(:first_name)
+      %td= @customer.try(:last_name)
+      %td= @customer.try(:gender)
+      %td= @customer.try(:dob).try(:strftime,"%d %b %Y ")
+      %td= @customer.try(:email)
+      %td= @customer.try(:phone_number)
+      %td= @customer.try(:mobile)
+      %td= @customer.try(:address)
+      %td= @customer.try(:town)
+      %td= @customer.try(:city)
+      %td= @customer.try(:post_code)
+.page-header
+  %h1 Registered Item
+  %p= link_to 'Add New', new_sale_to_customer_path, :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
+-if !@customer.equipments.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Serial Number
+        %th Brand
+        %th Model
+        %th Colour
+        %th Store Name
+        %th Date Purchased
+        %th Price
+    %tbody
+      - @customer.equipments.includes(:brand,:model,:retailer).each do |equipment| 
+        %tr
+          %td= link_to equipment.serial_number, equipment_path(equipment.id)
+          %td= equipment.try(:brand).try(:name)    
+          %td= equipment.try(:model).try(:name)   
+          %td= equipment.try(:colour).try(:name)  
+          %td= equipment.try(:retailer).try(:contact_person)      
+          %td= equipment.purchase_date
+          %td= equipment.price      
+.page-header
+  %h1 Customer Note
+%p= @customer.try(:customer_note)  

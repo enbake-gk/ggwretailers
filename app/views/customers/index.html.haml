@@ -1,6 +1,6 @@
 .page-header
-  %h1=t '.title', :default => "Customers list"
--if !@equipments.present?
+  %h1=t '.title', :default => "Customers"
+-if !@customers.present?
   %center
     %h2 No Record Found
 -else
@@ -9,17 +9,34 @@
       %tr
         %th First Name
         %th Last Name
+        %th Gender
+        %th Mobile 
+        %th Landline
+        %th Email 
+        %th Address
         %th Town
         %th City
         %th Postal Code 
         %th Date Of Birth 
-
+        %th Action 
     %tbody
-      - @equipments.each do |equipment|
+      - @customers.each do |customer|
         %tr
-          %td= equipment.first_name
-          %td= equipment.last_name
-          %td= equipment.town
-          %td= equipment.city
-          %td= equipment.post_code
-          %td= equipment.dob.try(:strftime,"%m/%d/%Y")
+          %td= customer.try(:first_name)
+          %td= customer.try(:last_name)
+          %td= customer.try(:gender)
+          %td= customer.try(:mobile)
+          %td= customer.try(:phone_number)
+          %td= customer.try(:email)
+          %td= customer.try(:address)
+          %td= customer.try(:town)
+          %td= customer.try(:city)
+          %td= customer.try(:post_code)
+          %td= customer.dob.try(:strftime,'%d %b %Y ')
+          %td
+            = link_to 'Edit', edit_customer_path(customer),:class => 'btn btn-warning btn-xs'
+            = link_to 'Show', customer_path(customer), :class => 'btn btn-primary btn-xs'
+            = link_to 'Destroy', customer_path(customer), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger' 
+ 
+%br
+=# will_paginate @users, renderer: BootstrapPagination::Rails 

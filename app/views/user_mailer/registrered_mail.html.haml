@@ -25,24 +25,24 @@
       %br
       Customer Datails are as follows
       %br
-      First Name: #{@equipment.first_name}
+      First Name: #{@equipment.customer.first_name}
       %br
-      Last Name: #{@equipment.last_name}
+      Last Name: #{@equipment.customer.last_name}
       %br
-      Address: #{@equipment.address}
+      Address: #{@equipment.customer.address}
       %br
-      Town: #{@equipment.town}
+      Town: #{@equipment.customer.town}
       %br
-      City: #{@equipment.city}
+      City: #{@equipment.customer.city}
       %br
-      Post Code: #{@equipment.post_code}
+      Post Code: #{@equipment.customer.post_code}
       %br
-      Telephone: #{@equipment.telephone}
+      Telephone: #{@equipment.customer.phone_number}
       %br
-      Mobile: #{@equipment.mobile}
+      Mobile: #{@equipment.customer.mobile}
       %br
-      Email: #{@equipment.email}
+      Email: #{@equipment.customer.email}
       %br
-      DOB: #{@equipment.dob.try(:strftime,'%m-%d-%Y')}
+      DOB: #{@equipment.customer.dob.try(:strftime,'%m-%d-%Y')}
       %br
       

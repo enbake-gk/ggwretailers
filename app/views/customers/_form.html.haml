@@ -5,9 +5,58 @@
       %ul
         - @customer.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+%br
+= form_for @customer, :url=> customer_path(@customer) , :html => { :class => 'form-horizontal' } do |f|
+  .form-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.email_field :email,:id => 'email_auto', :disabled => true, :class => 'form-control'
+  .form-group
+    = f.label :first_name, :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'form-control'
+  .form-group
+    = f.label :last_name, :class => 'control-label'
+    .controls
+      = f.text_field :last_name, :class => 'form-control'
+  .form-group
+    = f.label :address, :class => 'control-label'
+    .controls
+      = f.text_area :address,:class => 'form-control'
+  .form-group
+    = f.label :town, :class => 'control-label'
+    .controls
+      = f.text_field :town,  :class => 'form-control'
+  .form-group
+    = f.label :city, :class => 'control-label'
+    .controls
+      = f.text_field :city, :class => 'form-control'
+  .form-group
+    = f.label :post_code, :class => 'control-label'
+    .controls
+      = f.text_field :post_code, :class => 'form-control'
+  .form-group
+    = f.label :telephone, :class => 'control-label'
+    .controls
+      = f.text_field :phone_number, :class => 'form-control'
+  .form-group
+    = f.label :mobile, :class => 'control-label'
+    .controls
+      = f.text_field :mobile, :class => 'form-control'
+  .form-group
+    = f.label :gender,"Gender", :class => 'control-label' 
+    = f.radio_button :gender, "Male"
+    = f.label :gender, "Male" 
+    = f.radio_button :gender, "Female"
+    = f.label :gender, "Female"
+  .form-group
+    = f.label :date_of_birth, :class => 'control-label'
+    .controls
+      = f.date_select :dob, :class => 'form-control'
+  .form-group
+    = f.label :customer_note, :class => 'control-label'
+    .controls
+      = f.text_area :customer_note, :class => 'form-control'
+    .actions
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), customer_path(@customer), :class => 'btn btn-default'

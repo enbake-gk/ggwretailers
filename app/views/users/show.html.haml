@@ -1,5 +1,25 @@
 %p#notice= notice
-
+.page-header
+  %h1 Store
+%table.table.table-hover
+  %thead
+    %tr
+      %th Store Name
+      %th Store Group
+      %th First Name
+      %th Last Name
+      %th Phone Number
+      %th Email
+      %th Website
+  %tbody
+    %tr
+      %td= @user.try(:contact_person)
+      %td= @user.try(:retailer_group).try(:name)
+      %td= @user.try(:first_name)
+      %td= @user.try(:last_name)
+      %td= @user.try(:phone_number)
+      %td= @user.try(:email)
+      %td= @user.try(:website)
 .page-header
   %h1=t '.title', :default => "Customers list"
 %table.table.table-hover
@@ -7,6 +27,7 @@
     %tr
       %th First Name
       %th Last Name
+      %th Gender
       %th Mobile 
       %th Landline
       %th Email 
@@ -17,17 +38,18 @@
       %th Date Of Birth 
 
   %tbody
-    - @equipments.each do |equipment|
+    - @customers.each do |customer|
       %tr
-        %td= equipment.first_name
-        %td= equipment.last_name
-        %td= equipment.mobile
-        %td= equipment.telephone
-        %td= equipment.email
-        %td= equipment.address
-        %td= equipment.town
-        %td= equipment.city
-        %td= equipment.post_code
-        %td= equipment.dob
+        %td= customer.try(:first_name)
+        %td= customer.try(:last_name)
+        %td= customer.try(:gender)
+        %td= customer.try(:mobile)
+        %td= customer.try(:phone_number)
+        %td= customer.try(:email)
+        %td= customer.try(:address)
+        %td= customer.try(:town)
+        %td= customer.try(:city)
+        %td= customer.try(:post_code)
+        %td= customer.dob.try(:strftime,'%d %b %Y ')
 
 = link_to 'Back', stores_path

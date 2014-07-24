@@ -1,4 +1,11 @@
 = form_for @sale_to_customer,:url=> @sale_to_customer.new_record? ? sale_to_customers_path : sale_to_customer_path(@sale_to_customer) ,:as=>:sale_to_customer, :html => { :class => 'form-horizontal' } do |f|
+  - if @sale_to_customer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sale_to_customer.errors.count, "error")} prohibited this customer from being saved:"
+      %ul
+        - @sale_to_customer.errors.full_messages.each do |msg|
+          %li= msg
+
   .form-group
     = f.label :equipment_id,'Serial Number', :class => 'control-label'
     .controls
@@ -22,17 +29,9 @@
     = f.label :price, :class => 'control-label'
     .controls
       = f.text_field :price, :required => true, :class => 'form-control'
-  .form-group
-    = f.label :email, :class => 'control-label'
-    .controls
-      = f.text_field :email,:id => 'email_customer', :required => true, :class => 'form-control'
   #get_customer_details
-    = render 'customer_form',:f => f
-  .form-group
-    = f.label :customer_note, :class => 'control-label'
-    .controls
-      = f.text_area :customer_note, :class => 'form-control'  
-  
+    = f.fields_for :customer do |builder|
+      = render "customer_form", :f => builder 
   = f.submit 'Register', :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), sale_to_customers_path, :class => 'btn btn-default'
   = render 'autocomp.js'

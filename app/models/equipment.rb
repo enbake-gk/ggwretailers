@@ -3,6 +3,7 @@ class Equipment < ActiveRecord::Base
 	belongs_to :brand
 	belongs_to :user
   belongs_to :colour
+  belongs_to :customer, :class_name=> :User, :foreign_key => "customer_id"
 	belongs_to :retailer, :class_name=> :User, :foreign_key => "retailer_id"
   has_one :sale_history, :dependent => :destroy
   has_many :jobs, :primary_key => "serial_number", :foreign_key => "serial_number", :dependent => :destroy
@@ -10,6 +11,9 @@ class Equipment < ActiveRecord::Base
   scope :sold_to_customer, -> { where(sold_to_customer: true) }
   scope :sold_to_retailer, -> { where(sold_to_retailer: true) }
   scope :recent, -> { order('created_at desc')  }
+  
+  #nested attribute for Customer create at time of sale
+  accepts_nested_attributes_for :customer
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|

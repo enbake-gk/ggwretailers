@@ -2,7 +2,7 @@
 %h1 Customer Details
 %p= link_to 'Edit', edit_sale_to_customer_path(@sale_to_customer), :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
 .page-header
--if !@sale_to_customer.present?
+-if !@sale_to_customer.customer.present?
   %center
     %h2 No Record Found
 -else
@@ -11,6 +11,7 @@
       %tr
         %th= model_class.human_attribute_name(:first_name)
         %th= model_class.human_attribute_name(:last_name)
+        %th= model_class.human_attribute_name(:gender)
         %th= model_class.human_attribute_name(:dob)
         %th= model_class.human_attribute_name(:email)
         %th= model_class.human_attribute_name(:telephone)
@@ -21,45 +22,40 @@
         %th= model_class.human_attribute_name(:post_code)
     %tbody
       %tr
-        %td= @sale_to_customer.first_name
-        %td= @sale_to_customer.last_name
-        %td= @sale_to_customer.dob.try(:strftime,"%d %b %Y ")
-        %td= @sale_to_customer.email
-        %td= @sale_to_customer.telephone
-        %td= @sale_to_customer.mobile
-        %td= @sale_to_customer.address
-        %td= @sale_to_customer.town
-        %td= @sale_to_customer.city
-        %td= @sale_to_customer.post_code
+        %td= @sale_to_customer.try(:customer).try(:first_name)
+        %td= @sale_to_customer.try(:customer).try(:last_name)
+        %td= @sale_to_customer.try(:customer).try(:gender)
+        %td= @sale_to_customer.try(:customer).try(:dob).try(:strftime,"%d %b %Y ")
+        %td= @sale_to_customer.try(:customer).try(:email)
+        %td= @sale_to_customer.try(:customer).try(:phone_number)
+        %td= @sale_to_customer.try(:customer).try(:mobile)
+        %td= @sale_to_customer.try(:customer).try(:address)
+        %td= @sale_to_customer.try(:customer).try(:town)
+        %td= @sale_to_customer.try(:customer).try(:city)
+        %td= @sale_to_customer.try(:customer).try(:post_code)
 .page-header
-  %h1 Registered Item
+  %h1 Item Details
   %p= link_to 'Add New', new_sale_to_customer_path, :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
+%table.table.table-hover
+  %thead
+    %tr
+      %th Serial Number
+      %th Brand
+      %th Model
+      %th Colour
+      %th Store Name
+      %th Date Purchased
+      %th Price
 
--if !@items.present?
-  %center
-    %h2 No Service History Found
--else
-  %table.table.table-hover
-    %thead
-      %tr
-        %th Serial Number
-        %th Brand
-        %th Model
-        %th Colour
-        %th Store Name
-        %th Date Purchased
-        %th Price
-
-    %tbody
-      - @items.includes(:brand,:model,:retailer).each do |equipment| 
-        %tr
-          %td= link_to equipment.serial_number, equipment_path(equipment.id)
-          %td= equipment.try(:brand).try(:name)    
-          %td= equipment.try(:model).try(:name)   
-          %td= equipment.try(:colour).try(:name)  
-          %td= equipment.try(:retailer).try(:contact_person)      
-          %td= equipment.purchase_date
-          %td= equipment.price      
+  %tbody
+    %tr
+      %td= link_to @sale_to_customer.serial_number, equipment_path(@sale_to_customer.id)
+      %td= @sale_to_customer.try(:brand).try(:name)    
+      %td= @sale_to_customer.try(:model).try(:name)   
+      %td= @sale_to_customer.try(:colour).try(:name)  
+      %td= @sale_to_customer.try(:retailer).try(:contact_person)      
+      %td= @sale_to_customer.purchase_date
+      %td= @sale_to_customer.price      
 .page-header
   %h1 Customer Note
-%p= @sale_to_customer.post_code  
+%p= @sale_to_customer.try(:customer).try(:customer_note)  

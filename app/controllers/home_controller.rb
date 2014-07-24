@@ -21,6 +21,7 @@ class HomeController < ApplicationController
     		@result = Equipment.find_by_serial_number(params[:q][:serial_number_eq])
     	elsif params[:key].present?
     		@result = Equipment.find_by_serial_number(params[:key])
+    		@customer = @result.customer   
     	end
  	end
  	
@@ -45,6 +46,7 @@ class HomeController < ApplicationController
 	  @equipment.is_registered = true
 	    respond_to do |format|
 	      if @equipment.update(equipment_params)
+	      	update_customer
 	      	UserMailer.registrered_mail(@equipment).deliver!
 	        format.html { redirect_to thanks_path, notice: 'Product is successfully registered.' }
 	        format.json { render :show, status: :ok, location: @equipment }
@@ -76,7 +78,24 @@ class HomeController < ApplicationController
 
  	def equipment_params
       # ,:brand=>Brand.find(params[:equipment][:model_id])
-      params.require(:equipment).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, :customer_note).merge(sold_to_customer: true)
+      params.require(:equipment).permit(:purchase_date, :retailer_id,:selling_date, :price).merge(sold_to_customer: true)
+    end
+
+    def update_customer
+    	@equipment.customer.update(
+    			   :first_name => params[:equipment][:customer_attributes][:first_name],
+			       :last_name => params[:equipment][:customer_attributes][:last_name],
+			       :email => params[:equipment][:customer_attributes][:email],
+			       :mobile => params[:equipment][:customer_attributes][:mobile],
+			       :phone_number => params[:equipment][:customer_attributes][:phone_number],
+			       :address => params[:equipment][:customer_attributes][:address],
+			       :town => params[:equipment][:customer_attributes][:town],
+			       :city => params[:equipment][:customer_attributes][:city],
+			       :post_code => params[:equipment][:customer_attributes][:post_code],
+			       :dob => params[:equipment][:customer_attributes][:dob],
+			       :customer_note => params[:equipment][:customer_attributes][:customer_note],
+			       :gender => params[:equipment][:customer_attributes][:gender]
+    		)
     end
 
 end

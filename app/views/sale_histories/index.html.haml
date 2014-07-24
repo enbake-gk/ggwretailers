@@ -1,4 +1,4 @@
-= search_form_for @search, url: '/sale_histories' do |f|
+= search_form_for @search, :url => sale_histories_path do |f|
   / Search by Serial number
   .form-group
     = f.label :serial_no_eq, "Serial Number Search"
@@ -55,13 +55,13 @@
         %td= link_to sale_history.try(:buyer).try(:contact_person),show_store_path(sale_history.try(:buyer_id))
         %td= sale_history.selling_date.try(:strftime,'%d %b %Y ')
         %td
-          = link_to 'Edit', edit_sell_to_retailer_path(sale_history),:class => 'btn btn-warning btn-xs'
-          = link_to 'Show', show_sell_to_retailer_path(sale_history), :class => 'btn btn-primary btn-xs'
+          = link_to 'Edit', edit_sale_history_path(sale_history),:class => 'btn btn-warning btn-xs'
+          = link_to 'Show', sale_history_path(sale_history), :class => 'btn btn-primary btn-xs'
           = link_to 'Destroy', sale_history, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
     
 %br
 
 = will_paginate @sale_histories, renderer: BootstrapPagination::Rails 
 
-= link_to "Sell to Retailer", new_sell_to_retailer_path, :class => 'btn btn-primary'
+= link_to "Sell to Retailer", new_sale_history_path, :class => 'btn btn-primary'
 = render 'autocomp.js'

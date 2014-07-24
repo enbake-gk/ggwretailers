@@ -1,14 +1,24 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show,:create, :edit, :update, :destroy]
 
   # GET /customers
   # GET /customers.json
   def index
-    @equipments = Equipment.all.where(:retailer_id => current_user.id).uniq { |e| e[:first_name] }
-                 .order("id desc")
-                 .paginate(:page => params[:page], :per_page => 5)
-
+    #@equipments = Equipment.all.where(:retailer_id => current_user.id).uniq { |e| e[:first_name] }
+                 #.order("id desc")
+                 #.paginate(:page => params[:page], :per_page => 5)
+    if current_user.is_retailer?
+      equipments = Equipment.where(:retailer_id => current_user.id ) 
+      @customers = [] 
+      equipments.each do |equipment|
+        @customers << equipment.customer
+      end
+      @customers = @customers.uniq{|x| x.id}
+      @customers
+    else
+     @customers = User.customer  
+    end
   end
 
   # GET /customers/1
@@ -28,10 +38,10 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    @customer = Customer.new(customer_params)
+    #@customer = Customer.new(customer_params)
 
     respond_to do |format|
-      if @customer.save
+      if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
@@ -46,7 +56,7 @@ class CustomersController < ApplicationController
   def update
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
+        format.html { redirect_to customer_path(@customer), notice: 'Customer was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
@@ -68,11 +78,11 @@ class CustomersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+      @customer = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name)
+      params.require(:user).permit(:email,:first_name, :last_name, :address, :town, :city, :post_code, :phone_number, :mobile, :dob, :customer_note, :gender)
     end
 end

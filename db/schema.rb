@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717053342) do
+ActiveRecord::Schema.define(version: 20140723141758) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -66,21 +66,14 @@ ActiveRecord::Schema.define(version: 20140717053342) do
     t.integer  "accessory_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "address"
-    t.string   "town"
-    t.string   "city"
-    t.string   "post_code"
     t.string   "telephone"
-    t.string   "mobile"
     t.string   "email"
-    t.string   "customer_note"
     t.integer  "customer_id"
     t.string   "serial_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "retailer_id"
     t.datetime "selling_date"
-    t.datetime "dob"
     t.boolean  "sold_to_customer", default: false
     t.boolean  "sold_to_retailer", default: false
     t.integer  "colour_id"
@@ -175,6 +168,14 @@ ActiveRecord::Schema.define(version: 20140717053342) do
     t.integer  "role_id"
     t.string   "retailer_name"
     t.string   "phone_number"
+    t.string   "address"
+    t.string   "town"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "mobile"
+    t.date     "dob"
+    t.string   "customer_note"
+    t.string   "gender"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

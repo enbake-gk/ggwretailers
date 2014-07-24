@@ -36,8 +36,8 @@
       %th Purchase Date
   %tbody
     %tr
-      %td= @job.try(:equipment).try(:first_name)
-      %td= @job.try(:equipment).try(:last_name)
+      %td= @job.try(:equipment).try(:customer).try(:first_name)
+      %td= @job.try(:equipment).try(:customer).try(:last_name)
       %td= @job.try(:equipment).try(:purchase_date).try(:strftime,"%d %b %Y ")
 .page-header
   %h1 Service Detail

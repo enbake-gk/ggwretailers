@@ -15,19 +15,12 @@
     .controls
       = f.date_select :purchase_date, :order => [:day, :month, :year], :class => 'form-control'
   .form-group
-    = f.label :email, :class => 'control-label'
-    .controls
-      = f.email_field :email,:id => 'email_auto', :value =>@result.email, :class => 'form-control'
-  #get_customer_info
-    = render 'form',:f => f
-  .form-group
-    = f.label :customer_note, :class => 'control-label'
-    .controls
-      = f.text_area :customer_note, :value =>@result.customer_note, :class => 'form-control'
-  .form-group
     = f.label :price, :class => 'control-label'
     .controls
       = f.text_field :price, :required => true, :class => 'form-control'   
+  #get_customer_info
+    = f.fields_for :customer, @customer do |builder|
+      = render "form", :f => builder 
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), warrantyregistration_path, :class => 'btn btn-default'
   

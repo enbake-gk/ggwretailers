@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
  #        user_url(user)
  #    end
  def is_admin
-    if current_user.is_retailer?
+    if current_user.is_retailer? || current_user.is_customer?
       flash[:error] = "You are not allowed to view this page"
       redirect_to customers_path
     end

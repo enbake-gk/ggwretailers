@@ -10,10 +10,12 @@ Rails.application.routes.draw do
 
   resources :settings
 
-  resources :sale_to_customers 
+  #resources :sale_to_customers 
+  resources :customer_sales_history, :as => :sale_to_customers, :controller => :sale_to_customers
+
   get '/get_customer_details/' => 'sale_to_customers#get_customer'
   
-  match '/customers' => 'sale_to_customers#index',:as => :sell_to_customers, via: :get
+  #match '/customers' => 'customers#index',:as => :sell_to_customers, via: :get
 
   resources :customers
     
@@ -22,10 +24,10 @@ Rails.application.routes.draw do
    match '/user/:id' => 'settings#show', :as => :show_user, via: :get
    match '/users/:id/edit' => 'settings#edit', :as => :edit_user, via: :get
 
-  match '/sell_to_retailer' => 'sale_histories#index', :as => :sell_to_retailer, via: :get
-  match '/sell_to_retailer/new' => 'sale_histories#new', :as => :new_sell_to_retailer, via: :get
-  match '/sell_to_retailer/:id' => 'sale_histories#show', :as => :show_sell_to_retailer, via: :get
-  match '/sell_to_retailer/:id/edit' => 'sale_histories#edit', :as => :edit_sell_to_retailer, via: :get
+  # match '/sell_to_retailer' => 'sale_histories#index', :as => :sell_to_retailer, via: :get
+  # match '/sell_to_retailer/new' => 'sale_histories#new', :as => :new_sell_to_retailer, via: :get
+  # match '/sell_to_retailer/:id' => 'sale_histories#show', :as => :show_sell_to_retailer, via: :get
+  # match '/sell_to_retailer/:id/edit' => 'sale_histories#edit', :as => :edit_sell_to_retailer, via: :get
   
   match '/serialnumbers' => 'equipment#index',:as => :serialnumbers, via: :get
   match '/equipments/get_models' => 'equipment#get_models', via: :get
@@ -34,7 +36,8 @@ Rails.application.routes.draw do
   end
 
   resources :retailer_groups
-
+  
+  resources :retailer_sales_history, :as => :sale_histories,:controller => :sale_histories
   resources :sale_histories do
       collection do 
         get :equipment_list_by_srno
@@ -68,7 +71,8 @@ Rails.application.routes.draw do
   end  
   
   devise_for :users
- 
+  
+  match '/users/serialnumbers' => 'users#serial_key_list', :as => :user_key, via: :get
   resources :users do
     collection do
       get :serial_key_list

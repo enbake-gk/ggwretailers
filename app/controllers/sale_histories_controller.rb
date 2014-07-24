@@ -33,7 +33,7 @@ class SaleHistoriesController < ApplicationController
     @sale_history.brand_id = @equipment.brand_id
     @sale_history.serial_no = @equipment.serial_number
     if @equipment.sold_to_retailer == true
-      redirect_to new_sell_to_retailer_path, notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
+      redirect_to new_sale_history_path, notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
       return
     end
     respond_to do |format|
@@ -41,7 +41,7 @@ class SaleHistoriesController < ApplicationController
         @equipment.sold_to_retailer = true
         @equipment.retailer_id = params[:sale_history][:buyer_id]
         @equipment.save
-        format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully created.' }
+        format.html { redirect_to sale_histories_path, notice: 'Data was successfully created.' }
         format.json { render :show, status: :created, location: @sale_history }
       else
         format.html { render :new }
@@ -55,7 +55,7 @@ class SaleHistoriesController < ApplicationController
   def update
     @equipment = Equipment.find(params[:sale_history][:equipment_id])
     if @sale_history.equipment_id != @equipment.id and @equipment.sold_to_retailer == true
-      redirect_to edit_sell_to_retailer_path(@sale_history), notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
+      redirect_to edit_sale_history_path(@sale_history), notice: "Serial number (#{@equipment.serial_number}) has already been registered" 
       return
     elsif @equipment.sold_to_retailer != true
       @equipment.sold_to_retailer = true
@@ -68,7 +68,7 @@ class SaleHistoriesController < ApplicationController
     end
     respond_to do |format|
       if @sale_history.update(sale_history_params)
-        format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully updated.' }
+        format.html { redirect_to sale_histories_path, notice: 'Data was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale_history }
       else
         format.html { render :edit }
@@ -82,7 +82,7 @@ class SaleHistoriesController < ApplicationController
   def destroy
     @sale_history.destroy
     respond_to do |format|
-      format.html { redirect_to sell_to_retailer_path, notice: 'Data was successfully destroyed.' }
+      format.html { redirect_to sale_histories_path, notice: 'Data was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

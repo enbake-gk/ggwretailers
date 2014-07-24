@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @search = User.not_admin.not_setting.search(params[:q])
+    @search = User.retailer.search(params[:q])
     @users = @search.result.paginate(:page => params[:page], :per_page => 12)
     #render :template => "users/index"
   end
@@ -14,7 +14,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @equipments =Equipment.all.where(:retailer_id => params[:id]).uniq { |e| e[:first_name] }
+     equipments = Equipment.where(:retailer_id => @user.id )
+     @customers = [] 
+     equipments.each do |equipment|
+      @customers << equipment.customer
+     end
+     @customers = @customers.uniq{|x| x.id}
+     @customers
   end
 
   # GET /users/new

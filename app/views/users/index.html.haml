@@ -22,10 +22,10 @@
         %th Email
         %th Actions
     %tbody
-      - @users.each do |user|
+      - @users.includes(:retailer_group).each do |user|
         %tr
           %td= user.contact_person
-          %td= RetailerGroup.find(user.retailer_group_id).name if user.retailer_group_id.present?
+          %td= user.try(:retailer_group).try(:name)
           %td= user.first_name
           %td= user.last_name
           %td= user.phone_number

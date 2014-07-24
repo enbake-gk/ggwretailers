@@ -1,6 +1,13 @@
 - model_class = Equipment
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
+  -if !@equipment.sold_to_customer.present?
+    %p= label_tag 'Not Sale', 'Not Sold', :class => 'btn btn-default', :style => "float: right;  margin-top: -5%" 
+  -elsif remain_warrenty(@equipment) != nil
+    %p= label_tag 'Warranty', 'In Warranty', :class => 'btn btn-success', :style => "float: right;  margin-top: -5%" 
+  -else
+    %p= label_tag 'Warranty', 'Out of Warranty', :class => 'btn btn-danger', :style => "float: right;  margin-top: -5%" 
+
 %table.table.table-hover
   %thead
     %tr
@@ -8,7 +15,7 @@
       %th= model_class.human_attribute_name(:brand_id)
       %th= model_class.human_attribute_name(:model_id)
       %th= model_class.human_attribute_name(:colour_id)
-      %th warrenty(on months)
+      %th Warranty (in months)
       %th=t '.actions', :default => t("helpers.actions") unless current_user.is_retailer?
   %tbody
     %tr
@@ -22,7 +29,7 @@
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_equipment_path(@equipment), :class => 'btn btn-default'
         = link_to t('.destroy', :default => t("helpers.links.destroy")), equipment_path(@equipment), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 .page-header
-  %h1 Retailer
+  %h1 Store 
 %table.table.table-hover
   %thead
     %tr
@@ -34,17 +41,23 @@
       %td= @equipment.try(:sale_history).try(:selling_date).try(:strftime,"%d %b %Y ")
 .page-header
   %h1 Customer
-%table.table.table-hover
-  %thead
-    %tr
-      %th First Name
-      %th Last Name
-      %th Purchase Date
-  %tbody
-    %tr
-      %td= @equipment.first_name
-      %td= @equipment.last_name
-      %td= @equipment.purchase_date.try(:strftime,"%d %b %Y ")
+-if !@equipment.sold_to_customer.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
+      %tr
+        %th First Name
+        %th Last Name
+        %th Purchase Date
+        %th Warranty Expires(in months)
+    %tbody
+      %tr
+        %td= @equipment.try(:customer).first_name
+        %td= @equipment.try(:customer).last_name
+        %td= @equipment.purchase_date.try(:strftime,"%d %b %Y ")
+        %td= remain_warrenty(@equipment) != nil ? remain_warrenty(@equipment) : "Out of Warranty"
 .page-header
   %h1 Service History
 -if !@equipment.jobs.present?
