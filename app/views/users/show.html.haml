@@ -22,34 +22,37 @@
       %td= @user.try(:website)
 .page-header
   %h1=t '.title', :default => "Customers list"
-%table.table.table-hover
-  %thead
-    %tr
-      %th First Name
-      %th Last Name
-      %th Gender
-      %th Mobile 
-      %th Landline
-      %th Email 
-      %th Address
-      %th Town
-      %th City
-      %th Postal Code 
-      %th Date Of Birth 
-
-  %tbody
-    - @customers.each do |customer|
+-if !@customers.present?
+  %center
+    %h2 No Record Found
+-else
+  %table.table.table-hover
+    %thead
       %tr
-        %td= customer.try(:first_name)
-        %td= customer.try(:last_name)
-        %td= customer.try(:gender)
-        %td= customer.try(:mobile)
-        %td= customer.try(:phone_number)
-        %td= customer.try(:email)
-        %td= customer.try(:address)
-        %td= customer.try(:town)
-        %td= customer.try(:city)
-        %td= customer.try(:post_code)
-        %td= customer.dob.try(:strftime,'%d %b %Y ')
+        %th First Name
+        %th Last Name
+        %th Gender
+        %th Mobile 
+        %th Landline
+        %th Email 
+        %th Address
+        %th Town
+        %th City
+        %th Postal Code 
+        %th Date Of Birth 
+    %tbody
+      - @customers.each do |customer|
+        %tr
+          %td= customer.try(:first_name)
+          %td= customer.try(:last_name)
+          %td= customer.try(:gender)
+          %td= customer.try(:mobile)
+          %td= customer.try(:phone_number)
+          %td= customer.try(:email)
+          %td= customer.try(:address)
+          %td= customer.try(:town)
+          %td= customer.try(:city)
+          %td= customer.try(:post_code)
+          %td= customer.try(:dob).try(:strftime,'%d %b %Y ')
 
 = link_to 'Back', stores_path
