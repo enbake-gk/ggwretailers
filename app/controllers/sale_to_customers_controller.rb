@@ -26,7 +26,11 @@ class SaleToCustomersController < ApplicationController
 
   # GET /sale_to_customers/new
   def new
-    @sale_to_customer = Equipment.new
+    if params[:key].present?
+      @sale_to_customer = Equipment.find_by_serial_number(params[:key])
+    else
+      @sale_to_customer = Equipment.new
+    end
     customer = @sale_to_customer.build_customer
   end
 

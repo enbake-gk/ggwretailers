@@ -15,12 +15,12 @@
   .form-group
     = label_tag "Model", raw("Model : <span class=\"model_name\">#{@sale_to_customer.try(:model).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
-    = label_tag "Colour", raw("Colour : <span class=\"colour_name\">#{@sale_history.try(:equipment).try(:colour).try(:name)}</span>"),{:class => 'control-label'}
+    = label_tag "Colour", raw("Colour : <span class=\"colour_name\">#{@sale_to_customer.try(:colour).try(:name)}</span>"),{:class => 'control-label'}
   .form-group
     = f.label :retailer,'Store Name', :class => 'control-label'
     .controls
-      = f.select :retailer_id,User.retailer.all.map{|b| [b.contact_person,b.id]},{ :selected => User.find_by_contact_person('GoMotorised').id}, :class => 'form-control' if current_user.is_admin?
-    = label_tag "retailer", raw("<span class=\"retailer_name\">#{@sale_history.try(:retailer).try(:contact_person)}</span>"),{:class => 'control-label'} 
+      = f.select :retailer_id,User.retailer.all.map{|b| [b.contact_person,b.id]},{ :selected => User.find_by_contact_person('GoMotorised').id}, :class => 'form-control' if current_user.is_admin? && @sale_to_customer.sold_to_customer != true
+    = label_tag "retailer", raw("<span class=\"retailer_name\">#{@sale_to_customer.try(:retailer).try(:contact_person)}</span>"),{:class => 'control-label'} 
   .form-group
     = f.label :purchase_date,'Date Purchased', :class => 'control-label'
     .controls

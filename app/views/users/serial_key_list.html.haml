@@ -23,14 +23,14 @@
     %tbody
     - @equipment.includes(:model,:brand,:colour).each do |equipment| 
       %tr
-        %td= equipment.serial_number
+        %td= link_to equipment.try(:serial_number), equipment_path(equipment.id)
         %td= equipment.try(:brand).try(:name)
         %td= equipment.try(:model).try(:name)
         %td= equipment.try(:colour).try(:name)    
         %td= equipment.try(:purchase_date).try(:strftime,"%d %b %Y ")
         %td
           -if equipment.sold_to_customer == false
-            = link_to 'Register', new_sale_to_customer_path, :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
+            = link_to 'Register', new_sale_to_customer_path(:key => equipment.serial_number), :class => 'btn btn-primary', :style => "float: right;  margin-top: -5%" 
  
 
 =# link_to 'Create new customer', new_equipment_path, :class => 'btn btn-primary'

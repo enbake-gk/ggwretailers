@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
       redirect_to customers_path
     end
   end
+
+  def valid_retailer
+      equipment = Equipment.find(params[:id])
+  	if current_user.is_retailer? and equipment.retailer_id != current_user.id
+      flash[:error] = "You are not allowed to view this page"
+      redirect_to customers_path
+  	end
+  end
 end

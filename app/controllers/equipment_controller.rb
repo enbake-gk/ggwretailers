@@ -1,8 +1,8 @@
 class EquipmentController < ApplicationController
   before_action :set_equipment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :is_admin, :except => [:index]
-
+  before_action :is_admin, :except => [:index, :show]
+  before_action :valid_retailer, only: [:show]
   # GET /equipment
   # GET /equipment.json
   def index
