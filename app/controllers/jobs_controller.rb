@@ -26,7 +26,7 @@ class JobsController < ApplicationController
     @job = Job.new
     #find with serial key if Equipment with key is available
     @job.serial_number = params[:key]
-      3.times { @job.service_parts.build }
+    @job.service_parts.build 
 
     @equipment = Equipment.find_by_serial_number(params[:key])
      @search = Equipment.recent.search(params[:q])
@@ -69,6 +69,8 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+
+    abort "zkds"
     respond_to do |format|
       if @job.update(job_params)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }

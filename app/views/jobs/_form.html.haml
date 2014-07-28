@@ -30,8 +30,12 @@
     = f.label :service_notes  , :class => 'control-label'
     .controls
       = f.text_area :service_notes, :class => 'form-control'
-  = f.fields_for :service_parts do |builder|
-    = render "service_part_fields", :f => builder
+  %fieldset
+    .field
+      = f.fields_for :service_parts do |builder|
+        = render "service_part_fields" ,:f=>builder
+      %b.add_link_class= link_to_add_fields "Add Part", f, :service_parts
+  %br
   .form-group
     = f.label :time_spent, :class => 'control-label'
     .controls

@@ -9,12 +9,15 @@ class Equipment < ActiveRecord::Base
   has_many :jobs, :primary_key => "serial_number", :foreign_key => "serial_number", :dependent => :destroy
   has_many :service_parts, :primary_key => "serial_number",:foreign_key => "serial_number", :dependent => :destroy
 
+  validates_presence_of :colour
+  validates_presence_of :model
+  validates_presence_of :brand
   validates_presence_of :serial_number
+  
   scope :sold_to_customer, -> { where(sold_to_customer: true) }
   scope :sold_to_retailer, -> { where(sold_to_retailer: true) }
   scope :recent, -> { order('created_at desc')  }
   
-  validates_presence_of :colour
   #nested attribute for Customer create at time of sale
   accepts_nested_attributes_for :customer
 

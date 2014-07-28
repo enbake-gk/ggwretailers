@@ -48,7 +48,7 @@
       - @jobs.includes(:equipment).each do |job|
         %tr
           %td= job.date_of_job.try(:strftime,"%d %b %Y ")
-          %td= link_to job.try(:equipment).try(:serial_number), equipment_path(job.equipment.id)
+          %td= link_to job.try(:equipment).try(:serial_number), equipment_path(job.try(:equipment).try(:id))
           %td= job.service_notes
           %td= part_used(job)
           %td= job.time_spent
