@@ -46,7 +46,6 @@
     %tr
       %th Date of job
       %th Notes
-      %th Part Used
       %th Warrenty
       %th Claimed
       %th Time spent
@@ -55,7 +54,6 @@
     %tr
       %td= @job.date_of_job.try(:strftime,"%d %b %Y ")
       %td= @job.service_notes
-      %td= part_used(@job)
       %td= @job.warrenty_job
       %td= @job.claimed
       %td= @job.time_spent

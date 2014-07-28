@@ -20,8 +20,6 @@ class SaleToCustomersController < ApplicationController
   # GET /sale_to_customers/1
   # GET /sale_to_customers/1.json
   def show
-    #@items = Equipment.where('email=?',@sale_to_customer.email)
-     #@items = @sale_to_customer.try(:customer).try(:equipments) 
   end
 
   # GET /sale_to_customers/new
@@ -127,29 +125,11 @@ class SaleToCustomersController < ApplicationController
        :gender => params[:sale_to_customer][:customer_attributes][:gender],
        :role_id => '5')
     
-     # customer = User.where(:email => params[:sale_to_customer][:customer_attributes][:email], :role_id => 5).first_or_create { |user|
-     #   user.first_name = params[:sale_to_customer][:customer_attributes][:first_name]
-     #   user.last_name = params[:sale_to_customer][:customer_attributes][:last_name]
-     #   user.email = params[:sale_to_customer][:customer_attributes][:email]
-     #   user.mobile = params[:sale_to_customer][:customer_attributes][:mobile]
-     #   user.phone_number = params[:sale_to_customer][:customer_attributes][:phone_number]
-     #   user.address = params[:sale_to_customer][:customer_attributes][:address]
-     #   user.town = params[:sale_to_customer][:customer_attributes][:town]
-     #   user.city = params[:sale_to_customer][:customer_attributes][:city]
-     #   user.post_code = params[:sale_to_customer][:customer_attributes][:post_code]
-     #   user.dob = params[:sale_to_customer][:customer_attributes][:dob]
-     #   user.customer_note = params[:sale_to_customer][:customer_attributes][:customer_note]
-     #   #user.gender = params[:sale_to_customer][:customer_attributes][:gender]
-     #   user.role_id = '5'
-     #    }
         customer
   end
 
   def get_customer
     @result = User.customer.where(:email => params[:email]).first
-    puts "=================="
-    puts @result.first_name
-    puts "==================="
     respond_to do |format|
         format.js
     end
@@ -161,10 +141,6 @@ class SaleToCustomersController < ApplicationController
       @sale_to_customer = Equipment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    # def sale_to_customer_params
-    #   params.require(:sale_to_customer).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price,  :first_name, :last_name, :address, :town, :city, :post_code, :telephone, :mobile, :email, :dob, customer_attributes: [:email,:first_name, :last_name, :address, :town, :city, :post_code, :phone_number, :mobile, :dob, :customer_note, :gender]).merge(sold_to_customer: true)
-    # end
     def sale_to_customer_params
       params.require(:sale_to_customer).permit(:purchase_date, :retailer_id,:selling_date, :name, :url, :price).merge(sold_to_customer: true)
     end

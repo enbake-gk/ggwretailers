@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part_id: 
+  job_id: 
+  serial_number: MyString
+  quantity: MyString
+
+two:
+  part_id: 
+  job_id: 
+  serial_number: MyString
+  quantity: MyString

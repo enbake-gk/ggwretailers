@@ -1,5 +1,4 @@
-class JobsController < ApplicationController
-  
+class ReportsController < ApplicationController
   before_action :authenticate_user!, :except => [:new, :create, :show, :check_serial_key]
   before_action :is_admin
   before_action :set_job, only: [:show, :edit, :update, :destroy]
@@ -24,10 +23,7 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
-    #find with serial key if Equipment with key is available
     @job.serial_number = params[:key]
-      3.times { @job.service_parts.build }
-
     @equipment = Equipment.find_by_serial_number(params[:key])
      @search = Equipment.recent.search(params[:q])
   end
@@ -38,10 +34,10 @@ class JobsController < ApplicationController
         @result = Equipment.find_by_serial_number(params[:q][:serial_number_eq])
       end
       if !@result.present?
-        redirect_to new_job_path, notice: 'No Record Found.'
+        redirect_to new_warranty_path, notice: 'No Record Found.'
         return
       else
-        redirect_to new_jobs_with_params_path(:key => @result.serial_number)
+        redirect_to new_warranties_with_params_path(:key => @result.serial_number)
       end
   end
 
@@ -57,7 +53,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to jobs_path, notice: 'Job was successfully created.' }
+        format.html { redirect_to warranties_path, notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -85,7 +81,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
+      format.html { redirect_to warranties_url, notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -98,6 +94,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:cost, :serial_number, :claim_amount, :date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech, service_parts_attributes: [:id, :_destroy, :job_id,:part_id, :serial_number, :quantity])
+      params.require(:job).permit(:cost, :serial_number, :claim_amount, :date_of_job, :service_notes, :time_spent, :claimed, :warrenty_job, :servicetech)
     end
+
 end

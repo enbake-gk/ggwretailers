@@ -1,4 +1,4 @@
-= form_for @job do |f|
+= form_for @job, :url=> @job.new_record? ? warranties_path : warranty_path(@job) do |f|
   - if @job.errors.any?
     #error_explanation
       %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
@@ -30,8 +30,6 @@
     = f.label :service_notes  , :class => 'control-label'
     .controls
       = f.text_area :service_notes, :class => 'form-control'
-  = f.fields_for :service_parts do |builder|
-    = render "service_part_fields", :f => builder
   .form-group
     = f.label :time_spent, :class => 'control-label'
     .controls
@@ -42,15 +40,15 @@
       = f.text_field :cost, :class => 'form-control'
   .form-group
     = f.label :warrenty_job,"Warranty", :class => 'control-label' 
-    = f.radio_button :warrenty_job, "Yes"
+    = f.radio_button :warrenty_job, "Yes", :checked => true
     = f.label :warrenty_job, "Yes" 
     = f.radio_button :warrenty_job, "No"
     = f.label :warrenty_job, "No"
   #claimed_id.form-group
     = f.label :claimed, :class => 'control-label' 
-    = f.radio_button :claimed, "Yes", :disabled => true
-    = f.label :claimed, "Yes"
-    = f.radio_button :claimed, "No", :checked => true
+    = f.radio_button :claimed, "Yes"
+    = f.label :claimed, "Yes" 
+    = f.radio_button :claimed, "No"
     = f.label :claimed, "No"
   #claim_amount_id.form-group
     = f.label :claim_amount, :class => 'control-label'

@@ -7,6 +7,8 @@ class Equipment < ActiveRecord::Base
 	belongs_to :retailer, :class_name=> :User, :foreign_key => "retailer_id"
   has_one :sale_history, :dependent => :destroy
   has_many :jobs, :primary_key => "serial_number", :foreign_key => "serial_number", :dependent => :destroy
+  has_many :service_parts, :primary_key => "serial_number",:foreign_key => "serial_number", :dependent => :destroy
+
   validates_presence_of :serial_number
   scope :sold_to_customer, -> { where(sold_to_customer: true) }
   scope :sold_to_retailer, -> { where(sold_to_retailer: true) }

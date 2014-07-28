@@ -1,22 +1,25 @@
 = search_form_for @search, :url=> jobs_path do |f|
   / Search by Serial number
   .form-group
-    = f.label :warrenty_job, :class => 'control-label' 
-    = f.radio_button :warrenty_job_cont, "Yes" 
-    = f.label :warrenty_job, "Yes" 
-    = f.radio_button :warrenty_job_cont, "No" 
-    = f.label :warrenty_job, "No" 
-  .form-group
-    = f.label :claimed, :class => 'control-label' 
-    = f.radio_button :claimed_cont, "Yes" 
-    = f.label :claimed, "Yes" 
-    = f.radio_button :claimed_cont, "No" 
-    = f.label :claimed, "No" 
-  .form-group
-    = f.label :date_of_job_gteq, "Purchase Date Between"
-    = f.date_select :date_of_job_gteq, :order => [:day, :month, :year], :include_blank => true
-    = f.label :date_of_job_lteq, "and"
-    = f.date_select :date_of_job_lteq, :order => [:day, :month, :year], :include_blank => true
+    = f.label :serial_number_eq, "Serial Number Search"
+    = f.text_field :serial_number_eq
+  / .form-group
+  /   = f.label :warrenty_job, :class => 'control-label' 
+  /   = f.radio_button :warrenty_job_cont, "Yes" 
+  /   = f.label :warrenty_job, "Yes" 
+  /   = f.radio_button :warrenty_job_cont, "No" 
+  /   = f.label :warrenty_job, "No" 
+  / .form-group
+  /   = f.label :claimed, :class => 'control-label' 
+  /   = f.radio_button :claimed_cont, "Yes" 
+  /   = f.label :claimed, "Yes" 
+  /   = f.radio_button :claimed_cont, "No" 
+  /   = f.label :claimed, "No" 
+  / .form-group
+  /   = f.label :date_of_job_gteq, "Job Date Between"
+  /   = f.date_select :date_of_job_gteq, :order => [:day, :month, :year], :include_blank => true
+  /   = f.label :date_of_job_lteq, "and"
+  /   = f.date_select :date_of_job_lteq, :order => [:day, :month, :year], :include_blank => true
 
   .actions= f.submit "Search"
   %br
@@ -33,6 +36,7 @@
         %th Date of job
         %th Serial Number
         %th Service notes
+        %th Part Used
         %th Time spent
         %th Cost
         %th Claimed
@@ -46,6 +50,7 @@
           %td= job.date_of_job.try(:strftime,"%d %b %Y ")
           %td= link_to job.try(:equipment).try(:serial_number), equipment_path(job.equipment.id)
           %td= job.service_notes
+          %td= part_used(job)
           %td= job.time_spent
           %td= job.cost
           %td= job.claimed

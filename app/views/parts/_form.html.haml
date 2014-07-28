@@ -1,0 +1,15 @@
+= form_for @part, :html => { :class => 'form-horizontal' } do |f|
+  .form-group
+    = f.label :model_id, :class => 'control-label'
+    .controls
+      = f.select :model_id,Model.all.map{|b| [b.name,b.id]},{}, :class => 'form-control'
+  .form-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :required => true, :class => 'form-control'
+  .form-group
+    = f.label :barcode, :class => 'control-label'
+    .controls
+      = f.text_field :barcode, :class => 'form-control'      
+  = f.submit nil, :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), parts_path, :class => 'btn btn-default'

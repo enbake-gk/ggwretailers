@@ -1,0 +1,13 @@
+= f.hidden_field :serial_number, :value => @job.serial_number
+.form-group
+  = f.label :part_id, :class => 'control-label'
+  .controls
+    = f.select :part_id, Part.all.map{|b| [b.name,b.id]},{}, :class => 'form-control'
+.form-group
+  = f.label :quantity, :class => 'control-label'
+  .controls
+    = f.text_field :quantity, :class => 'form-control'
+.form-group
+  = f.check_box :_destroy
+  = f.label :_destroy, " Remove Part", :class => 'control-label'
+  =# link_to_function "remove", "remove_fields(this)" 

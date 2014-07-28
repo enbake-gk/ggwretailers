@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723141758) do
+ActiveRecord::Schema.define(version: 20140726101359) do
 
   create_table "accessories", force: true do |t|
     t.string   "name"
@@ -116,6 +116,16 @@ ActiveRecord::Schema.define(version: 20140723141758) do
   add_index "models", ["brand_id"], name: "index_models_on_brand_id", using: :btree
   add_index "models", ["user_id"], name: "index_models_on_user_id", using: :btree
 
+  create_table "parts", force: true do |t|
+    t.integer  "model_id"
+    t.string   "name"
+    t.string   "barcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parts", ["model_id"], name: "index_parts_on_model_id", using: :btree
+
   create_table "retailer_groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -139,6 +149,18 @@ ActiveRecord::Schema.define(version: 20140723141758) do
   add_index "sale_histories", ["equipment_id"], name: "index_sale_histories_on_equipment_id", using: :btree
   add_index "sale_histories", ["model_id"], name: "index_sale_histories_on_model_id", using: :btree
   add_index "sale_histories", ["seller_id"], name: "index_sale_histories_on_seller_id", using: :btree
+
+  create_table "service_parts", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "job_id"
+    t.string   "serial_number"
+    t.string   "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "service_parts", ["job_id"], name: "index_service_parts_on_job_id", using: :btree
+  add_index "service_parts", ["part_id"], name: "index_service_parts_on_part_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

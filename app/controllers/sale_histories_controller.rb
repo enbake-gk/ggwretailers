@@ -104,16 +104,11 @@ class SaleHistoriesController < ApplicationController
       @equipment = Equipment.select("users.contact_person as rname, models.name as mname,brands.name as bname,colours.name as cname")
                   .joins(:model,:brand,:colour,:retailer)
                   .where("equipment.id = ? ",id)
-      puts "===================================="
-      puts @equipment
-      puts "================================="
       if !@equipment.present?
         @equipment = Equipment.select("models.name as mname,brands.name as bname,colours.name as cname")
                   .joins(:model,:brand,:colour)
                   .where("equipment.id = ? ",id)
-      puts @equipment
       end     
-      puts "========================"             
       respond_to do |format|
         format.json { render json: @equipment.try(:first)   }
       end
@@ -121,8 +116,6 @@ class SaleHistoriesController < ApplicationController
 
   def retailer_list_by_srno
        sr_no = params[:query]
-       # @retailer = User.retailer.select("id, CONCAT(first_name, ' ', last_name) AS usr_name ")
-       #            .where("users.first_name LIKE ?  or users.last_name  LIKE ?","%#{sr_no}%","%#{sr_no}%")
        @retailer = User.retailer.select("id,contact_person AS usr_name").where("users.contact_person LIKE ? ","%#{sr_no}%")
       respond_to do |format|
         format.json { render json: @retailer }

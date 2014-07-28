@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :parts
+
   get '/thanks/' => 'home#thanks', :as => :thanks
   get '/get_customer/' => 'home#get_customer'
   get '/get_serial_numbers/' => 'home#get_serial_numbers'
@@ -15,8 +17,6 @@ Rails.application.routes.draw do
 
   get '/get_customer_details/' => 'sale_to_customers#get_customer'
   
-  #match '/customers' => 'customers#index',:as => :sell_to_customers, via: :get
-
   resources :customers
     
    match '/user' => 'settings#index',:as => :users, via: :get
@@ -24,11 +24,6 @@ Rails.application.routes.draw do
    match '/user/:id' => 'settings#show', :as => :show_user, via: :get
    match '/users/:id/edit' => 'settings#edit', :as => :edit_user, via: :get
 
-  # match '/sell_to_retailer' => 'sale_histories#index', :as => :sell_to_retailer, via: :get
-  # match '/sell_to_retailer/new' => 'sale_histories#new', :as => :new_sell_to_retailer, via: :get
-  # match '/sell_to_retailer/:id' => 'sale_histories#show', :as => :show_sell_to_retailer, via: :get
-  # match '/sell_to_retailer/:id/edit' => 'sale_histories#edit', :as => :edit_sell_to_retailer, via: :get
-  
   match '/serialnumbers' => 'equipment#index',:as => :serialnumbers, via: :get
   match '/equipments/get_models' => 'equipment#get_models', via: :get
   resources :equipment do
@@ -47,9 +42,13 @@ Rails.application.routes.draw do
   end
 
   get 'jobs/get_serial_numbers/' => 'home#get_serial_numbers'
-  match '/check_serial_key/' => 'jobs#check_serial_key', :as => :check_serial_key, via: :get  
+  get 'jobs/check_serial_key/' => 'jobs#check_serial_key'
+  get 'warranties/check_serial_key/' => 'reports#check_serial_key'
+
   match '/jobs/new/:key' => 'jobs#new', :as => :new_jobs_with_params, via: :get
-  
+  match '/warranties/new/:key' => 'reports#new', :as => :new_warranties_with_params, via: :get
+
+  resources :warranties, :as => :warranties, :controller => :reports
   resources :service_history, :as => :jobs, :controller => :jobs
   #resources :jobs, :as :service_history
 
@@ -88,57 +87,6 @@ Rails.application.routes.draw do
     end
   end
  
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   root 'home#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
